@@ -24,6 +24,9 @@
   --t-m:clamp(1.1rem,3.3vmin,2rem); --t-s:clamp(.95rem,2.3vmin,1.3rem);
   --celda:clamp(40px,9.2vmin,92px); --obj:clamp(30px,7vmin,68px); --punto:clamp(9px,2.3vmin,20px);
   --radio:14px;
+  /* Papel y tinta: tarjetas de cartulina pegadas en la pizarra para dibujos y textos */
+  --papel:#fbf6e6; --papel-sombra:rgba(0,0,0,.28); --tinta:#1f2d28; --tinta-suave:#5d6b64;
+  --resalte:#ffe27a; --tinta-bien:#2f7d1f; --tinta-falta:#c2185b; --tinta-sujeto:#1565c0; --tinta-pred:#b26a00;
   color-scheme:dark;
 }
 html{box-sizing:border-box;height:100%;background:var(--marco-oscuro)}
@@ -234,6 +237,132 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .panel .btn{width:auto;flex:1 1 40%}
   :root{--celda:clamp(36px,12vw,70px);--obj:clamp(26px,9vw,52px)}
 }
+
+/* ---------- Lectura ---------- */
+.areas .tarjeta{min-height:clamp(150px,30vmin,280px);justify-content:center}
+.area-sim{font-size:var(--t-xxl);letter-spacing:.04em}
+.tarjetas.juegos{grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
+.tarjetas.juegos .tarjeta{padding:clamp(10px,2vmin,20px)}
+.tarjetas.juegos .tarjeta-nombre{font-size:var(--t-m)}
+.dib-card{width:clamp(40px,8vmin,76px);height:auto;display:block}
+.emo{display:inline-block;line-height:1;font-size:3em}
+.lec{height:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(14px,3vmin,34px);min-height:0}
+.lec-ancho{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+.lec-estimulo,.lec-resp{display:flex;flex-direction:column;gap:clamp(8px,1.6vmin,16px);min-width:0;min-height:0}
+.lec-resp{justify-content:flex-start;justify-content:safe center;position:relative;overflow-y:auto;padding:4px 6px 4px 4px}
+.consigna-lec{margin:0;font-size:var(--t-m);color:var(--tiza-suave);max-width:42ch}
+.pregunta{margin:0;font-weight:700;font-size:var(--t-m);line-height:1.3;text-wrap:balance}
+.tipo-preg{display:inline-block;font-family:var(--f-titulo);font-weight:600;font-size:.62em;color:var(--celeste);border:2px solid currentColor;border-radius:99px;padding:.05em .7em;margin-right:.5em;vertical-align:.2em;letter-spacing:.03em}
+.aciertos-lec{font-family:var(--f-titulo);font-weight:800;color:var(--verde);font-variant-numeric:tabular-nums}
+.cartulina{background:var(--papel);color:var(--tinta);border-radius:12px;padding:clamp(12px,2.4vmin,28px);display:flex;flex-direction:column;align-items:center;gap:.5em;box-shadow:0 7px 0 var(--papel-sombra);transform:rotate(-.6deg);text-align:center;margin-block:auto;max-width:100%}
+.dib-grande{width:min(34vmin,100%);height:auto;aspect-ratio:1;display:block}
+.dib-media{width:min(24vmin,40vw);height:auto;display:block}
+.dib-chica{width:clamp(36px,9vmin,80px);height:auto;display:block}
+.dib-op{width:clamp(40px,10vmin,96px);height:auto;display:block}
+.palabra-lec{margin:0;font-weight:700;font-size:var(--t-xl);line-height:1.1;color:var(--tinta);letter-spacing:.02em;overflow-wrap:anywhere}
+.palabra-lec .sep{color:var(--tinta-suave);margin-inline:.12em}
+.frase-lec,.texto-adiv{margin:0;font-size:var(--t-m);line-height:1.45;color:var(--tinta);max-width:34ch;text-wrap:balance}
+.frase-lec{font-size:var(--t-l);font-weight:700}
+.refran{margin:0;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-l);line-height:1.15;color:var(--tinta);text-wrap:balance}
+.situacion{margin:0;font-size:var(--t-m);line-height:1.45;color:var(--tinta);text-align:left;max-width:40ch}
+.titulo-cuento{margin:0;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-m);color:var(--tinta)}
+.hueco{display:inline-block;min-width:1.3em;padding-inline:.15em;border:.08em dashed var(--tinta-suave);border-radius:.18em;color:var(--tinta-suave);text-align:center;line-height:1.15}
+.resalta{background:var(--resalte);color:var(--tinta);border-radius:.15em;padding-inline:.08em}
+.opciones{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(8px,1.6vmin,16px)}
+.opcion{appearance:none;position:relative;flex:0 1 calc(33.33% - clamp(8px,1.6vmin,16px));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15em;min-height:clamp(74px,15vmin,150px);padding:.6em .4em .4em;border:4px solid var(--amarilla);border-radius:12px;background:rgba(0,0,0,.24);cursor:pointer;color:var(--tiza);transition:transform .12s ease,background .12s ease}
+.opciones.n2 .opcion,.opciones.n4 .opcion{flex-basis:calc(50% - clamp(8px,1.6vmin,16px))}
+.opcion:focus,.opcion:hover{background:rgba(255,211,90,.14);transform:scale(1.03)}
+.opcion .letra{position:absolute;top:.25em;left:.5em;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-s);color:var(--amarilla);opacity:.7;line-height:1}
+.op-t{font-family:var(--f-titulo);font-weight:800;font-size:var(--t-xl);line-height:1;color:var(--amarilla)}
+.opcion.pal .op-t{font-family:var(--f-texto);font-weight:700;font-size:var(--t-m);color:var(--tiza);line-height:1.15}
+.op-sub{font-size:var(--t-s);color:var(--tiza-suave)}
+.lec-lista .opciones{flex-direction:column;flex-wrap:nowrap}
+.lec-lista .opciones .opcion{flex:0 0 auto;flex-direction:row;justify-content:flex-start;gap:.7em;min-height:0;padding:.5em .8em;text-align:left}
+.lec-lista .opcion .letra{position:static;flex:none;width:1.9em;height:1.9em;border:2px solid var(--amarilla);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;opacity:1}
+.lec-lista .op-t{font-family:var(--f-texto);font-weight:400;font-size:var(--t-s);color:var(--tiza);line-height:1.3}
+.opcion.mal{border-color:var(--rosa);background:rgba(255,147,182,.16);opacity:.55;animation:sacudir .4s}
+.opcion.quitada{opacity:.18;border-style:dashed}
+.opcion.bien{border-color:var(--verde);background:rgba(169,231,133,.2);opacity:1}
+.opcion.bien .op-t{color:var(--verde)}
+.opcion:disabled{cursor:default;transform:none}
+@keyframes sacudir{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.lec-botones .btn{font-size:var(--t-s);min-height:2.4em}
+.festejo{display:flex;align-items:center;flex-wrap:wrap;gap:.6em 1em;padding:.8em 1em;border:3px solid var(--verde);border-radius:14px;background:rgba(18,40,34,.92)}
+.festejo .sello svg{width:clamp(40px,8vmin,72px)}
+.festejo-txt{flex:1 1 14em;min-width:0}
+.festejo .acierto-titulo{font-size:var(--t-l)}
+.festejo-final{margin:.2em 0 0;font-size:var(--t-s);color:var(--tiza);max-width:48ch}
+/* Explicaciones */
+.chips{display:flex;flex-wrap:wrap;gap:.35em;justify-content:center}
+.sil{font-family:var(--f-titulo);font-weight:800;font-size:var(--t-xl);padding:.05em .35em;border-radius:10px;border:3px dashed var(--tiza-tenue);color:var(--tiza);line-height:1.05;transition:all .2s ease}
+.sil.on{border-style:solid;border-color:var(--amarilla);color:var(--amarilla);background:rgba(255,211,90,.12);transform:translateY(-4px)}
+.exp-col{display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2vmin,20px)}
+.palabra-exp{margin:0;font-weight:700;font-size:var(--t-xl);color:var(--tiza)}
+.palabra-exp .resalta,.frase-exp .resalta{background:transparent;color:var(--amarilla);text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.12em}
+.frase-exp{margin:0;font-weight:700;font-size:var(--t-l);line-height:1.35;color:var(--tiza);text-align:center;max-width:26ch}
+.rima-exp{display:flex;flex-wrap:wrap;gap:clamp(12px,3vmin,32px);justify-content:center}
+.rima-pal{display:flex;flex-direction:column;align-items:center;gap:.3em}
+.rima-pal p{margin:0;font-weight:700;font-size:var(--t-l)}
+.fin-rima{color:var(--amarilla);text-decoration:underline wavy;text-underline-offset:.15em}
+.traba-exp{margin:0;font-size:var(--t-m);line-height:1.8;text-align:center;max-width:34ch}
+.pal-exp{padding:.05em .2em;border-radius:6px;transition:all .15s ease}
+.pal-exp.on{background:rgba(255,211,90,.18);color:var(--amarilla)}
+.resp-exp{margin:0;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-l);color:var(--tinta-bien)}
+.ejs-orto{margin:0;font-weight:700;font-size:var(--t-l);color:var(--tinta)}
+.sujeto{color:var(--celeste);text-decoration:underline;text-underline-offset:.15em}
+.predicado{color:var(--amarilla);text-decoration:underline;text-underline-offset:.15em}
+.exp-texto{width:100%;max-height:100%;overflow:auto;text-align:left}
+/* Textos para leer */
+.titulo-texto{margin:0;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-m)}
+.texto-lec{font-size:var(--t-s);line-height:1.65;color:var(--tiza);overflow:auto;min-height:0;flex:1 1 auto;padding-right:.5em}
+.texto-lec p{margin:0 0 .7em;max-width:64ch}
+.or{border-radius:4px;transition:background .2s ease}
+.or.lee{background:rgba(134,213,255,.14)}
+.or.evid{background:rgba(255,211,90,.2);box-shadow:0 0 0 3px rgba(255,211,90,.25)}
+.pa{border-radius:3px}
+.pa.lee{color:var(--amarilla)}
+.pa.ok{color:var(--verde)}
+.pa.falta{color:var(--rosa);text-decoration:underline}
+.cartulina .pa.lee,.libro .pa.lee{background:var(--resalte);color:var(--tinta)}
+.cartulina .pa.ok,.libro .pa.ok{color:var(--tinta-bien)}
+.cartulina .pa.falta,.libro .pa.falta{color:var(--tinta-falta)}
+.cartulina .or.lee,.libro .or.lee{background:transparent}
+.lectura-g{height:100%;display:flex;flex-direction:column;gap:clamp(8px,1.6vmin,16px);min-height:0}
+.lectura-g .texto-lec{font-size:var(--t-m)}
+/* Cuentos */
+.cuento{height:100%;display:flex;flex-direction:column;gap:clamp(8px,1.8vmin,18px);min-height:0}
+.libro{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(14px,3vmin,34px);align-items:center;background:var(--papel);color:var(--tinta);border-radius:16px;padding:clamp(16px,3vmin,36px);box-shadow:0 8px 0 var(--papel-sombra);flex:1 1 auto;min-height:0}
+.libro-dib{display:flex;justify-content:center}
+.dib-pagina{width:min(32vmin,100%);height:auto;display:block}
+.texto-pagina{margin:0;font-size:var(--t-l);line-height:1.4;font-weight:700}
+.libro-exp{flex:none;max-width:min(100%,46em)}
+.libro-exp .texto-pagina{font-size:var(--t-m)}
+.resultado-voz{margin:0;min-height:1.3em;font-family:var(--f-titulo);font-weight:600;color:var(--tiza-suave)}
+.resultado-voz.ok{color:var(--verde)}
+.resultado-voz.falta{color:var(--rosa)}
+/* Armar */
+.armado{display:flex;flex-wrap:wrap;gap:.35em;justify-content:center;margin-top:.3em}
+.hueco-armar{min-width:2.2em;min-height:1.2em;padding:.05em .25em;border:4px dashed var(--tiza-suave);border-radius:12px;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-xl);color:var(--amarilla);text-align:center;line-height:1.1}
+.hueco-armar.lleno{border-style:solid;border-color:var(--verde)}
+.armar .cartulina{margin-block:0}
+.armar .lec-estimulo{justify-content:center}
+.armado.frase .hueco-armar{font-family:var(--f-texto);font-weight:700;font-size:var(--t-m);min-width:2.4em;border-width:3px;border-radius:8px;color:var(--tiza)}
+.piezas{display:flex;flex-wrap:wrap;gap:clamp(8px,1.6vmin,16px);justify-content:center}
+.pieza{appearance:none;border:4px solid var(--amarilla);border-radius:12px;background:rgba(0,0,0,.24);font-family:var(--f-titulo);font-weight:800;font-size:var(--t-xl);color:var(--amarilla);padding:.1em .5em;min-width:2.4em;cursor:pointer}
+.pieza.palabra{font-family:var(--f-texto);font-weight:700;font-size:var(--t-m);color:var(--tiza);padding:.35em .7em}
+.pieza.usada{opacity:.2}
+.pieza.mal{border-color:var(--rosa);animation:sacudir .4s}
+/* Trabalenguas */
+.texto-traba{font-size:var(--t-l);line-height:1.45;font-weight:700}
+.acciones-traba{display:flex;flex-direction:column;gap:clamp(8px,1.4vmin,14px)}
+.acciones-traba .btn{width:100%}
+@media (max-width:760px),(orientation:portrait){
+  .lec,.lec-ancho,.libro{grid-template-columns:minmax(0,1fr);height:auto}
+  .lectura-g,.cuento{height:auto}
+  .opcion{flex-basis:calc(50% - 12px)}
+  .lec-lista .opcion{flex-basis:auto}
+  .texto-lec{max-height:45vh}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -253,6 +382,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 
 <script src="vendor/peerjs.min.js"></script>
 <script src="vendor/qrcode.js"></script>
+<script src="lecturas.js"></script>
 <script>
 (function(){
 'use strict';
@@ -273,20 +403,36 @@ var ESTRELLA='<svg class="estrella" viewBox="0 0 24 24" aria-hidden="true"><path
 var CHECK='<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M8 44 L36 70 L92 10" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--verde)"/></svg>';
 
 var PERFILES={
-  peque:{nombre:'Peque',grado:'Primero de básica',ops:['contar','sumar','restar'],mision:6,resumen:'Contar, sumar y restar con objetos'},
-  grande:{nombre:'Grande',grado:'Quinto de básica',ops:['sumar','restar','multiplicar','dividir'],mision:8,resumen:'Las cuatro operaciones, paso a paso'}
+  peque:{nombre:'Peque',grado:'Primero de básica',ops:['contar','sumar','restar'],lect:['silabas','armar','leer','rimas','adivinanzas','cuentos','trabalenguas'],mision:6,resumen:'Números con objetos, sílabas, palabras y cuentos'},
+  grande:{nombre:'Grande',grado:'Quinto de básica',ops:['sumar','restar','multiplicar','dividir'],lect:['comprension','refranes','ortografia','vocabulario','oraciones','adivinanzas','trabalenguas'],mision:8,resumen:'Las cuatro operaciones, lectura y ortografía'}
 };
-var OPS={contar:{nombre:'Contar',simbolo:'123'},sumar:{nombre:'Sumar',simbolo:'+'},restar:{nombre:'Restar',simbolo:'−'},multiplicar:{nombre:'Multiplicar',simbolo:'×'},dividir:{nombre:'Dividir',simbolo:'÷'}};
+var OPS={contar:{nombre:'Contar',simbolo:'123'},sumar:{nombre:'Sumar',simbolo:'+'},restar:{nombre:'Restar',simbolo:'−'},multiplicar:{nombre:'Multiplicar',simbolo:'×'},dividir:{nombre:'Dividir',simbolo:'÷'},
+  silabas:{nombre:'¿Con qué empieza?',lec:1},armar:{nombre:'Arma la palabra',lec:1},leer:{nombre:'Lee y busca',lec:1},rimas:{nombre:'Rimas',lec:1},adivinanzas:{nombre:'Adivinanzas',lec:1},cuentos:{nombre:'Cuentos',lec:1},trabalenguas:{nombre:'Trabalenguas',lec:1},
+  comprension:{nombre:'Lectura',lec:1},refranes:{nombre:'Refranes y dichos',lec:1},ortografia:{nombre:'Ortografía',lec:1},vocabulario:{nombre:'Vocabulario',lec:1},oraciones:{nombre:'Ordena la oración',lec:1}};
 var DESC={
   peque:{
     contar:['Hasta 5','Hasta 10','Hasta 12','Hasta 16','Hasta 20'],
     sumar:['Hasta 5, con objetos','Hasta 10, con objetos','Hasta 10, con objetos','Hasta 10, solo números','Hasta 15, solo números'],
-    restar:['Hasta 5, tachando','Hasta 10, tachando','Hasta 10, con objetos','Hasta 10, solo números','Hasta 15, solo números']},
+    restar:['Hasta 5, tachando','Hasta 10, tachando','Hasta 10, con objetos','Hasta 10, solo números','Hasta 15, solo números'],
+    silabas:['Vocales: ¿con cuál empieza?','Sílabas con M, P, S y L','Sílabas con T, N, D, R y más','Sílabas que se parecen','La sílaba que falta'],
+    armar:['Palabras de 2 sílabas','2 sílabas, con una de más','Palabras de 3 sílabas','3 sílabas, con dos de más','Palabras largas y difíciles'],
+    leer:['Palabras cortas, separadas','Palabras que se parecen','Palabras de 3 sílabas','Palabras con bl, tr, ll, ch','Oraciones cortas'],
+    rimas:['Elige entre 2','Elige entre 3','Elige entre 4','Palabras que suenan parecido','¿Cuál no rima?'],
+    adivinanzas:['Fáciles, con 3 dibujos','Fáciles, con 4 dibujos','Adivinanzas en verso','Más difíciles','Las más difíciles'],
+    cuentos:['Cuentos muy cortos','Cuentos cortos','Fábulas','Cuentos de Ecuador','Cuentos más largos'],
+    trabalenguas:['Muy cortos','Cortos','Medianos','Largos','Los más difíciles']},
   grande:{
     sumar:['Dos cifras sin llevar','Dos cifras llevando','Tres cifras llevando','Tres cifras, varias llevadas','Cuatro cifras'],
     restar:['Dos cifras sin prestar','Dos cifras prestando','Tres cifras prestando','Prestando a través del cero','Cuatro cifras'],
     multiplicar:['Tablas del 2, 3, 4, 5 y 10','Tablas del 6 al 9','Dos cifras por una','Dos cifras por 6, 7, 8 o 9','Tres cifras por una'],
-    dividir:['Repartir: tablas del 2 al 5','Repartir: tablas del 6 al 9','Dos cifras entre una','Tres cifras entre una','Tres cifras entre 6, 7, 8 o 9']}
+    dividir:['Repartir: tablas del 2 al 5','Repartir: tablas del 6 al 9','Dos cifras entre una','Tres cifras entre una','Tres cifras entre 6, 7, 8 o 9'],
+    comprension:['Cuentos e informativos cortos','Fábulas e instructivos','Leyendas y fábulas','Ecuador y cartas','Textos más largos'],
+    refranes:['Dichos y expresiones','Refranes fáciles','Refranes difíciles','Completa el refrán','¿Qué refrán va aquí?'],
+    ortografia:['B y V · M antes de B y P','C, S y Z','G, J y H','LL e Y · R y RR','Tildes'],
+    vocabulario:['Sinónimos','Antónimos','Palabras en contexto','Prefijos y sufijos','Analogías'],
+    oraciones:['Oraciones cortas','Oraciones medianas','Oraciones largas','Preguntas y exclamaciones','Dos ideas unidas'],
+    adivinanzas:['Fáciles','En verso','Más difíciles','Con trampa','Las más difíciles'],
+    trabalenguas:['Cortos','Medianos','Con R y S','Largos','Los más difíciles']}
 };
 var KINDS=[
   {k:'manzana',sing:'manzana',pl:'manzanas',colores:[['roja','rojas','--obj-rojo'],['verde','verdes','--obj-verde']]},
@@ -296,9 +442,13 @@ var KINDS=[
 
 /* ---------- Datos guardados en este dispositivo ---------- */
 var CLAVE='pizarra-numeros-v1';
-function base(){return {peque:{niveles:{contar:1,sumar:1,restar:1},stats:{},estrellas:0},grande:{niveles:{sumar:1,restar:1,multiplicar:1,dividir:1},stats:{},estrellas:0},voz:true};}
+function base(){
+  var b={voz:true};
+  ['peque','grande'].forEach(function(k){var nv={};PERFILES[k].ops.concat(PERFILES[k].lect).forEach(function(o){nv[o]=1;});b[k]={niveles:nv,stats:{},estrellas:0,vistos:{}};});
+  return b;
+}
 var DATOS=base();
-try{var g=JSON.parse(localStorage.getItem(CLAVE));if(g&&g.peque&&g.grande){DATOS=Object.assign(base(),g);}}catch(e){}
+try{var g=JSON.parse(localStorage.getItem(CLAVE));if(g&&g.peque&&g.grande){['peque','grande'].forEach(function(k){Object.assign(DATOS[k].niveles,g[k].niveles||{});DATOS[k].stats=g[k].stats||{};DATOS[k].estrellas=g[k].estrellas||0;DATOS[k].vistos=g[k].vistos||{};});DATOS.voz=g.voz!==false;}}catch(e){}
 function guardar(){try{localStorage.setItem(CLAVE,JSON.stringify(DATOS));}catch(e){}}
 function stat(){var s=DATOS[S.p].stats;if(!s[S.op])s[S.op]={intentos:0,aciertos:0,explicaciones:0};return s[S.op];}
 
@@ -322,10 +472,11 @@ function decir(t,o){
   try{speechSynthesis.cancel();}catch(e){}
   var u=new SpeechSynthesisUtterance(t);
   if(vozES){u.voice=vozES;u.lang=vozES.lang;}else{u.lang='es-US';}
-  u.rate=S.p==='peque'?0.88:0.97;u.pitch=1.05;
+  u.rate=(o.rate||1)*(S.p==='peque'?0.88:0.97);u.pitch=1.05;
+  if(o.onboundary)u.onboundary=o.onboundary;
   var hecho=false;var fin=function(){if(hecho)return;hecho=true;fin1();};
   u.onend=fin;u.onerror=fin;
-  setTimeout(fin,o.max||Math.max(2500,t.length*95));
+  setTimeout(fin,o.max||Math.max(2500,t.length*95/(o.rate||1)));
   setTimeout(function(){try{speechSynthesis.speak(u);}catch(e){fin();}},40);
 }
 function hablarP(t,max){return new Promise(function(r){decir(t,{onend:r,max:max});});}
@@ -343,7 +494,7 @@ function leerNumero(t){
   s.split(/[^a-z]+/).forEach(function(w){if(!w||w==='y')return;if(w==='mil'){total+=(actual||1)*1000;actual=0;hay=true;return;}if(Object.prototype.hasOwnProperty.call(W,w)){actual+=W[w];hay=true;}});
   return hay?total+actual:null;
 }
-function micFallo(){micBloqueado=true;var b=$('#b-mic',pantalla);if(b)b.remove();aviso('El micrófono no está disponible aquí. Responde con el control o tocando la pantalla.',true);}
+function micFallo(){micBloqueado=true;var b=$('#b-mic',pantalla);if(b)b.remove();if(!CTRL.conns.length)['#b-yo','#b-digo'].forEach(function(x){var e=$(x,pantalla);if(e)e.remove();});aviso('El micrófono no está disponible aquí. Responde con el control o tocando la pantalla.',true);}
 function escuchar(btn){
   var r;try{r=new SR();}catch(e){micFallo();return;}
   r.lang='es-EC';r.maxAlternatives=4;r.interimResults=false;
@@ -402,6 +553,7 @@ document.addEventListener('keydown',function(e){
   if(dir){e.preventDefault();mover(dir);return;}
   if(e.keyCode===23){e.preventDefault();if(document.activeElement&&document.activeElement.click)document.activeElement.click();return;}
   if(k==='Enter'&&navegables().indexOf(document.activeElement)<0){e.preventDefault();mover('down');return;}
+  if(/^[1-5]$/.test(k)&&modoJuego==='lectura'&&$('.opcion',pantalla)){e.preventDefault();elegirLec(+k-1);return;}
   if(/^[0-9]$/.test(k)){
     if(modoJuego==='grande'){e.preventDefault();escribir(+k);return;}
     if(modoJuego==='peque'){e.preventDefault();enfocar('.ficha[data-v="'+k+'"]');return;}
@@ -636,6 +788,7 @@ function pasosRestarPeque(p){
   ];
 }
 function pasos(p){
+  if(p.lectura)return p.explicar();
   if(p.perfil==='peque')return p.op==='contar'?pasosContar(p):p.op==='sumar'?pasosSumarPeque(p):pasosRestarPeque(p);
   if(p.tipo==='columna')return p.op==='sumar'?pasosSuma(p.a,p.b):p.op==='restar'?pasosResta(p.a,p.b):pasosMultCol(p.a,p.b);
   if(p.tipo==='tabla')return pasosTabla(p.a,p.b);
@@ -701,6 +854,7 @@ function renderReparto(v){
   return '<div class="vis-rep">'+(v.eq?'<p class="eq">'+v.eq+'</p>':'')+(v.fase==='inicio'?'<div class="pozo">'+new Array(v.D+1).join('<i></i>')+'</div>':'')+'<div class="platos">'+range(0,v.d).map(plato).join('')+'</div></div>';
 }
 function renderVis(v){
+  if(v.tipo==='html')return v.html;
   if(v.tipo==='peque')return renderPeque(v);
   if(v.tipo==='col')return renderCol(v,false);
   if(v.tipo==='galera')return renderGalera(v,false);
@@ -740,6 +894,11 @@ function correrAnim(an,tok){
     range(0,an.n).forEach(function(r){c2=c2.then(function(){if(!vivo())return;var f=$('.fila[data-f="'+r+'"]',pantalla);if(f)f.classList.add('lit');return hablarP(String((r+1)*an.paso),1500);});});
     return c2;
   }
+  if(an.tipo==='resaltar'){
+    var els=$$(an.sel,pantalla),c4=Promise.resolve();
+    els.forEach(function(el,i){c4=c4.then(function(){if(!vivo())return;els.forEach(function(x){x.classList.remove('on');});el.classList.add('on');return hablarP(an.voces&&an.voces[i]!=null?an.voces[i]:el.textContent.toLowerCase(),1800);});});
+    return c4.then(function(){if(!vivo())return;els.forEach(function(x,i){x.classList.toggle('on',an.fin==null||i===an.fin);});if(an.final)return hablarP(an.final,3000);});
+  }
   if(an.tipo==='repartir'){
     var c3=Promise.resolve();
     range(0,an.rondas).forEach(function(r){c3=c3.then(function(){if(!vivo())return;$$('.plato i[data-ronda="'+r+'"]',pantalla).forEach(function(i){i.classList.remove('oculto');});return sleep(650);});});
@@ -775,21 +934,39 @@ function pantallaJugadores(){
   decir('¿Quién va a jugar?');
 }
 function pantallaMenu(saludo){
-  modoJuego=null;animTok++;var pf=PERFILES[S.p];setJugador(S.p);
-  var cards=pf.ops.map(function(op){var n=DATOS[S.p].niveles[op];return '<button type="button" data-nav class="tarjeta op" data-op="'+op+'"><span class="simbolo" aria-hidden="true">'+OPS[op].simbolo+'</span><span class="tarjeta-nombre">'+OPS[op].nombre+'</span><span class="nivel">'+puntosNivel(n)+'<span>Nivel '+n+'</span></span><span class="tarjeta-desc">'+DESC[S.p][op][n-1]+'</span></button>';}).join('');
-  pantalla.innerHTML='<div class="seccion"><h1 class="titulo-sec">¿Qué practicamos hoy?</h1><p class="sub">Cada misión tiene '+pf.mision+' ejercicios. Si te equivocas, la pizarra te explica cómo se hace.</p><div class="tarjetas">'+cards+'</div>'+
+  modoJuego=null;animTok++;S.oyente=null;S.area=null;var pf=PERFILES[S.p];setJugador(S.p);
+  pantalla.innerHTML='<div class="seccion"><h1 class="titulo-sec">¿Qué practicamos hoy?</h1><div class="tarjetas dos areas">'+
+    '<button type="button" data-nav class="tarjeta area" id="b-area-numeros" data-area="numeros"><span class="simbolo area-sim" aria-hidden="true">1 + 2</span><span class="tarjeta-nombre">Números</span><span class="tarjeta-desc">'+pf.ops.map(function(o){return OPS[o].nombre;}).join(', ')+'</span></button>'+
+    '<button type="button" data-nav class="tarjeta area" id="b-area-letras" data-area="letras"><span class="simbolo area-sim" aria-hidden="true">A b c</span><span class="tarjeta-nombre">Letras</span><span class="tarjeta-desc">'+(S.p==='peque'?'Sílabas, palabras, rimas, adivinanzas y cuentos':'Lectura, refranes, ortografía, vocabulario y más')+'</span></button></div>'+
     '<div class="fila-botones"><button type="button" data-nav class="btn btn-suave" id="b-cambiar">Cambiar de jugador</button><button type="button" data-nav class="btn btn-suave" id="b-voz">'+vozTxt()+'</button></div></div>';
-  $$('.op',pantalla).forEach(function(b){b.addEventListener('click',function(){iniciarMision(b.dataset.op);});});
+  $$('.area',pantalla).forEach(function(b){b.addEventListener('click',function(){pantallaJuegos(b.dataset.area,true);});});
   on('#b-cambiar',function(){pantallaJugadores();});
   on('#b-voz',function(){alternarVoz();this.textContent=vozTxt();});
-  enfocar('.op');alVolver=pantallaJugadores;
-  decir(saludo===true?'¡Hola, '+pf.nombre+'! ¿Qué practicamos hoy?':'¿Qué practicamos ahora?');
+  enfocar('.area');alVolver=pantallaJugadores;
+  decir(saludo===true?'¡Hola, '+pf.nombre+'! ¿Números o letras?':'¿Números o letras?');
+}
+function pantallaJuegos(area,hablar){
+  modoJuego=null;animTok++;S.oyente=null;S.area=area;var pf=PERFILES[S.p];setJugador(S.p);
+  var lista=area==='letras'?pf.lect:pf.ops;
+  var cards=lista.map(function(op){var n=DATOS[S.p].niveles[op]||1,ic=OPS[op].lec?dib(L.iconos[op],'dib-card'):'<span class="simbolo" aria-hidden="true">'+OPS[op].simbolo+'</span>';
+    return '<button type="button" data-nav class="tarjeta op" data-op="'+op+'">'+ic+'<span class="tarjeta-nombre">'+OPS[op].nombre+'</span><span class="nivel">'+puntosNivel(n)+'<span>Nivel '+n+'</span></span><span class="tarjeta-desc">'+DESC[S.p][op][n-1]+'</span></button>';}).join('');
+  var sub=area==='letras'?'Si te equivocas, la profe te explica cómo se hace. Puedes responder tocando o hablando por el celular.':'Cada misión tiene '+pf.mision+' ejercicios. Si te equivocas, la pizarra te explica cómo se hace.';
+  pantalla.innerHTML='<div class="seccion"><h1 class="titulo-sec">'+(area==='letras'?'Letras':'Números')+'</h1><p class="sub">'+sub+'</p><div class="tarjetas juegos">'+cards+'</div>'+
+    '<div class="fila-botones"><button type="button" data-nav class="btn btn-suave" id="b-volver">Volver</button><button type="button" data-nav class="btn btn-suave" id="b-voz">'+vozTxt()+'</button></div></div>';
+  $$('.op',pantalla).forEach(function(b){b.addEventListener('click',function(){iniciarMision(b.dataset.op);});});
+  on('#b-volver',function(){pantallaMenu(false);});
+  on('#b-voz',function(){alternarVoz();this.textContent=vozTxt();});
+  enfocar('.op');alVolver=function(){pantallaMenu(false);};
+  if(hablar)decir('¿Qué juego quieres?');
 }
 function iniciarMision(op){
-  S.op=op;S.n=0;S.total=PERFILES[S.p].mision;S.aciertos=0;S.ayudas=0;S.racha=0;S.fallos=0;S.prob=null;
+  S.op=op;S.n=0;S.aciertos=0;S.ayudas=0;S.racha=0;S.fallos=0;S.prob=null;S.comodines=2;S.texto=null;S.oyente=null;
+  if(esLec(op))return iniciarLectura(op);
+  S.total=PERFILES[S.p].mision;
   nuevoTurno(false);
 }
 function nuevoTurno(gemelo){
+  if(esLec(S.op)){S.prob=crearLec(gemelo);S.intentos=1;S.conAyuda=!!gemelo&&!!S.prob.gemelo;mostrarLec(S.prob);return;}
   var nivel=DATOS[S.p].niveles[S.op];
   S.prob=gemelo?crearDistinto(S.p,S.op,nivel,S.prob):crear(S.p,S.op,nivel);
   S.intentos=1;S.conAyuda=!!gemelo;S.bloqueado=false;
@@ -847,8 +1024,8 @@ function pantallaProblema(){
   on('#b-oir',function(){decir(p.voz);});
   on('#b-como',ejemplo);
   on('#b-mic',function(){escuchar(this);});
-  on('#b-salir',function(){pantallaMenu(false);});
-  alVolver=function(){pantallaMenu(false);};
+  on('#b-salir',volverJuegos);
+  alVolver=volverJuegos;
   decir(p.voz);
 }
 function actualizarSlots(){$$('.slot',pantalla).forEach(function(b){var i=+b.dataset.slot;b.textContent=S.entrada[i]||'';b.classList.toggle('activo',i===S.activo);});}
@@ -895,11 +1072,16 @@ function comprobarPeque(v){
   setTimeout(explicarError,650);
 }
 function acierto(){
+  var subio=registrarAcierto();
+  if(S.prob&&S.prob.lectura)return celebrarLec(subio);
+  pantallaAcierto(subio);
+}
+function registrarAcierto(){
   var st=stat();st.intentos++;st.aciertos++;S.aciertos++;DATOS[S.p].estrellas++;
   var subio=false,niv=DATOS[S.p].niveles;
   if(S.intentos===1&&!S.conAyuda){S.racha++;S.fallos=0;if(S.racha>=3&&niv[S.op]<5){niv[S.op]++;S.racha=0;subio=true;}}
   else S.fallos=0;
-  guardar();setJugador(S.p);pantallaAcierto(subio);
+  guardar();setJugador(S.p);return subio;
 }
 function explicarError(){
   var st=stat();st.intentos++;st.explicaciones++;S.ayudas++;
@@ -909,15 +1091,17 @@ function explicarError(){
   var lista=pasos(S.prob);
   var intro=S.p==='peque'?'Casi. Vamos a verlo juntos. ':'No pasa nada. Vamos a resolverlo juntos en la pizarra. ';
   lista[0]=Object.assign({},lista[0],{texto:intro+lista[0].texto});
-  pantallaExplicacion(lista,{titulo:'Así se hace',textoFinal:S.n+1>=S.total?'Terminar misión':'Ahora tú, con uno parecido',alFinal:function(){siguienteTurno(true);}});
+  var lec=!!S.prob.lectura;S.oyente=null;
+  pantallaExplicacion(lista,{titulo:lec?'La profe te explica':'Así se hace',textoFinal:S.n+1>=S.total?'Terminar misión':(S.prob.textoSig||'Ahora tú, con uno parecido'),alFinal:function(){siguienteTurno(lec?!!S.prob.gemelo:true);}});
 }
 function ejemplo(){
+  if(S.prob&&S.prob.lectura)return ayudaLec();
   S.conAyuda=true;
   var ej=crearDistinto(S.p,S.op,S.prob.nivel,S.prob);
   pantallaExplicacion(pasos(ej),{titulo:'Ejemplo con otros números',textoFinal:'Volver a mi ejercicio',alFinal:function(){pantallaProblema();}});
 }
 function pantallaExplicacion(lista,op){
-  modoJuego=null;var k=0;$('#aviso').hidden=true;
+  modoJuego=null;S.oyente=null;var k=0;$('#aviso').hidden=true;
   function pintar(foco){
     animTok++;var tok=animTok,paso=lista[k],ultimo=k===lista.length-1;
     pantalla.innerHTML='<div class="explica"><section class="tablero-vis vis-centro">'+renderVis(paso.vis)+'</section>'+
@@ -931,7 +1115,8 @@ function pantallaExplicacion(lista,op){
     on('#b-sig',function(){if(ultimo){animTok++;op.alFinal();}else{k++;pintar('#b-sig');}});
     var f=foco&&$(foco,pantalla);
     enfocar(f&&!f.disabled?f:'#b-sig');
-    hablarP(vozDe(paso.texto)).then(function(){if(tok===animTok&&paso.anim)return correrAnim(paso.anim,tok);});
+    var ev=$('.evid',pantalla);if(ev&&ev.scrollIntoView)ev.scrollIntoView({block:'center'});
+    hablarP(paso.voz||vozDe(paso.texto.replace(/<[^>]+>/g,'').replace(/[«»]/g,''))).then(function(){if(tok===animTok&&paso.anim)return correrAnim(paso.anim,tok);});
   }
   alVolver=function(){animTok++;op.alFinal();};
   pintar();
@@ -948,27 +1133,27 @@ function pantallaAcierto(subio){
     (subio?'<p class="sube">'+ESTRELLA+'Subiste al nivel '+n+': '+DESC[S.p][S.op][n-1]+'</p>':'')+
     '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza grande" id="b-sig">'+(S.n+1>=S.total?'Ver mi misión':'Siguiente')+'</button><button type="button" data-nav class="btn btn-suave" id="b-salir">Salir</button></div></div>';
   on('#b-sig',function(){siguienteTurno(false);});
-  on('#b-salir',function(){pantallaMenu(false);});
-  enfocar('#b-sig');alVolver=function(){pantallaMenu(false);};
+  on('#b-salir',volverJuegos);
+  enfocar('#b-sig');alVolver=volverJuegos;
   decir(msg+' '+vozDe(fin)+'.'+(subio?' ¡Subiste al nivel '+n+'!':''));
 }
 function pantallaFin(){
-  modoJuego=null;animTok++;
+  modoJuego=null;animTok++;S.oyente=null;
   var msg=S.ayudas===0?'Trabajaste con mucha atención en todos los ejercicios.':'Viste '+S.ayudas+' '+(S.ayudas===1?'explicación':'explicaciones')+' y seguiste intentando. Así es como se aprende.';
   var est=range(0,S.total).map(function(i){return i<S.aciertos?ESTRELLA:ESTRELLA.replace('class="estrella"','class="estrella vacia"');}).join('');
   pantalla.innerHTML='<div class="fin"><p class="eyebrow">'+OPS[S.op].nombre+' · '+PERFILES[S.p].nombre+'</p><h1 class="titulo-sec">¡Misión cumplida!</h1><div class="fila-estrellas" aria-label="'+S.aciertos+' estrellas">'+est+'</div>'+
     '<p class="sub">Respondiste bien '+S.aciertos+' de '+S.total+'. '+msg+'</p>'+
     '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza grande" id="b-otra">Otra misión</button><button type="button" data-nav class="btn" id="b-menu">Elegir otro juego</button></div></div>';
   on('#b-otra',function(){iniciarMision(S.op);});
-  on('#b-menu',function(){pantallaMenu(false);});
-  enfocar('#b-otra');alVolver=function(){pantallaMenu(false);};
+  on('#b-menu',volverJuegos);
+  enfocar('#b-otra');alVolver=volverJuegos;
   decir('¡Misión cumplida! Respondiste bien '+S.aciertos+' de '+S.total+'. '+msg);
 }
 function pantallaProgreso(){
   modoJuego=null;animTok++;setJugador(null);
   function bloque(pid){
     var pf=PERFILES[pid];
-    var filas=pf.ops.map(function(op){var n=DATOS[pid].niveles[op],st=DATOS[pid].stats[op]||{intentos:0,aciertos:0,explicaciones:0},pct=st.intentos?Math.round(st.aciertos*100/st.intentos):null;
+    var filas=pf.ops.concat(pf.lect).map(function(op){var n=DATOS[pid].niveles[op],st=DATOS[pid].stats[op]||{intentos:0,aciertos:0,explicaciones:0},pct=st.intentos?Math.round(st.aciertos*100/st.intentos):null;
       return '<tr><th scope="row">'+OPS[op].nombre+'</th><td>'+puntosNivel(n)+'<span class="nivel-txt">Nivel '+n+' · '+DESC[pid][op][n-1]+'</span></td><td class="num">'+st.aciertos+' de '+st.intentos+(pct!==null?' <span class="pct">('+pct+' %)</span>':'')+'</td><td class="num">'+st.explicaciones+'</td></tr>';}).join('');
     return '<section class="prog-bloque"><h2>'+pf.nombre+'<span>'+pf.grado+' · '+DATOS[pid].estrellas+' estrellas</span></h2><div class="tabla-scroll"><table><thead><tr><th scope="col">Juego</th><th scope="col">Nivel actual</th><th scope="col">Respuestas bien</th><th scope="col">Explicaciones vistas</th></tr></thead><tbody>'+filas+'</tbody></table></div></section>';
   }
@@ -979,6 +1164,617 @@ function pantallaProgreso(){
   var conf=false;
   on('#b-borrarp',function(){if(!conf){conf=true;this.textContent='Sí, borrar todo';return;}var v=DATOS.voz;DATOS=base();DATOS.voz=v;guardar();pantallaProgreso();aviso('Progreso borrado.',false);});
   enfocar('#b-volver');alVolver=function(){pantallaJugadores();};
+}
+
+/* ======================= LECTURA: la profe ======================= */
+var L=window.LEC||{palabras:[],rimas:[],frases:[],adivPeque:[],cuentosPeque:[],textos:[],dichos:[],refranes:[],ortografia:[],tildes:[],vocabulario:[],oraciones:[],adivGrande:[],trabalenguas:{peque:[],grande:[]},iconos:{}};
+var VOCALES=['a','e','i','o','u'];
+var CONS2=['m','p','s','l'],CONS3=['t','n','d','r','f','j','b','v','c','g'],CONS4=['m','p','s','l','t','n','d','r'];
+var NOMBRE_LETRA={b:'be',c:'ce',d:'de',f:'efe',g:'ge',h:'hache',j:'jota',l:'ele',m:'eme',n:'ene',p:'pe',r:'erre',s:'ese',t:'te',v:'ve',z:'zeta',y:'ye'};
+function esLec(op){return !!(op&&OPS[op]&&OPS[op].lec);}
+function sinT(s){return String(s).replace(/[áéíóúü]/g,function(c){return 'aeiouu'.charAt('áéíóúü'.indexOf(c));});}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(0,i),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function mezclarOps(ops,ok){var idx=barajar(range(0,ops.length));return {ops:idx.map(function(i){return ops[i];}),ok:idx.indexOf(ok)};}
+function listaVoz(a){return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' o '+a[a.length-1];}
+function cpDe(e){var a=Array.from(e).map(function(ch){return ch.codePointAt(0).toString(16);});if(e.indexOf('‍')<0)a=a.filter(function(c){return c!=='fe0f';});return a.join('-');}
+function dib(e,cls){if(!e)return '';return '<img class="'+(cls||'dib')+'" src="img/'+cpDe(e)+'.svg" alt="" data-e="'+e+'" draggable="false">';}
+document.addEventListener('error',function(ev){var t=ev.target;if(t&&t.tagName==='IMG'&&t.dataset&&t.dataset.e){var s=document.createElement('span');s.className=t.className+' emo';s.textContent=t.dataset.e;t.replaceWith(s);}},true);
+function btnL(id,txt,dis,cls){return '<button type="button" data-nav class="btn '+(cls||'')+'" id="'+id+'"'+(dis?' disabled':'')+'>'+txt+'</button>';}
+function cartulina(inner,cls){return '<div class="cartulina '+(cls||'')+'">'+inner+'</div>';}
+function chipsHTML(arr,cls,on){return '<div class="chips">'+arr.map(function(x,i){return '<span class="sil '+(cls||'')+(on===i?' on':'')+'">'+esc(x)+'</span>';}).join('')+'</div>';}
+
+/* Banco de palabras */
+var PAL=[],PALX={};
+L.palabras.forEach(function(s){var i=s.lastIndexOf(' '),sil=s.slice(0,i).split('-'),w={w:sil.join(''),s:sil,e:s.slice(i+1)};PAL.push(w);PALX[w.w]=w;});
+var AMBIGUAS={arena:1,pirata:1,viento:1};
+var PALJ=PAL.filter(function(w){return !AMBIGUAS[w.w];});
+var RE_SIMPLE=/^([bdfjlmnprstvz][aeiou]|[cg][aou]|[aeiou])$/;
+function simple(x){return RE_SIMPLE.test(sinT(x));}
+function todasSimples(w){return w.s.every(simple);}
+var RE_COMPLEJA=/(bl|br|cl|cr|dr|fl|fr|gl|gr|pl|pr|tr|ll|ch|rr|qu|gu[ei]|gü|ñ)/;
+function compleja(w){return RE_COMPLEJA.test(w.w);}
+function otrasPalabras(excl,k,filtro){
+  var usados={};excl.forEach(function(w){usados[w.w]=1;usados[w.e]=1;});
+  var c=barajar(PALJ.filter(function(w){return !usados[w.w]&&!usados[w.e]&&(!filtro||filtro(w));})),out=[];
+  for(var i=0;i<c.length&&out.length<k;i++){if(usados[c[i].e])continue;usados[c[i].e]=1;out.push(c[i]);}
+  return out;
+}
+function distr(excl,k,pref){var a=pref?otrasPalabras(excl,k,pref):[];if(a.length<k)a=a.concat(otrasPalabras(excl.concat(a),k-a.length));return a;}
+
+/* Para no repetir: recuerda lo que ya salió en cada juego y nivel */
+function elegirNuevo(lista,k,idf){
+  var vs=DATOS[S.p].vistos||(DATOS[S.p].vistos={}),v=vs[k]||(vs[k]=[]);
+  var libres=lista.filter(function(x){return v.indexOf(idf(x))<0;});
+  if(!libres.length){v.length=0;libres=lista.slice();}
+  var x=pick(libres);v.push(idf(x));while(v.length>Math.max(1,lista.length-1))v.shift();
+  return x;
+}
+function elegirTexto(lista,n,k){
+  var c=[];for(var d=0;d<5&&!c.length;d++)c=lista.filter(function(x){return Math.abs(x.n-n)===d;});
+  return elegirNuevo(c,k+n,function(x){return x.id;});
+}
+
+/* Texto con oraciones y palabras marcables (para leer con resaltado y revisar la lectura en voz alta) */
+function oracionHTML(t,idx,extra){
+  var html='',ci=0;
+  t.split(/(\s+)/).forEach(function(tok){if(!tok)return;if(/^\s+$/.test(tok)){html+=' ';ci+=tok.length;return;}html+='<span class="pa" data-ci="'+ci+'">'+esc(tok)+'</span>';ci+=tok.length;});
+  return '<span class="or'+(extra||'')+'" data-o="'+idx+'" data-t="'+esc(t)+'">'+html+'</span>';
+}
+function textoHTML(arr,ev){
+  var ps=[[]];
+  arr.forEach(function(s,i){if(s==='¶'){ps.push([]);return;}ps[ps.length-1].push(oracionHTML(s,i,ev&&ev.indexOf(i)>=0?' evid':''));});
+  return '<div class="texto-lec" data-nosync>'+ps.filter(function(p){return p.length;}).map(function(p){return '<p>'+p.join(' ')+'</p>';}).join('')+'</div>';
+}
+function marcarEvid(ev){
+  var primero=null;
+  $$('.texto-lec .or',pantalla).forEach(function(o){var on=ev.indexOf(+o.dataset.o)>=0;o.classList.toggle('evid',on);if(on&&!primero)primero=o;});
+  if(primero&&primero.scrollIntoView)primero.scrollIntoView({block:'center'});
+}
+function leerConResaltado(cont,tok,o){
+  o=o||{};var ors=$$('.or',cont),cad=Promise.resolve();
+  ors.forEach(function(or){cad=cad.then(function(){
+    if(tok!==animTok)return;
+    ors.forEach(function(x){x.classList.remove('lee');});or.classList.add('lee');
+    if(or.scrollIntoView)or.scrollIntoView({block:'nearest'});
+    var pas=$$('.pa',or);pas.forEach(function(x){x.classList.remove('ok','falta');});
+    return new Promise(function(res){
+      decir(or.dataset.t,{rate:o.rate,onend:res,onboundary:function(ev){if(tok!==animTok)return;var ci=ev.charIndex,cur=null;pas.forEach(function(x){if(+x.dataset.ci<=ci)cur=x;});pas.forEach(function(x){x.classList.toggle('lee',x===cur);});}});
+    }).then(function(){pas.forEach(function(x){x.classList.remove('lee');});});
+  });});
+  return cad.then(function(){if(tok===animTok)ors.forEach(function(x){x.classList.remove('lee');});});
+}
+
+/* Revisar lo que el niño leyó en voz alta */
+function palabrasDe(t){return normal(String(t).replace(/\d+/g,function(d){return ' '+(PALABRAS[+d]||d)+' ';})).replace(/[«»"—\-()]/g,' ').split(' ').filter(Boolean);}
+function lev(a,b){var m=a.length,n=b.length,d=[],i,j;for(i=0;i<=m;i++)d[i]=[i];for(j=1;j<=n;j++)d[0][j]=j;for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
+function eqPal(a,b){if(a===b)return true;if(a.length>=4&&b.length>=4)return lev(a,b)<=(a.length>=7?2:1);return false;}
+function lcs(A,B){
+  var m=A.length,n=B.length,d=[],i,j;for(i=0;i<=m;i++)d.push(new Array(n+1).fill(0));
+  for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=eqPal(A[i-1],B[j-1])?d[i-1][j-1]+1:Math.max(d[i-1][j],d[i][j-1]);
+  var marcas=A.map(function(){return false;});i=m;j=n;
+  while(i>0&&j>0){if(eqPal(A[i-1],B[j-1])&&d[i][j]===d[i-1][j-1]+1){marcas[i-1]=true;i--;j--;}else if(d[i-1][j]>=d[i][j-1])i--;else j--;}
+  return {n:d[m][n],marcas:marcas};
+}
+function compararLectura(cont,alts){
+  var spans=$$('.pa',cont),M=[];
+  spans.forEach(function(sp,si){palabrasDe(sp.textContent).forEach(function(w){M.push({w:w,si:si});});});
+  var best=null;
+  alts.forEach(function(a){var r=lcs(M.map(function(x){return x.w;}),palabrasDe(a));if(!best||r.n>best.n)best=r;});
+  var marcas=best?best.marcas:M.map(function(){return false;}),porSpan={};
+  M.forEach(function(x,i){if(porSpan[x.si]===undefined)porSpan[x.si]=true;if(!marcas[i])porSpan[x.si]=false;});
+  spans.forEach(function(sp,si){sp.classList.remove('ok','falta','lee');if(porSpan[si]===true)sp.classList.add('ok');else if(porSpan[si]===false)sp.classList.add('falta');});
+  var bien=marcas.filter(Boolean).length;
+  return {ratio:M.length?bien/M.length:0,bien:bien,total:M.length};
+}
+function esComandoCorto(s){return s.split(' ').length<=3&&COMANDOS.some(function(c){return c.p.test(s);});}
+function oyenteLectura(alts,cont,umbral,esTraba){
+  if(esComandoCorto(normal(alts[0]||'')))return null;
+  var r=compararLectura(cont,alts),res=$('#res-voz',pantalla);
+  if(r.ratio>=umbral){
+    var bien='¡Muy bien leído! Dijiste '+r.bien+' de '+r.total+' palabras.';
+    if(res){res.textContent=bien;res.className='resultado-voz ok';}
+    if(esTraba){if(!S.bloqueado){S.bloqueado=true;setTimeout(acierto,500);}}
+    else{DATOS[S.p].estrellas++;guardar();setJugador(S.p);decir('¡Muy bien leído!');}
+    return bien;
+  }
+  S.intentosVoz=(S.intentosVoz||0)+1;
+  var msg='Dijiste '+r.bien+' de '+r.total+' palabras. Las que están en rosado faltaron. Escucha y prueba otra vez.';
+  if(res){res.textContent=msg;res.className='resultado-voz falta';}
+  if(esTraba&&S.intentosVoz>=2&&!S.bloqueado){S.bloqueado=true;setTimeout(explicarError,1800);}
+  else decir('Casi. Las palabras en rosado faltaron. Escucha otra vez y prueba de nuevo.');
+  return msg;
+}
+function puedeEscuchar(){return CTRL.conns.length>0||!micBloqueado;}
+function escucharLectura(btn){
+  if(CTRL.conns.length){aviso('Toca «Toca y habla» en el celular y dilo en voz alta.',true);return;}
+  var r;try{r=new SR();}catch(e){micFallo();return;}
+  r.lang='es-EC';r.maxAlternatives=3;var txt=btn.textContent;btn.textContent='Te escucho…';btn.classList.add('escuchando');
+  r.onresult=function(e){var res=e.results[0],a=[];for(var i=0;i<res.length;i++)a.push(res[i].transcript);if(S.oyente)S.oyente(a);};
+  r.onerror=function(e){if(e.error==='not-allowed'||e.error==='service-not-allowed'||e.error==='audio-capture')micFallo();};
+  r.onend=function(){if(btn.isConnected){btn.textContent=txt;btn.classList.remove('escuchando');}};
+  animTok++;try{speechSynthesis.cancel();}catch(e){}
+  try{r.start();}catch(e){micFallo();}
+}
+
+/* ---------- Generadores de ejercicios de lectura ---------- */
+var LEC_GEN={};
+
+function variantes(sil){
+  var s=sinT(sil),m=s.match(/^([^aeiou]*)([aeiou]+)(.*)$/);if(!m)return [];
+  var on=m[1],nu=m[2],co=m[3],v=nu.charAt(nu.length-1),vv=[],cc=[];
+  VOCALES.forEach(function(x){if(x!==v)vv.push(on+nu.slice(0,-1)+x+co);});
+  var ons=(on.length===2&&/[lr]$/.test(on))?['bl','br','cl','cr','fl','fr','gl','gr','pl','pr','tr']:['m','p','s','l','t','n','d'];
+  ons.forEach(function(x){if(x!==on)cc.push(x+nu+co);});
+  var res=[];barajar(vv).slice(0,2).concat(barajar(cc).slice(0,2)).forEach(function(x){if(x!==s&&res.indexOf(x)<0)res.push(x);});
+  return res;
+}
+function estimuloSil(p){
+  var w=p.w,h=dib(w.e,'dib-grande');
+  if(p.modo==='falta')h+='<p class="palabra-lec">'+w.s.map(function(s,i){return i===p.idx?'<span class="hueco">?</span>':esc(s);}).join('<span class="sep">·</span>')+'</p>';
+  return cartulina(h);
+}
+function explicarSil(p){
+  var w=p.w,L2=[];
+  if(p.modo==='vocal'){
+    var V=p.sil;
+    L2.push({texto:'Escucha: '+w.w+'. Empieza con el sonido de la '+V.toUpperCase()+'.',voz:w.w+'. '+w.w+' empieza con '+V+'.',vis:{tipo:'html',html:'<div class="exp-col">'+dib(w.e,'dib-media')+'<p class="palabra-exp"><span class="resalta">'+esc(w.w.charAt(0))+'</span>'+esc(w.w.slice(1))+'</p></div>'}});
+    L2.push({texto:'Las vocales son A, E, I, O y U. La de '+w.w+' es la '+V.toUpperCase()+'.',voz:'Digamos las vocales.',vis:{tipo:'html',html:chipsHTML(VOCALES.map(function(x){return x.toUpperCase();}),'')},anim:{tipo:'resaltar',sel:'.sil',voces:VOCALES,fin:VOCALES.indexOf(V),final:'La de '+w.w+' es la '+V+'.'}});
+    return L2;
+  }
+  var chips=w.s.map(function(s){return s.toUpperCase();}),idx=p.modo==='falta'?p.idx:0;
+  L2.push({texto:'Separamos '+w.w+' en sílabas, como aplausos: '+w.s.join(' - ')+'.',voz:'Separamos '+w.w+' en sílabas, como aplausos.',vis:{tipo:'html',html:'<div class="exp-col">'+dib(w.e,'dib-media')+chipsHTML(chips,'')+'</div>'},anim:{tipo:'resaltar',sel:'.sil',voces:w.s.map(sinT),fin:idx,final:(p.modo==='falta'?'Faltaba '+sinT(p.sil):'La primera es '+p.sil)+'.'}});
+  if(p.modo==='falta'){
+    L2.push({texto:'La palabra completa es '+w.w+'. Faltaba la sílaba '+sinT(p.sil).toUpperCase()+'.',voz:'La palabra completa es '+w.w+'.',vis:{tipo:'html',html:'<div class="exp-col">'+dib(w.e,'dib-media')+chipsHTML(chips,'',idx)+'</div>'}});
+  } else {
+    var c=p.cons,fam=VOCALES.map(function(v){return c+v;});
+    L2.push({texto:'La '+c.toUpperCase()+' con la '+p.vocal.toUpperCase()+' suena '+p.sil.toUpperCase()+'. Esta es la familia de la '+c.toUpperCase()+'.',voz:'La '+NOMBRE_LETRA[c]+' con la '+p.vocal+' suena '+p.sil+'. Esta es la familia de la '+NOMBRE_LETRA[c]+'.',vis:{tipo:'html',html:chipsHTML(fam.map(function(x){return x.toUpperCase();}),'')},anim:{tipo:'resaltar',sel:'.sil',voces:fam,fin:VOCALES.indexOf(p.vocal)}});
+  }
+  return L2;
+}
+LEC_GEN['peque:silabas']=function(n,previo){
+  var p={tipo:'opciones',gemelo:true},w,cand,s0;
+  if(n===1){
+    cand=PALJ.filter(function(x){return /^[aeiou]/.test(sinT(x.w))&&(!previo||x.w!==previo.w.w);});
+    w=elegirNuevo(cand,'sil1',function(x){return x.w;});
+    var v=sinT(w.w).charAt(0);
+    p.ops=VOCALES.map(function(x){return {t:x.toUpperCase(),sub:x,voz:x};});p.ok=VOCALES.indexOf(v);
+    p.w=w;p.sil=v;p.modo='vocal';p.consigna='¿Con qué vocal empieza?';
+    p.voz='¿Con qué vocal empieza... '+w.w+'?';
+    p.final=cap(w.w)+' empieza con '+v.toUpperCase()+'.';p.finalVoz=w.w+' empieza con '+v+'.';
+    p.pista=function(){return 'Escucha cómo empieza: '+w.w+'. ¿Qué sonido sale primero?';};
+  } else if(n<=4){
+    var set=n===2?CONS2:n===3?CONS3:CONS4;
+    cand=PALJ.filter(function(x){var a=sinT(x.s[0]);return a.length===2&&simple(a)&&set.indexOf(a.charAt(0))>=0;});
+    if(previo&&previo.cons&&n<=3){var mismo=cand.filter(function(x){return sinT(x.s[0]).charAt(0)===previo.cons&&x.w!==previo.w.w;});if(mismo.length)cand=mismo;}
+    w=elegirNuevo(cand,'sil'+n,function(x){return x.w;});
+    s0=sinT(w.s[0]);var c=s0.charAt(0),vo=s0.charAt(1),ops;
+    if(n<=3){ops=VOCALES.map(function(x){return c+x;});p.ok=VOCALES.indexOf(vo);}
+    else{ops=barajar([c].concat(barajar(CONS4.filter(function(x){return x!==c;})).slice(0,4))).map(function(x){return x+vo;});p.ok=ops.indexOf(s0);}
+    p.ops=ops.map(function(x){return {t:x.toUpperCase(),sub:x,voz:x};});
+    p.w=w;p.sil=s0;p.cons=c;p.vocal=vo;p.modo='inicio';p.consigna='¿Con qué sílaba empieza?';
+    p.voz='¿Con qué sílaba empieza... '+w.w+'?';
+    p.final=cap(w.w)+' empieza con '+s0.toUpperCase()+'.';p.finalVoz=w.w+' empieza con '+s0+'.';
+    p.pista=function(){return 'Casi. Escucha despacio: '+w.s.join(', ')+'. ¿Cuál es el primer aplauso?';};
+  } else {
+    cand=PALJ.filter(function(x){return x.s.length>=2;});
+    w=elegirNuevo(cand,'sil5',function(x){return x.w;});
+    var idx=rnd(0,w.s.length-1),sil=sinT(w.s[idx]);
+    var m=mezclarOps([sil].concat(variantes(sil).slice(0,4)).map(function(x){return {t:x.toUpperCase(),sub:x,voz:x};}),0);
+    p.ops=m.ops;p.ok=m.ok;p.w=w;p.idx=idx;p.sil=sil;p.modo='falta';p.consigna='¿Qué sílaba falta?';
+    p.voz='Completa la palabra: '+w.w+'. ¿Qué sílaba falta?';
+    p.final='¡'+cap(w.w)+'! Faltaba '+sil.toUpperCase()+'.';p.finalVoz=w.w+'. Faltaba '+sil+'.';
+    p.pista=function(){return 'Lee la palabra con cada sílaba y escucha cuál suena bien: '+w.w+'.';};
+  }
+  p.titulo=p.consigna;p.estimulo=estimuloSil(p);
+  p.explicar=function(){return explicarSil(p);};
+  return p;
+};
+LEC_GEN['peque:armar']=function(n){
+  var f=[null,function(x){return x.s.length===2&&todasSimples(x);},function(x){return x.s.length===2;},function(x){return x.s.length===3;},function(x){return x.s.length===3;},function(x){return x.s.length>=4||(x.s.length>=2&&compleja(x));}][n];
+  var w=elegirNuevo(PALJ.filter(f),'arm'+n,function(x){return x.w;});
+  var nd=[0,0,1,0,2,2][n],usadas=w.s.map(sinT),extra=[];
+  barajar(PAL).some(function(o){o.s.forEach(function(s){var t=sinT(s);if(extra.length<nd&&usadas.indexOf(t)<0&&extra.indexOf(t)<0&&t.length<=3)extra.push(t);});return extra.length>=nd;});
+  var sol=w.s.map(function(s){return s.toUpperCase();}),piezas=barajar(sol.concat(extra.map(function(x){return x.toUpperCase();})));
+  if(piezas.join()===sol.join()&&piezas.length>1)piezas=piezas.slice(1).concat(piezas[0]);
+  return {tipo:'armar',w:w,sol:sol,piezas:piezas,sep:'',maxErr:2,gemelo:true,consigna:'Arma la palabra.',titulo:'Arma la palabra',
+    voz:'Arma la palabra: '+w.w+'.',estimulo:cartulina(dib(w.e,'dib-grande')),
+    final:'¡'+cap(w.w)+'!',finalVoz:w.s.map(sinT).join(', ')+'. ¡'+w.w+'!',
+    pista:function(){return 'Escucha: '+w.s.join(', ')+'. ¿Qué sílaba va ahora?';},
+    explicar:function(){return [
+      {texto:'Escucha los aplausos: '+w.s.join(' - ')+'. '+cap(w.w)+' tiene '+w.s.length+' sílabas.',voz:'Escucha los aplausos de '+w.w+'.',vis:{tipo:'html',html:'<div class="exp-col">'+dib(w.e,'dib-media')+chipsHTML(sol,'')+'</div>'},anim:{tipo:'resaltar',sel:'.sil',voces:w.s.map(sinT),final:w.w+' tiene '+numPalabra(w.s.length)+' sílabas.'}},
+      {texto:'Primero va '+sol[0]+(sol.length>2?', después '+sol.slice(1,-1).join(', ')+' y al final '+sol[sol.length-1]:' y después '+sol[1])+'.',voz:'Primero va '+sinT(w.s[0])+'. '+w.s.slice(1).map(sinT).join(', ')+'. ¡'+w.w+'!',vis:{tipo:'html',html:chipsHTML(sol.map(function(s,i){return (i+1)+'. '+s;}),'')}}];}};
+};
+LEC_GEN['peque:leer']=function(n){
+  var p={tipo:'opciones',gemelo:true};
+  if(n>=5){
+    var f=elegirNuevo(L.frases,'leer5',function(x){return x.t;}),r=PALX[f.r],ds=f.d.map(function(x){return PALX[x];}).filter(Boolean);
+    var m=mezclarOps([r].concat(ds).map(function(x){return {img:x.e,voz:x.w};}),0),full=f.t.replace('___',r.w);
+    p.ops=m.ops;p.ok=m.ok;p.consigna='Lee la oración. ¿Qué dibujo falta?';p.titulo=f.t;
+    p.estimulo=cartulina('<p class="frase-lec">'+esc(f.t).replace('___','<span class="hueco">?</span>')+'</p>');
+    p.voz='Lee la oración y elige el dibujo que falta.';p.final=full;p.finalVoz=full;
+    p.pista=function(){return 'Lee la oración otra vez, despacio. ¿Qué dibujo tiene sentido?';};
+    p.explicar=function(){return [{texto:'Leemos la oración completa: «'+full+'». ¡Así tiene sentido!',vis:{tipo:'html',html:'<div class="exp-col">'+dib(r.e,'dib-media')+'<p class="frase-exp">'+esc(f.t).replace('___','<span class="resalta">'+esc(r.w)+'</span>')+'</p></div>'}}];};
+    return p;
+  }
+  var fl=[null,function(x){return x.s.length===2&&todasSimples(x);},function(x){return x.s.length===2;},function(x){return x.s.length===3;},function(x){return x.s.length>=2&&compleja(x);}][n];
+  var w=elegirNuevo(PALJ.filter(fl),'leer'+n,function(x){return x.w;});
+  var pref=n===2?function(x){return sinT(x.s[0])===sinT(w.s[0]);}:function(x){return x.w.charAt(0)===w.w.charAt(0);};
+  var m2=mezclarOps([w].concat(distr([w],n===1?2:3,pref)).map(function(x){return {img:x.e,voz:x.w};}),0);
+  p.ops=m2.ops;p.ok=m2.ok;p.w=w;p.consigna='Lee la palabra y busca su dibujo.';p.titulo=w.w;
+  p.estimulo=cartulina('<p class="palabra-lec">'+(n===1?w.s.map(esc).join('<span class="sep">·</span>'):esc(w.w))+'</p>');
+  p.voz='Lee la palabra y busca su dibujo.';p.final='¡Sí! Dice '+w.w+'.';p.finalVoz='Sí. Dice '+w.w+'.';
+  p.pista=function(){return 'Lee despacio, sílaba por sílaba. Empieza con '+w.s[0]+'.';};
+  p.explicar=function(){return [
+    {texto:'Leemos despacio, sílaba por sílaba: '+w.s.join(' - ')+'.',voz:'Leemos despacio, sílaba por sílaba.',vis:{tipo:'html',html:chipsHTML(w.s,'')},anim:{tipo:'resaltar',sel:'.sil',voces:w.s.map(sinT),final:'¡'+w.w+'!'}},
+    {texto:'Dice '+w.w+'. Este es su dibujo.',vis:{tipo:'html',html:'<div class="exp-col">'+dib(w.e,'dib-media')+'<p class="palabra-exp">'+esc(w.w)+'</p></div>'}}];};
+  return p;
+};
+function rimaHTML(w,fin,marcar){var i=w.w.length-fin.length;return '<div class="rima-pal">'+dib(w.e,'dib-chica')+'<p>'+(marcar?esc(w.w.slice(0,i))+'<span class="fin-rima">'+esc(w.w.slice(i))+'</span>':esc(w.w))+'</p></div>';}
+LEC_GEN['peque:rimas']=function(n){
+  var p={tipo:'opciones',gemelo:false};
+  var grupos=L.rimas.filter(function(g){return g.ws.filter(function(x){return PALX[x];}).length>=(n>=5?3:2);});
+  var g=elegirNuevo(grupos,'rim'+n,function(x){return x.fin;}),gw=g.ws.map(function(x){return PALX[x];}).filter(Boolean),ws=barajar(gw);
+  if(n<5){
+    var t=ws[0],a=ws[1],k=[0,1,2,3,3][n];
+    var ds=distr(gw,k,n===4?function(x){return x.w.charAt(0)===t.w.charAt(0);}:null);
+    var m=mezclarOps([a].concat(ds).map(function(x){return {img:x.e,t:x.w,voz:x.w,clase:'pal'};}),0);
+    p.ops=m.ops;p.ok=m.ok;p.consigna='¿Qué palabra rima con «'+t.w+'»?';p.titulo=p.consigna;
+    p.estimulo=cartulina(dib(t.e,'dib-grande')+'<p class="palabra-lec">'+esc(t.w)+'</p>');
+    p.voz='¿Qué palabra rima con '+t.w+'? ¿'+listaVoz(p.ops.map(function(o){return o.voz;}))+'?';
+    p.final=cap(t.w)+' y '+a.w+' riman: terminan en «'+g.fin+'».';p.finalVoz=t.w+' y '+a.w+' riman. Terminan igual.';
+    p.pista=function(){return 'Escucha el final de '+t.w+'. ¿Cuál termina igual?';};
+    p.explicar=function(){return [{texto:'Escucha el final: '+t.w+', '+a.w+'. Las dos terminan en «'+g.fin+'». Por eso riman.',voz:t.w+'... '+a.w+'... terminan igual. Por eso riman.',vis:{tipo:'html',html:'<div class="rima-exp">'+rimaHTML(t,g.fin,true)+rimaHTML(a,g.fin,true)+'</div>'}}];};
+  } else {
+    var tres=ws.slice(0,3),fuera=distr(gw,1)[0];
+    var m5=mezclarOps([fuera].concat(tres).map(function(x){return {img:x.e,t:x.w,voz:x.w,clase:'pal'};}),0);
+    p.ops=m5.ops;p.ok=m5.ok;p.consigna='Tres riman y una no. ¿Cuál no rima?';p.titulo=p.consigna;
+    p.estimulo=cartulina('<p class="texto-adiv">Tres palabras riman y una no. Escucha el final de cada una.</p>');
+    p.voz='Tres palabras riman y una no. '+listaVoz(p.ops.map(function(o){return o.voz;}))+'. ¿Cuál no rima?';
+    p.final='¡Sí! '+cap(fuera.w)+' no termina en «'+g.fin+'».';p.finalVoz='Sí. '+fuera.w+' no rima.';
+    p.pista=function(){return 'Di cada palabra en voz alta y escucha cómo termina.';};
+    p.explicar=function(){return [{texto:cap(tres.map(function(x){return x.w;}).join(', '))+' terminan en «'+g.fin+'». '+cap(fuera.w)+' termina distinto: por eso no rima.',vis:{tipo:'html',html:'<div class="rima-exp">'+tres.map(function(x){return rimaHTML(x,g.fin,true);}).join('')+rimaHTML(fuera,g.fin,false)+'</div>'}}];};
+  }
+  return p;
+};
+LEC_GEN['peque:adivinanzas']=function(n){
+  var c=L.adivPeque.filter(function(x){return x.n===n;});if(!c.length)c=L.adivPeque;
+  var a=elegirNuevo(c,'adp'+n,function(x){return x.t;}),r=PALX[a.r];
+  var m=mezclarOps([r].concat(distr([r],n===1?2:3)).map(function(x){return {img:x.e,t:x.w,voz:x.w,clase:'pal'};}),0);
+  return {tipo:'opciones',ops:m.ops,ok:m.ok,gemelo:false,consigna:'Adivina, adivinador…',titulo:a.t,
+    estimulo:cartulina('<p class="texto-adiv">'+esc(a.t)+'</p>'),voz:'Adivina, adivinador: '+a.t+' ¿Qué es?',
+    final:a.exp,finalVoz:a.exp,pista:function(){return 'Escucha otra vez con atención: '+a.t;},
+    explicar:function(){return [{texto:a.exp,vis:{tipo:'html',html:'<div class="exp-col">'+dib(r.e,'dib-media')+'<p class="frase-exp">'+esc(a.t)+'</p></div>'}}];}};
+};
+LEC_GEN['peque:cuentos']=function(){
+  var c=S.texto,q=c.preguntas[S.n],pg=c.paginas[q.ev],okTxt=q.ops[q.ok][1];
+  var m=mezclarOps(q.ops.map(function(o){return {img:o[0]||null,t:o[1],voz:o[1],clase:'pal'};}),q.ok);
+  return {tipo:'opciones',ops:m.ops,ok:m.ok,gemelo:false,consigna:c.titulo,titulo:q.p,pregunta:esc(q.p),
+    estimulo:cartulina(dib(c.portada,'dib-grande')+'<p class="titulo-cuento">'+esc(c.titulo)+'</p>'),
+    voz:q.p+' ¿'+listaVoz(m.ops.map(function(o){return o.voz;}))+'?',
+    final:cap(okTxt)+'.',finalVoz:'',ayudaTxt:'Escucha esta parte del cuento: '+pg[1],
+    pista:function(){return 'Piensa en el cuento. Escucha esta parte: '+pg[1];},
+    explicar:function(){return [{texto:'Volvamos a leer: «'+pg[1]+'». '+(q.exp||'La respuesta es: '+okTxt+'.'),vis:{tipo:'html',html:'<div class="libro libro-exp">'+dib(pg[0],'dib-pagina')+'<p class="texto-pagina">'+esc(pg[1])+'</p></div>'}}];},
+    textoSig:'Siguiente pregunta'};
+};
+function genTraba(n){
+  var lista=L.trabalenguas[S.p].filter(function(x){return x.n===n;});if(!lista.length)lista=L.trabalenguas[S.p];
+  var t=elegirNuevo(lista,'tra'+n,function(x){return x.t;});
+  return {tipo:'traba',t:t.t,titulo:t.t,gemelo:false,final:'¡Lo dijiste muy bien!',finalVoz:'',textoSig:'Otro trabalenguas',
+    explicar:function(){var ws=t.t.split(/\s+/);return [{texto:'Truco: primero dilo muy despacio, palabra por palabra. Después, un poco más rápido. ¡Practicar es la clave!',voz:'Truco: primero dilo muy despacio, palabra por palabra. Escucha.',vis:{tipo:'html',html:'<p class="traba-exp">'+ws.map(function(w){return '<span class="pal-exp">'+esc(w)+'</span>';}).join(' ')+'</p>'},anim:{tipo:'resaltar',sel:'.pal-exp',voces:ws.map(function(w){return w.replace(/[¿?¡!.,;:«»—]/g,'');}),final:'Ahora inténtalo tú.'}}];}};
+}
+LEC_GEN['peque:trabalenguas']=genTraba;
+LEC_GEN['grande:trabalenguas']=genTraba;
+LEC_GEN['grande:comprension']=function(){
+  var t=S.texto,q=t.preguntas[S.n],okTxt=q.ops[q.ok];
+  var m=mezclarOps(q.ops.map(function(o){return {t:o,voz:o};}),q.ok);
+  var exp=function(){return '<div class="exp-texto"><h2 class="titulo-texto">'+esc(t.titulo)+'</h2>'+textoHTML(t.texto,q.ev)+'</div>';};
+  return {tipo:'opciones',lista:true,ancho:true,ops:m.ops,ok:m.ok,gemelo:false,titulo:q.p,
+    pregunta:'<span class="tipo-preg">'+esc(q.tipo)+'</span>'+esc(q.p),
+    estimulo:'<h2 class="titulo-texto">'+esc(t.titulo)+'</h2>'+textoHTML(t.texto),voz:q.p,evid:q.ev,
+    final:'Correcto: '+okTxt+'.',finalVoz:'Correcto.',
+    pista:function(){return q.ev.length?'Busca la respuesta en la parte marcada del texto.':'Piensa en todo el texto: ¿cómo está escrito y para qué sirve?';},
+    explicar:function(){return [{texto:q.exp,vis:{tipo:'html',html:exp()}},{texto:'La respuesta correcta es: «'+okTxt+'».',vis:{tipo:'html',html:exp()}}];},
+    textoSig:'Siguiente pregunta'};
+};
+function limpiaRef(r){return r.r.replace(' | ',' ');}
+LEC_GEN['grande:refranes']=function(n){
+  var p={tipo:'opciones',lista:true,gemelo:false},m,r;
+  if(n<=3){
+    r=elegirNuevo(n===1?L.dichos:L.refranes.filter(function(x){return x.n===n;}),'ref'+n,function(x){return x.r;});
+    m=mezclarOps([r.s].concat(r.d).map(function(x){return {t:x,voz:x};}),0);
+    p.consigna=n===1?'¿Qué significa este dicho?':'¿Qué significa este refrán?';p.titulo='«'+limpiaRef(r)+'» '+p.consigna;
+    p.estimulo=cartulina('<p class="refran">«'+esc(limpiaRef(r))+'»</p>');p.voz=limpiaRef(r)+'. ¿Qué significa?';
+    p.final=r.s+' Ejemplo: '+r.ej;p.finalVoz='Correcto. '+r.s;
+    p.pista=function(){return 'No lo pienses al pie de la letra. ¿Qué quiere decir en la vida real?';};
+    p.explicar=function(){return [{texto:'«'+limpiaRef(r)+'» no se entiende al pie de la letra. Significa: '+r.s,vis:{tipo:'html',html:cartulina('<p class="refran">«'+esc(limpiaRef(r))+'»</p>')}},{texto:'Por ejemplo: '+r.ej,vis:{tipo:'html',html:cartulina('<p class="refran">«'+esc(limpiaRef(r))+'»</p><p class="situacion">'+esc(r.ej)+'</p>')}}];};
+  } else if(n===4){
+    r=elegirNuevo(L.refranes,'ref4',function(x){return x.r;});var partes=r.r.split(' | ');
+    var otros=barajar(L.refranes.filter(function(x){return x!==r;})).slice(0,3).map(function(x){return x.r.split(' | ')[1];});
+    m=mezclarOps([partes[1]].concat(otros).map(function(x){return {t:x,voz:x};}),0);
+    p.consigna='Completa el refrán.';p.titulo=partes[0]+' …';
+    p.estimulo=cartulina('<p class="refran">«'+esc(partes[0])+' …»</p>');p.voz='Completa el refrán: '+partes[0]+'...';
+    p.final='«'+limpiaRef(r)+'» '+r.s;p.finalVoz=limpiaRef(r);
+    p.pista=function(){return 'Lee las opciones junto con el comienzo. ¿Cuál suena como un refrán que conoces?';};
+    p.explicar=function(){return [{texto:'El refrán completo es: «'+limpiaRef(r)+'». Significa: '+r.s,vis:{tipo:'html',html:cartulina('<p class="refran">«'+esc(limpiaRef(r))+'»</p>')}}];};
+  } else {
+    r=elegirNuevo(L.refranes,'ref5',function(x){return x.r;});
+    var otros5=barajar(L.refranes.filter(function(x){return x.g!==r.g;})).slice(0,3);
+    m=mezclarOps([r].concat(otros5).map(function(x){return {t:limpiaRef(x),voz:limpiaRef(x)};}),0);
+    p.consigna='¿Qué refrán le queda a esta situación?';p.titulo=r.ej;
+    p.estimulo=cartulina('<p class="situacion">'+esc(r.ej)+'</p>');p.voz='Lee la situación. ¿Qué refrán le queda mejor?';
+    p.final='«'+limpiaRef(r)+'»: '+r.s;p.finalVoz='Correcto.';
+    p.pista=function(){return 'Piensa qué enseñanza tiene la situación y busca el refrán que dice lo mismo.';};
+    p.explicar=function(){return [{texto:'El refrán que mejor queda es «'+limpiaRef(r)+'», porque significa: '+r.s,vis:{tipo:'html',html:cartulina('<p class="situacion">'+esc(r.ej)+'</p><p class="refran">«'+esc(limpiaRef(r))+'»</p>')}}];};
+  }
+  p.ops=m.ops;p.ok=m.ok;return p;
+};
+var REGLAS={};L.ortografia.forEach(function(o){if(o.regla)REGLAS[o.r]={regla:o.regla,ejs:o.ejs};});
+function genTilde(){
+  var o=elegirNuevo(L.tildes,'til',function(x){return x.w;});
+  var m=mezclarOps(o.ops.map(function(x){return {t:x,voz:x};}),0);
+  var pos=o.s.length-1-o.t,tipo=['aguda','grave','esdrújula','sobresdrújula'][pos]||'esdrújula';
+  var fin=sinT(o.w).slice(-1),lleva=/[áéíóú]/.test(o.w);
+  var regla=pos===0?'Las palabras agudas llevan tilde cuando terminan en N, S o vocal.':pos===1?'Las palabras graves llevan tilde cuando NO terminan en N, S o vocal.':'Las palabras esdrújulas siempre llevan tilde.';
+  var concl=pos>=2?'Por eso «'+o.w+'» lleva tilde.':'Termina en «'+fin+'», así que '+(lleva?'sí lleva tilde':'no lleva tilde')+': «'+o.w+'».';
+  var lugar=['última','penúltima','antepenúltima','anterior a la antepenúltima'][pos];
+  return {tipo:'opciones',ops:m.ops,ok:m.ok,gemelo:false,consigna:'¿Cuál está bien escrita?',titulo:'¿Cuál está bien escrita? Fíjate en la tilde.',
+    estimulo:cartulina('<p class="texto-adiv">Escucha la palabra y fíjate dónde va la tilde.</p>'),voz:'¿Cómo se escribe '+o.w+'? Fíjate en la tilde.',
+    final:cap(o.w)+' es palabra '+tipo+'. '+regla,finalVoz:'Correcto.',
+    pista:function(){return 'Separa la palabra en sílabas y busca la que suena más fuerte.';},
+    explicar:function(){return [
+      {texto:'Separamos en sílabas: '+o.s.join(' - ')+'. La sílaba que suena más fuerte es «'+o.s[o.t]+'».',voz:'Separamos en sílabas.',vis:{tipo:'html',html:chipsHTML(o.s,'')},anim:{tipo:'resaltar',sel:'.sil',voces:o.s.map(sinT),fin:o.t,final:'La que suena más fuerte es '+sinT(o.s[o.t])+'.'}},
+      {texto:'Es la '+lugar+' sílaba: la palabra es '+tipo.toUpperCase()+'.',vis:{tipo:'html',html:chipsHTML(o.s,'',o.t)}},
+      {texto:regla+' '+concl,vis:{tipo:'html',html:cartulina('<p class="palabra-lec">'+esc(o.w)+'</p>')}}];}};
+}
+LEC_GEN['grande:ortografia']=function(n,previo){
+  if(n>=5)return genTilde();
+  var cand=L.ortografia.filter(function(o){return o.n===n;});
+  if(previo&&previo.r){var mm=cand.filter(function(o){return o.r===previo.r&&o.w!==previo.w;});if(mm.length)cand=mm;}
+  var o=elegirNuevo(cand,'ort'+n,function(x){return x.w;}),R=REGLAS[o.r];
+  var i=o.g.indexOf('_'),len=o.w.length-(o.g.length-1),letra=len?o.w.substr(i,len).toLowerCase():'sin letra';
+  var m=mezclarOps(o.ops.map(function(x){return {t:x,voz:x};}),o.ops.indexOf(letra));
+  var antes=o.g.slice(0,i),despues=o.g.slice(i+1);
+  return {tipo:'opciones',ops:m.ops,ok:m.ok,r:o.r,w:o.w,gemelo:true,consigna:'¿Qué letra falta?',titulo:'¿Qué letra falta en «'+o.g.replace('_','…')+'»?',
+    estimulo:cartulina('<p class="palabra-lec orto">'+esc(antes)+'<span class="hueco">?</span>'+esc(despues)+'</p>'),
+    voz:'¿Qué letra falta? '+o.w+'.',final:cap(o.w)+'. '+R.regla,finalVoz:'Correcto.',
+    pista:function(){return 'Fíjate en las letras que están antes y después del espacio. ¿Qué regla conoces?';},
+    explicar:function(){return [
+      {texto:'Se escribe «'+o.w+'». '+R.regla,vis:{tipo:'html',html:cartulina('<p class="palabra-lec orto">'+esc(antes)+'<span class="resalta">'+esc(len?o.w.substr(i,len):'')+'</span>'+esc(despues)+'</p>')}},
+      {texto:'Otras palabras con la misma regla: '+R.ejs+'.',vis:{tipo:'html',html:cartulina('<p class="ejs-orto">'+esc(R.ejs)+'</p>')}}];}};
+};
+LEC_GEN['grande:vocabulario']=function(n){
+  var c=L.vocabulario.filter(function(x){return x.n===n;});
+  var o=elegirNuevo(c,'voc'+n,function(x){return x.p;});
+  var m=mezclarOps(o.ops.map(function(x){return {t:x,voz:x};}),0);
+  return {tipo:'opciones',lista:n===3||n===4,ops:m.ops,ok:m.ok,gemelo:false,
+    consigna:['','Sinónimos','Antónimos','Palabras en contexto','Prefijos y sufijos','Analogías'][n],titulo:o.p,
+    estimulo:cartulina('<p class="'+(o.p.length>70?'situacion':'texto-adiv')+'">'+esc(o.p)+'</p>'),
+    voz:n===3?'Lee la oración y elige qué significa la palabra.':o.p.replace(/[«»]/g,''),
+    final:o.exp,finalVoz:'Correcto.',
+    pista:function(){return n===3?'Busca pistas en la misma oración.':n===5?'Piensa qué relación hay entre las dos primeras palabras.':'Piensa otra vez con calma.';},
+    explicar:function(){return [{texto:o.exp,vis:{tipo:'html',html:cartulina('<p class="texto-adiv">'+esc(o.p)+'</p><p class="resp-exp">'+esc(o.ops[0])+'</p>')}}];}};
+};
+LEC_GEN['grande:oraciones']=function(n){
+  var o=elegirNuevo(L.oraciones.filter(function(x){return x.n===n;}),'ora'+n,function(x){return x.o;});
+  var full=o.o.replace(' | ',' '),sol=full.split(' '),alts=(o.alt||[]).map(function(a){return a.split(' ');}),partes=o.o.split(' | ');
+  var piezas=barajar(sol);if(piezas.join(' ')===full)piezas=piezas.slice(1).concat(piezas[0]);
+  var signo=/\?$/.test(full)?'signo de pregunta':/!$/.test(full)?'signo de exclamación':'punto';
+  return {tipo:'armar',sol:sol,alts:alts,piezas:piezas,sep:' ',maxErr:3,gemelo:false,consigna:'Ordena las palabras para formar una oración.',titulo:'Ordena la oración',
+    voz:'Ordena las palabras para formar una oración.',estimulo:'',final:full,finalVoz:full,
+    pista:function(k){return k===0?'Busca la palabra que empieza con mayúscula'+(/^[¿¡]/.test(full)?' y con el signo de apertura':'')+'.':'¿Qué palabra tiene sentido después de «'+S.armado[k-1].t+'»?';},
+    explicar:function(){
+      var txt=partes.length>1?'El sujeto es «'+partes[0]+'»: de quién se habla. El predicado es «'+partes[1].replace(/[.!?]$/,'')+'»: lo que se dice del sujeto.':(o.tip||'');
+      return [{texto:'La oración empieza con mayúscula'+(/^[¿¡]/.test(full)?' y signo de apertura':'')+' y termina con '+signo+'.',vis:{tipo:'html',html:'<p class="frase-exp">'+esc(full)+'</p>'}},
+        {texto:txt,vis:{tipo:'html',html:partes.length>1?'<p class="frase-exp"><span class="sujeto">'+esc(partes[0])+'</span> <span class="predicado">'+esc(partes[1])+'</span></p>':'<p class="frase-exp">'+esc(full)+'</p>'}}];}};
+};
+LEC_GEN['grande:adivinanzas']=function(n){
+  var c=L.adivGrande.filter(function(x){return x.n===n;});if(!c.length)c=L.adivGrande;
+  var a=elegirNuevo(c,'adg'+n,function(x){return x.t;});
+  var m=mezclarOps(a.ops.map(function(x){return {t:x,voz:x.replace(/^(el|la|los|las|tu) /i,'')};}),0);
+  return {tipo:'opciones',lista:true,ops:m.ops,ok:m.ok,gemelo:false,consigna:'Adivina, adivinador…',titulo:a.t,
+    estimulo:cartulina('<p class="texto-adiv">'+esc(a.t)+'</p>'),voz:'Lee la adivinanza. ¿Qué es?',final:a.exp,finalVoz:'¡Correcto!',
+    pista:function(){return 'Lee otra vez despacio. A veces la respuesta está escondida en las mismas palabras.';},
+    explicar:function(){return [{texto:a.exp,vis:{tipo:'html',html:cartulina('<p class="texto-adiv">'+esc(a.t)+'</p><p class="resp-exp">'+esc(a.ops[0])+'</p>')}}];}};
+};
+function crearLec(gemelo){
+  var n=DATOS[S.p].niveles[S.op]||1;
+  var p=LEC_GEN[S.p+':'+S.op](n,gemelo?S.prob:null);
+  p.lectura=true;p.perfil=S.p;p.op=S.op;p.nivel=n;return p;
+}
+
+/* ---------- Pantallas de lectura ---------- */
+function volverJuegos(){animTok++;S.oyente=null;if(S.area)pantallaJuegos(S.area);else pantallaMenu(false);}
+function cabezaLec(p){return '<div class="cabeza-juego"><p class="eyebrow">'+OPS[S.op].nombre+' · Nivel '+p.nivel+'</p><span class="aciertos-lec" aria-label="'+S.aciertos+' respuestas bien">✓ '+S.aciertos+'</span>'+palitos()+'</div>';}
+function opcionHTML(o,i){
+  var letra='ABCDE'.charAt(i);
+  return '<button type="button" data-nav class="opcion'+(o.clase?' '+o.clase:'')+(o.img&&!o.t?' solo-img':'')+'" data-i="'+i+'" data-letra="'+letra+'" data-txt="'+esc(o.t||'')+'"'+(o.img?' data-img="'+o.img+'"':'')+' aria-label="'+esc(letra+(o.t?': '+o.t:''))+'">'+
+    '<span class="letra" aria-hidden="true">'+letra+'</span>'+(o.img?dib(o.img,'dib-op'):'')+(o.t?'<span class="op-t">'+esc(o.t)+'</span>':'')+(o.sub?'<span class="op-sub">'+esc(o.sub)+'</span>':'')+'</button>';
+}
+function mostrarLec(p){
+  S.bloqueado=false;S.usado5050=false;S.oyente=null;S.tituloTel=p.titulo||'';
+  if(p.tipo==='armar')return pantallaArmar(p);
+  if(p.tipo==='traba')return pantallaTraba(p);
+  return pantallaOpciones(p);
+}
+function pantallaOpciones(p){
+  modoJuego='lectura';animTok++;
+  pantalla.innerHTML='<div class="lec'+(p.lista?' lec-lista':'')+(p.ancho?' lec-ancho':'')+'">'+
+    '<section class="lec-estimulo">'+cabezaLec(p)+(p.consigna&&!p.pregunta?'<p class="consigna-lec">'+esc(p.consigna)+'</p>':'')+p.estimulo+'</section>'+
+    '<section class="lec-resp">'+(p.pregunta?'<p class="pregunta">'+p.pregunta+'</p>':'')+
+    '<div class="opciones n'+p.ops.length+'" role="group" aria-label="Opciones">'+p.ops.map(opcionHTML).join('')+'</div>'+
+    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+(p.ops.length>=4?btnL('b-5050','50:50 · quedan '+S.comodines,S.comodines<1):'')+btnL('b-como',S.p==='peque'?'Ayúdame':'Pista')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+  $$('.opcion',pantalla).forEach(function(b){b.addEventListener('click',function(){elegirLec(+b.dataset.i);});});
+  on('#b-oir',function(){decir(vozDe(p.voz||p.titulo));});
+  on('#b-5050',usar5050);on('#b-como',ejemplo);on('#b-salir',volverJuegos);
+  alVolver=volverJuegos;S.oyente=oyenteOpciones;
+  enfocar('.opcion');
+  if(p.voz)decir(vozDe(p.voz));
+}
+function usar5050(){
+  var p=S.prob;if(!p||S.comodines<1||S.usado5050||S.bloqueado)return;
+  var malas=barajar(range(0,p.ops.length).filter(function(i){var b=$('.opcion[data-i="'+i+'"]',pantalla);return i!==p.ok&&b&&!b.disabled;}));
+  var quitar=malas.slice(0,Math.min(malas.length,Math.floor(p.ops.length/2)));if(!quitar.length)return;
+  quitar.forEach(function(i){var b=$('.opcion[data-i="'+i+'"]',pantalla);b.disabled=true;b.classList.add('quitada');});
+  S.comodines--;S.usado5050=true;S.conAyuda=true;
+  var bb=$('#b-5050',pantalla);if(bb){bb.disabled=true;bb.textContent='50:50 · quedan '+S.comodines;}
+  enfocar($$('.opcion:not(:disabled)',pantalla)[0]);decir('Quité '+numPalabra(quitar.length)+' respuestas. Ahora elige.');
+}
+function elegirLec(i){
+  var p=S.prob;if(S.bloqueado||!p||!p.ops)return;
+  var b=$('.opcion[data-i="'+i+'"]',pantalla);if(!b||b.disabled)return;
+  if(i===p.ok){S.bloqueado=true;$$('.opcion',pantalla).forEach(function(x){if(x!==b)x.disabled=true;});b.classList.add('bien');return acierto();}
+  b.classList.add('mal');b.disabled=true;
+  var quedan=$$('.opcion:not(:disabled)',pantalla).length;
+  if(S.intentos===1&&quedan>1){
+    S.intentos=2;var h=p.pista?p.pista(i):'Casi. Piensa otra vez.';
+    if(p.evid&&p.evid.length)marcarEvid(p.evid);
+    aviso(h,false);decir(vozDe(h));enfocar($$('.opcion:not(:disabled)',pantalla)[0]);return;
+  }
+  S.bloqueado=true;setTimeout(explicarError,700);
+}
+function oyenteOpciones(alts){
+  var p=S.prob;if(!p||!p.ops||S.bloqueado)return null;
+  var LET={a:0,b:1,be:1,c:2,ce:2,se:2,d:3,de:3,e:4};
+  for(var a=0;a<alts.length;a++){
+    var s=normal(alts[a]);if(!s)continue;var pri=s.split(' ')[0];
+    for(var i=0;i<p.ops.length;i++){
+      var o=p.ops[i],cs=[o.voz,o.t].filter(Boolean).map(function(x){return normal(sinT(x));});
+      for(var j=0;j<cs.length;j++){var c=cs[j];if(!c)continue;
+        if(s===c||(c.length<=2&&pri===c)||(c.length>=3&&(' '+s+' ').indexOf(' '+c+' ')>=0)){elegirLec(i);return 'Elegiste: '+(o.t||o.voz);}}
+    }
+    var m=s.match(/^(?:la |el |letra |opcion |la opcion |la letra )*(a|b|be|c|ce|se|d|de|e)$/);
+    if(m&&LET[m[1]]<p.ops.length){elegirLec(LET[m[1]]);return 'Elegiste la '+'ABCDE'.charAt(LET[m[1]]);}
+  }
+  return null;
+}
+function celebrarLec(subio){
+  var p=S.prob,tok=++animTok,n=DATOS[S.p].niveles[S.op];
+  var msg=(S.conAyuda||S.intentos>1)?pick(['¡Muy bien! Lo lograste.','¡Eso es!','¡Bien hecho!']):pick(['¡Muy bien!','¡Excelente!','¡Correcto!','¡Así se hace!','¡Bravo!']);
+  var cont=$('.lec-resp',pantalla)||pantalla,fb=$('.lec-botones, .acciones-traba',pantalla);if(fb)fb.hidden=true;
+  var fest=document.createElement('div');fest.className='festejo';fest.setAttribute('role','status');
+  fest.innerHTML='<div class="sello">'+CHECK+'</div><div class="festejo-txt"><p class="acierto-titulo">'+msg+'</p>'+(p.final?'<p class="festejo-final">'+esc(p.final)+'</p>':'')+(subio?'<p class="sube">'+ESTRELLA+'Subiste al nivel '+n+': '+DESC[S.p][S.op][n-1]+'</p>':'')+'</div>'+btnL('b-sig',S.n+1>=S.total?'Ver mi misión':'Siguiente',false,'btn-tiza');
+  cont.appendChild(fest);S.oyente=null;
+  on('#b-sig',function(){animTok++;siguienteTurno(false);});
+  enfocar('#b-sig');
+  var dicho=msg+' '+(p.finalVoz!=null?p.finalVoz:(p.final||''))+(subio?' ¡Subiste al nivel '+n+'!':'');
+  hablarP(vozDe(dicho.replace(/[«»]/g,''))).then(function(){
+    if(S.p==='peque')return sleep(900).then(function(){if(tok===animTok)siguienteTurno(false);});
+  });
+}
+
+/* Armar: sílabas (primero) u oraciones (quinto) */
+function solucionesArmar(p){return [p.sol].concat(p.alts||[]);}
+function pantallaArmar(p){
+  modoJuego='lectura';animTok++;S.armado=[];S.errores=0;
+  var frase=p.sep===' ';
+  pantalla.innerHTML='<div class="lec armar'+(frase?' armar-frase':'')+'"><section class="lec-estimulo">'+cabezaLec(p)+'<p class="consigna-lec">'+esc(p.consigna)+'</p>'+(p.estimulo||'')+'<div class="armado'+(frase?' frase':'')+'" id="armado" aria-live="polite"></div></section>'+
+    '<section class="lec-resp"><div class="piezas" role="group" aria-label="Piezas">'+p.piezas.map(function(x,i){return '<button type="button" data-nav class="pieza'+(frase?' palabra':'')+'" data-i="'+i+'" data-txt="'+esc(x)+'">'+esc(x)+'</button>';}).join('')+'</div>'+
+    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+btnL('b-quitar','Quitar la última',true)+btnL('b-como',S.p==='peque'?'Ayúdame':'Pista')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+  actualizarArmado();
+  $$('.pieza',pantalla).forEach(function(b){b.addEventListener('click',function(){ponerPieza(+b.dataset.i);});});
+  on('#b-oir',function(){decir(p.voz);});on('#b-quitar',quitarPieza);on('#b-como',ejemplo);on('#b-salir',volverJuegos);
+  alVolver=volverJuegos;S.oyente=oyenteArmar;
+  enfocar('.pieza');decir(p.voz);
+}
+function actualizarArmado(){
+  var p=S.prob,box=$('#armado',pantalla);if(!box)return;
+  box.innerHTML=range(0,p.sol.length).map(function(i){var x=S.armado[i];return '<span class="hueco-armar'+(x?' lleno':'')+'">'+(x?esc(x.t):'&nbsp;')+'</span>';}).join('');
+  var q=$('#b-quitar',pantalla);if(q)q.disabled=!S.armado.length;
+}
+function siguientesValidas(p){var k=S.armado.length;return solucionesArmar(p).filter(function(sol){return S.armado.every(function(y,j){return sol[j]===y.t;});}).map(function(sol){return sol[k];}).filter(Boolean);}
+function ponerPieza(i){
+  var p=S.prob;if(S.bloqueado||!p)return;var b=$('.pieza[data-i="'+i+'"]',pantalla);if(!b||b.disabled)return;
+  var x=p.piezas[i],k=S.armado.length;
+  if(siguientesValidas(p).indexOf(x)>=0){
+    var foco=document.activeElement===b;
+    S.armado.push({t:x,i:i});b.disabled=true;b.classList.add('usada');actualizarArmado();
+    if(solucionesArmar(p).some(function(sol){return sol.length===S.armado.length&&S.armado.every(function(y,j){return sol[j]===y.t;});})){S.bloqueado=true;return acierto();}
+    if(p.sep==='')decir(sinT(x.toLowerCase()));
+    if(foco){var sig=$$('.pieza:not(:disabled)',pantalla)[0];if(sig)enfocar(sig);}
+    return;
+  }
+  b.classList.remove('mal');void b.offsetWidth;b.classList.add('mal');
+  S.errores++;
+  if(S.errores>=p.maxErr){S.bloqueado=true;setTimeout(explicarError,700);return;}
+  S.intentos=2;var h=p.pista?p.pista(k):'Esa no va ahí. Prueba otra.';aviso(h,false);decir(vozDe(h));
+}
+function quitarPieza(){if(S.bloqueado||!S.armado.length)return;var u=S.armado.pop(),b=$('.pieza[data-i="'+u.i+'"]',pantalla);if(b){b.disabled=false;b.classList.remove('usada');}actualizarArmado();}
+function oyenteArmar(alts){
+  var p=S.prob;if(!p||S.bloqueado)return null;
+  for(var a=0;a<alts.length;a++){
+    var ws=normal(alts[a]).split(' '),puestas=[];
+    ws.forEach(function(w){if(S.bloqueado)return;var val=siguientesValidas(p);
+      var b=$$('.pieza:not(:disabled)',pantalla).filter(function(el){return normal(sinT(el.dataset.txt))===normal(sinT(w))&&val.indexOf(p.piezas[+el.dataset.i])>=0;})[0];
+      if(b){puestas.push(b.dataset.txt);ponerPieza(+b.dataset.i);}});
+    if(puestas.length)return 'Pusiste: '+puestas.join(' ');
+  }
+  return null;
+}
+
+/* Trabalenguas */
+function pantallaTraba(p){
+  modoJuego='lectura';animTok++;S.intentosVoz=0;
+  pantalla.innerHTML='<div class="lec traba"><section class="lec-estimulo">'+cabezaLec(p)+'<div class="cartulina texto-traba" data-nosync>'+oracionHTML(p.t,0)+'</div><p class="resultado-voz" id="res-voz" aria-live="polite"></p></section>'+
+    '<section class="lec-resp"><p class="consigna-lec">Escúchalo despacio, practícalo y luego dilo rápido.</p><div class="acciones-traba">'+
+    btnL('b-lento','Escuchar despacio')+btnL('b-rapido','Escuchar rápido')+(puedeEscuchar()?btnL('b-digo','Lo digo al micrófono',false,'btn-tiza'):'')+btnL('b-dije','¡Ya lo dije!')+btnL('b-saltar','Otro trabalenguas')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+  var cont=$('.texto-traba',pantalla);
+  on('#b-lento',function(){leerConResaltado(cont,++animTok,{rate:0.72});});
+  on('#b-rapido',function(){leerConResaltado(cont,++animTok,{rate:1.2});});
+  on('#b-digo',function(){escucharLectura(this);});
+  on('#b-dije',function(){if(S.bloqueado)return;S.bloqueado=true;acierto();});
+  on('#b-saltar',function(){animTok++;siguienteTurno(false);});
+  on('#b-salir',volverJuegos);alVolver=volverJuegos;
+  S.oyente=function(alts){return oyenteLectura(alts,cont,S.p==='peque'?0.6:0.75,true);};
+  enfocar('#b-lento');
+  var t0=animTok;hablarP('Escucha el trabalenguas.').then(function(){if(t0===animTok)return leerConResaltado(cont,t0,{rate:0.85});});
+}
+
+/* Cuentos (primero): páginas con dibujo, la profe lee resaltando cada palabra */
+function pantallaCuento(k){
+  modoJuego='lectura';animTok++;var tok=animTok,c=S.texto,pg=c.paginas[k],ult=k===c.paginas.length-1;
+  S.tituloTel=pg[1];S.prob=null;
+  pantalla.innerHTML='<div class="cuento"><div class="cabeza-juego"><p class="eyebrow">'+esc(c.titulo)+' · Página '+(k+1)+' de '+c.paginas.length+'</p></div>'+
+    '<div class="libro"><div class="libro-dib">'+dib(pg[0],'dib-pagina')+'</div><p class="texto-pagina" data-nosync>'+oracionHTML(pg[1],0)+'</p></div>'+
+    '<p class="resultado-voz" id="res-voz" aria-live="polite"></p>'+
+    '<div class="fila-botones">'+btnL('b-atras','Atrás',k===0)+btnL('b-oirp','Léemelo otra vez')+(puedeEscuchar()?btnL('b-yo','Lo leo yo'):'')+btnL('b-sig',ult?'¡A responder!':'Siguiente página',false,'btn-tiza')+btnL('b-salir','Salir',false,'btn-suave')+'</div></div>';
+  var cont=$('.texto-pagina',pantalla);
+  on('#b-atras',function(){if(k>0)pantallaCuento(k-1);});
+  on('#b-oirp',function(){leerConResaltado(cont,++animTok);});
+  on('#b-yo',function(){escucharLectura(this);});
+  on('#b-sig',function(){animTok++;if(ult)nuevoTurno(false);else pantallaCuento(k+1);});
+  on('#b-salir',volverJuegos);alVolver=volverJuegos;
+  S.oyente=function(alts){return oyenteLectura(alts,cont,0.5,false);};
+  enfocar('#b-sig');
+  (k===0?hablarP(c.titulo+'.'):Promise.resolve()).then(function(){if(tok===animTok)return leerConResaltado(cont,tok);});
+}
+/* Lectura (quinto): primero el texto completo, después las preguntas con el texto a la vista */
+function pantallaTextoGrande(){
+  modoJuego='lectura';animTok++;var t=S.texto;S.tituloTel=t.titulo;S.prob=null;S.oyente=null;
+  pantalla.innerHTML='<div class="lectura-g"><div class="cabeza-juego"><p class="eyebrow">Lectura · '+esc(t.tipo)+' · Nivel '+(DATOS[S.p].niveles.comprension||1)+'</p><span class="aciertos-lec">'+t.preguntas.length+' preguntas</span></div>'+
+    '<h1 class="titulo-sec">'+esc(t.titulo)+'</h1>'+textoHTML(t.texto)+
+    '<div class="fila-botones">'+btnL('b-leeme','Léemelo')+btnL('b-sig','Ya lo leí: a las preguntas',false,'btn-tiza')+btnL('b-salir','Salir',false,'btn-suave')+'</div></div>';
+  var cont=$('.texto-lec',pantalla);
+  on('#b-leeme',function(){leerConResaltado(cont,++animTok);});
+  on('#b-sig',function(){animTok++;nuevoTurno(false);});
+  on('#b-salir',volverJuegos);alVolver=volverJuegos;
+  enfocar('#b-sig');
+  decir('Lee el texto con atención. Si quieres, te lo leo. Cuando termines, pasamos a las preguntas.');
+}
+function iniciarLectura(op){
+  var n=DATOS[S.p].niveles[op]||1;
+  if(op==='cuentos'){S.texto=elegirTexto(L.cuentosPeque,n,'cuentos');S.total=S.texto.preguntas.length;return pantallaCuento(0);}
+  if(op==='comprension'){S.texto=elegirTexto(L.textos,n,'comprension');S.total=S.texto.preguntas.length;return pantallaTextoGrande();}
+  S.total=op==='trabalenguas'?3:(S.p==='peque'?6:8);
+  nuevoTurno(false);
+}
+function ayudaLec(){
+  var p=S.prob;S.conAyuda=true;
+  if(p.evid&&p.evid.length){marcarEvid(p.evid);var t='Vuelve a leer la parte marcada del texto. Ahí está la respuesta.';aviso(t,false);decir(t);return;}
+  if(p.ayudaTxt){aviso(p.ayudaTxt,false);decir(p.ayudaTxt);return;}
+  if(p.gemelo){var ej=crearLec(true);pantallaExplicacion(ej.explicar(),{titulo:'Ejemplo con otra palabra',textoFinal:'Volver a mi ejercicio',alFinal:function(){mostrarLec(S.prob);}});return;}
+  var h=p.pista?p.pista(S.armado?S.armado.length:0):'Piensa con calma.';aviso(h,false);decir(vozDe(h));
 }
 
 /* ---------- Celular como control y micrófono ----------
@@ -1029,7 +1825,7 @@ function pintarConexion(){
     '<p class="codigo">Código <strong>'+CTRL.codigo+'</strong></p><p class="ayuda-url">Escanea el código o abre '+location.host+location.pathname.replace(/[^/]*$/,'')+'control.html</p></div>';
 }
 function etiqueta(el){if(el.classList.contains('tarjeta')){var n=$('.tarjeta-nombre',el);return n?n.textContent.trim():el.textContent.trim();}return (el.getAttribute('aria-label')||el.textContent||'').replace(/\s+/g,' ').trim();}
-function grupoDe(el){var c=el.classList;return c.contains('tecla')?'teclado':c.contains('ficha')?'fichas':c.contains('slot')?'slots':c.contains('tarjeta')?'tarjetas':'acciones';}
+function grupoDe(el){var c=el.classList;return c.contains('opcion')?'opciones':c.contains('pieza')?'piezas':c.contains('tecla')?'teclado':c.contains('ficha')?'fichas':c.contains('slot')?'slots':c.contains('tarjeta')?'tarjetas':'acciones';}
 function textoDe(sel){var el=$(sel,pantalla);return el?el.textContent.replace(/\s+/g,' ').trim():'';}
 function estadoActual(){
   var botones=$$('[data-nav]',pantalla).map(function(el,i){
@@ -1039,15 +1835,17 @@ function estadoActual(){
     if(el.disabled)b.disabled=true;
     if(el.classList.contains('activo'))b.activo=true;
     if(b.grupo==='slots')b.valor=el.textContent.trim();
+    if(b.grupo==='opciones'){b.letra=el.dataset.letra;b.txt=el.dataset.txt;if(el.dataset.img)b.img=el.dataset.img;b.label=b.txt||el.dataset.letra;if(el.classList.contains('bien'))b.estado='bien';else if(el.classList.contains('mal'))b.estado='mal';}
+    if(b.grupo==='piezas')b.label=el.dataset.txt;
     if(b.grupo==='tarjetas'){var g=$('.tarjeta-grado',el),d=$('.tarjeta-desc',el);b.sub=[g&&g.textContent,d&&d.textContent].filter(Boolean).join(' · ');}
     return b;
   });
-  var titulo=modoJuego==='grande'&&S.prob?S.prob.texto+' = ?':textoDe('.enunciado')||textoDe('.texto-paso')||textoDe('.acierto-titulo')||textoDe('.titulo-sec')||textoDe('.titulo');
-  var detalle=textoDe('.eq-final')||textoDe('.consigna')||textoDe('.profe .eyebrow')||textoDe('.cabeza-juego .eyebrow');
+  var titulo=modoJuego==='lectura'?(S.tituloTel||''):modoJuego==='grande'&&S.prob?S.prob.texto+' = ?':textoDe('.enunciado')||textoDe('.texto-paso')||textoDe('.acierto-titulo')||textoDe('.titulo-sec')||textoDe('.titulo');
+  var detalle=modoJuego==='lectura'?(textoDe('.festejo-final')||textoDe('.cabeza-juego .eyebrow')):textoDe('.eq-final')||textoDe('.consigna')||textoDe('.profe .eyebrow')||textoDe('.cabeza-juego .eyebrow');
   return {t:'estado',modo:modoJuego,titulo:titulo,detalle:detalle,jugador:S.p?PERFILES[S.p].nombre:'',estrellas:S.p?DATOS[S.p].estrellas:null,botones:botones};
 }
 var tSync=null;
-new MutationObserver(function(){clearTimeout(tSync);tSync=setTimeout(difundir,90);}).observe(pantalla,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','disabled']});
+new MutationObserver(function(rs){if(rs.every(function(r){var t=r.target.nodeType===1?r.target:r.target.parentElement;return t&&t.closest&&t.closest('[data-nosync]');}))return;clearTimeout(tSync);tSync=setTimeout(difundir,90);}).observe(pantalla,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','disabled']});
 function difundir(){if(!CTRL.conns.length)return;var e=estadoActual();CTRL.conns.forEach(function(c){enviar(c,e);});}
 function normal(t){return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[¿?¡!.,;:]/g,' ').replace(/\s+/g,' ').trim();}
 var COMANDOS=[
@@ -1058,12 +1856,20 @@ var COMANDOS=[
   {p:/atras|regresa|anterior/,sel:['#b-atras']},
   {p:/borra/,sel:['#b-borrar']},
   {p:/salir|menu|otro juego/,sel:['#b-salir','#b-menu']},
-  {p:/cambiar de jugador|cambiar jugador/,sel:['#b-cambiar']}
+  {p:/cambiar de jugador|cambiar jugador/,sel:['#b-cambiar']},
+  {p:/numero|matematica/,sel:['#b-area-numeros']},
+  {p:/letra|lectura|leer/,sel:['#b-area-letras']},
+  {p:/cincuenta|50/,sel:['#b-5050']},
+  {p:/leeme|lee tu/,sel:['#b-leeme','#b-oirp']},
+  {p:/despacio/,sel:['#b-lento']},
+  {p:/rapido/,sel:['#b-rapido']},
+  {p:/pregunta/,sel:['#b-sig']},
+  {p:/volver/,sel:['#b-volver']}
 ];
 function pulsar(el){enfocar(el);el.click();}
 function procesarVoz(t){
   var s=normal(t);if(!s)return null;
-  if(modoJuego){var v=leerNumero(t);if(v!==null){responderConVoz(v);return 'Respuesta: '+v;}}
+  if(modoJuego==='peque'||modoJuego==='grande'){var v=leerNumero(t);if(v!==null){responderConVoz(v);return 'Respuesta: '+v;}}
   for(var i=0;i<COMANDOS.length;i++){if(!COMANDOS[i].p.test(s))continue;
     for(var j=0;j<COMANDOS[i].sel.length;j++){var el=$(COMANDOS[i].sel[j],pantalla);if(el&&!el.disabled){pulsar(el);return etiqueta(el);}}}
   var els=$$('[data-nav]',pantalla).filter(function(el){return !el.disabled&&grupoDe(el)!=='teclado'&&grupoDe(el)!=='slots'&&grupoDe(el)!=='fichas';});
@@ -1077,11 +1883,13 @@ function recibir(m,c){
   if(m.t==='escuchando'){try{speechSynthesis.cancel();}catch(e){}return;}
   if(m.t==='voz'){
     var alts=[].concat(m.alternativas||[],m.texto||[]),hecho=null,oido=alts[0]||'';
+    if(modoJuego==='lectura'&&typeof S.oyente==='function')hecho=S.oyente(alts);
     for(var i=0;i<alts.length&&hecho===null;i++){hecho=procesarVoz(alts[i]);if(hecho!==null)oido=alts[i];}
-    enviar(c,{t:'eco',oido:oido,ok:hecho!==null,msg:hecho!==null?hecho:modoJuego?'No entendí el número. Dilo otra vez, despacito.':'No entendí. Puedes decir «siguiente», «otra vez», «ayuda» o el nombre de un botón.'});
+    enviar(c,{t:'eco',oido:oido,ok:hecho!==null,msg:hecho!==null?hecho:modoJuego==='lectura'?'No entendí. Di la respuesta o la letra de la opción: a, be, ce…':modoJuego?'No entendí el número. Dilo otra vez, despacito.':'No entendí. Puedes decir «siguiente», «otra vez», «ayuda» o el nombre de un botón.'});
   }
 }
 
+if(/[?&]prueba/.test(location.search))window.__PZ={S:S,D:function(){return DATOS;},LEC_GEN:LEC_GEN,crearLec:crearLec,mostrarLec:mostrarLec,iniciarMision:iniciarMision,nuevoTurno:nuevoTurno,pantallaExplicacion:pantallaExplicacion,pantallaJuegos:pantallaJuegos,elegirLec:elegirLec};
 iniciarPuente();
 pantallaInicio();
 })();

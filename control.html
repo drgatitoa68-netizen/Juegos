@@ -58,6 +58,22 @@ input:focus{outline:4px solid var(--amarilla);outline-offset:2px;border-style:so
 .tecla.texto{font-size:1.1rem}
 .tecla.comprobar{background:var(--tiza);color:var(--pizarra-hondo);border-color:var(--tiza)}
 .fichas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.opciones{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.opciones.lista{grid-template-columns:1fr}
+.opc{appearance:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:5.4rem;padding:.7em .5em .5em;border:4px solid var(--amarilla);border-radius:14px;background:rgba(0,0,0,.22);color:var(--tiza)}
+.opc .le{position:absolute;top:.3em;left:.55em;font-family:var(--f-titulo);font-weight:800;font-size:.95rem;color:var(--amarilla);opacity:.75}
+.opc img{width:3.4rem;height:3.4rem;display:block}
+.opc .tx{font-family:var(--f-titulo);font-weight:800;font-size:1.8rem;line-height:1.05;color:var(--amarilla);text-align:center}
+.opc .tx.largo{font-family:var(--f-texto);font-weight:400;font-size:1.02rem;line-height:1.3;color:var(--tiza)}
+.opciones.lista .opc{flex-direction:row;justify-content:flex-start;gap:.7em;min-height:0;padding:.65em .8em;text-align:left}
+.opciones.lista .opc .le{position:static;flex:none;width:1.9em;height:1.9em;border:2px solid var(--amarilla);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;opacity:1}
+.opciones.lista .opc .tx{text-align:left;font-family:var(--f-texto);font-weight:400;font-size:1.02rem;line-height:1.3;color:var(--tiza)}
+.opc.bien{border-color:var(--verde);background:rgba(169,231,133,.2)}
+.opc.mal,.opc:disabled{opacity:.35;border-color:var(--rosa)}
+.piezas{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pz{appearance:none;border:4px solid var(--amarilla);border-radius:12px;background:rgba(0,0,0,.22);font-family:var(--f-titulo);font-weight:800;font-size:1.7rem;color:var(--amarilla);padding:.15em .55em;min-width:3.2rem}
+.pz.pal{font-family:var(--f-texto);font-weight:700;font-size:1.15rem;color:var(--tiza)}
+.pz:disabled{opacity:.2}
 .ficha{appearance:none;aspect-ratio:1;border-radius:50%;border:3px solid var(--tiza-tenue);background:var(--pizarra-alto);font-family:var(--f-titulo);font-weight:800;font-size:1.9rem;line-height:1;padding:0}
 .tarjetas{display:flex;flex-direction:column;gap:10px}
 .tarjeta{appearance:none;text-align:left;display:flex;flex-direction:column;gap:.15em;padding:.8em 1em;border-radius:16px;border:3px dashed var(--tiza-tenue);background:rgba(0,0,0,.15)}
@@ -97,10 +113,12 @@ input:focus{outline:4px solid var(--amarilla);outline-offset:2px;border-style:so
     <p class="eco" id="eco" aria-live="polite"></p>
     <div class="slots" id="slots"></div>
     <div class="teclado" id="teclado"></div>
+    <div class="opciones" id="opciones"></div>
+    <div class="piezas" id="piezas"></div>
     <div class="fichas" id="fichas"></div>
     <div class="tarjetas" id="tarjetas"></div>
     <div class="acciones" id="acciones"></div>
-    <p class="pie">Puedes decir el número de la respuesta, o «siguiente», «otra vez», «ayuda», «comprobar».</p>
+    <p class="pie">Di la respuesta o la letra de la opción. También: «siguiente», «otra vez», «ayuda», «comprobar». En cuentos y trabalenguas, léelo en voz alta.</p>
   </section>
 </main>
 
@@ -157,11 +175,12 @@ function recibir(m){
   if(m.t==='eco'){var e=$('#eco');e.textContent=(m.oido?'Escuché «'+m.oido+'». ':'')+m.msg;e.className='eco '+(m.ok?'ok':'mal');clearTimeout(tEco);tEco=setTimeout(function(){e.textContent='';},6000);}
 }
 function boton(cls,html,id,extra){var b=document.createElement('button');b.type='button';b.className=cls;b.innerHTML=html;if(id)b.addEventListener('click',function(){click(id);});if(extra)extra(b);return b;}
+function cpDe(e){var a=Array.from(e).map(function(ch){return ch.codePointAt(0).toString(16);});if(e.indexOf('\u200d')<0)a=a.filter(function(c){return c!=='fe0f';});return a.join('-');}
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function pintar(m){
   var tit=$('#titulo');tit.textContent=m.titulo||'';tit.classList.toggle('largo',(m.titulo||'').length>40);
   $('#detalle').textContent=[m.jugador,m.detalle].filter(Boolean).join(' · ');
-  var g={slots:[],teclado:[],fichas:[],tarjetas:[],acciones:[]};
+  var g={slots:[],teclado:[],fichas:[],tarjetas:[],acciones:[],opciones:[],piezas:[]};
   (m.botones||[]).forEach(function(b){if(b.clave==='b-mic')return;(g[b.grupo]||g.acciones).push(b);});
   var cont;
   cont=$('#slots');cont.innerHTML='';
@@ -170,6 +189,14 @@ function pintar(m){
   var orden=['1','2','3','4','5','6','7','8','9','Borrar','0','Comprobar'];
   orden.forEach(function(lbl){var b=g.teclado.filter(function(x){return x.label===lbl;})[0];if(!b)return;
     cont.appendChild(boton('tecla'+(lbl.length>1?' texto':'')+(lbl==='Comprobar'?' comprobar':''),esc(lbl),b.id));});
+  cont=$('#opciones');cont.innerHTML='';
+  var largo=g.opciones.some(function(b){return (b.txt||'').length>14;});cont.classList.toggle('lista',largo);
+  g.opciones.forEach(function(b){
+    var h='<span class="le">'+esc(b.letra||'')+'</span>'+(b.img?'<img src="img/'+cpDe(b.img)+'.svg" alt="">':'')+(b.txt?'<span class="tx'+(b.txt.length>14?' largo':'')+'">'+esc(b.txt)+'</span>':'');
+    cont.appendChild(boton('opc'+(b.estado?' '+b.estado:''),h,b.id,function(el){if(b.disabled)el.disabled=true;el.setAttribute('aria-label',(b.letra||'')+(b.txt?': '+b.txt:''));}));
+  });
+  cont=$('#piezas');cont.innerHTML='';
+  g.piezas.forEach(function(b){cont.appendChild(boton('pz'+((b.label||'').length>4||/[a-z]/.test(b.label||'')?' pal':''),esc(b.label),b.id,function(el){if(b.disabled)el.disabled=true;}));});
   cont=$('#fichas');cont.innerHTML='';
   g.fichas.forEach(function(b){cont.appendChild(boton('ficha',esc(b.label),b.id));});
   cont=$('#tarjetas');cont.innerHTML='';
