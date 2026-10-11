@@ -118,6 +118,7 @@ input:focus{outline:4px solid var(--amarilla);outline-offset:2px;border-style:so
     <div class="fichas" id="fichas"></div>
     <div class="tarjetas" id="tarjetas"></div>
     <div class="acciones" id="acciones"></div>
+    <button class="btn" type="button" id="b-vozcel"></button>
     <p class="pie">Di la respuesta o la letra de la opción. También: «siguiente», «otra vez», «ayuda», «comprobar». En cuentos y trabalenguas, léelo en voz alta.</p>
   </section>
 </main>
@@ -128,6 +129,16 @@ input:focus{outline:4px solid var(--amarilla);outline-offset:2px;border-style:so
 'use strict';
 var $=function(s){return document.querySelector(s);};
 var peer=null,conn=null,codigo=null,ultimoEstado=null,wake=null,tEco=null;
+/* Voz en el celular: auto = solo si la tele no puede hablar */
+var MODOS={auto:'Voz en el celular: solo si la tele no habla',siempre:'Voz en el celular: siempre',nunca:'Voz en el celular: apagada'},modoVoz='auto',vozCel=null;
+try{modoVoz=localStorage.getItem('pizarra-voz-cel')||'auto';}catch(e){}
+function elegirVozCel(){if(!('speechSynthesis' in window))return null;var vs=speechSynthesis.getVoices()||[];var pref=['es-ec','es-us','es-mx','es-419','es-es'];for(var i=0;i<pref.length;i++){var v=vs.filter(function(x){return (x.lang||'').replace('_','-').toLowerCase().indexOf(pref[i])===0;})[0];if(v)return v;}return vs.filter(function(x){return /^es/i.test(x.lang||'');})[0]||null;}
+if('speechSynthesis' in window){vozCel=elegirVozCel();speechSynthesis.onvoiceschanged=function(){vozCel=elegirVozCel();};}
+function pintarModoVoz(){var b=$('#b-vozcel');if(b)b.textContent=MODOS[modoVoz];}
+function hablarCel(m){
+  if(!('speechSynthesis' in window)||modoVoz==='nunca'||(modoVoz==='auto'&&m.tvHabla)||escuchando)return;
+  try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(m.texto);if(vozCel){u.voice=vozCel;u.lang=vozCel.lang;}else u.lang='es-US';u.rate=(m.rate||1)*(m.peque?0.88:0.97);speechSynthesis.speak(u);}catch(e){}
+}
 var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 var IDIOMAS=['es-EC','es-US','es-ES'],idioma=0,rec=null,escuchando=false;
 
@@ -172,6 +183,7 @@ function click(id){vibrar();enviar({t:'click',id:id});}
 function recibir(m){
   if(!m||typeof m!=='object')return;
   if(m.t==='estado'){ultimoEstado=m;pintar(m);return;}
+  if(m.t==='decir'){hablarCel(m);return;}
   if(m.t==='eco'){var e=$('#eco');e.textContent=(m.oido?'Escuché «'+m.oido+'». ':'')+m.msg;e.className='eco '+(m.ok?'ok':'mal');clearTimeout(tEco);tEco=setTimeout(function(){e.textContent='';},6000);}
 }
 function boton(cls,html,id,extra){var b=document.createElement('button');b.type='button';b.className=cls;b.innerHTML=html;if(id)b.addEventListener('click',function(){click(id);});if(extra)extra(b);return b;}
@@ -214,7 +226,7 @@ function hablar(){
   if(escuchando){try{rec.stop();}catch(e){}return;}
   vibrar();
   rec=new SR();rec.lang=IDIOMAS[idioma];rec.interimResults=false;rec.maxAlternatives=4;rec.continuous=false;
-  rec.onstart=function(){escuchando=true;$('#b-hablar').classList.add('activo');textoHablar('Te escucho…');enviar({t:'escuchando'});};
+  rec.onstart=function(){escuchando=true;try{speechSynthesis.cancel();}catch(e){}$('#b-hablar').classList.add('activo');textoHablar('Te escucho…');enviar({t:'escuchando'});};
   rec.onresult=function(e){
     var r=e.results[0],alts=[];for(var i=0;i<r.length;i++)alts.push(r[i].transcript);
     $('#eco').textContent='Escuché «'+alts[0]+'»…';$('#eco').className='eco';
@@ -233,6 +245,8 @@ function hablar(){
 }
 
 $('#b-hablar').addEventListener('click',hablar);
+$('#b-vozcel').addEventListener('click',function(){var ks=Object.keys(MODOS);modoVoz=ks[(ks.indexOf(modoVoz)+1)%ks.length];try{localStorage.setItem('pizarra-voz-cel',modoVoz);}catch(e){}pintarModoVoz();if(modoVoz!=='nunca')hablarCel({texto:'Así se escucha la voz en el celular.',tvHabla:false});});
+pintarModoVoz();
 $('#f-conectar').addEventListener('submit',function(e){e.preventDefault();var c=$('#codigo').value.replace(/\D/g,'');if(c.length!==5){error('El código tiene 5 números.');return;}conectar(c);});
 $('#b-reconectar').addEventListener('click',function(){if(codigo)conectar(codigo);});
 document.addEventListener('visibilitychange',function(){if(document.visibilityState!=='visible')return;despierto();if(codigo&&(!conn||!conn.open)&&!$('#v-juego').hidden)conectar(codigo);});

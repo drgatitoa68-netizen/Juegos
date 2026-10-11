@@ -26,6 +26,9 @@
   --radio:14px;
   /* Papel y tinta: tarjetas de cartulina pegadas en la pizarra para dibujos y textos */
   --papel:#fbf6e6; --papel-sombra:rgba(0,0,0,.28); --tinta:#1f2d28; --tinta-suave:#5d6b64;
+  /* Regletas de colores (Cuisenaire): los colores que usan en la escuela */
+  --r1:#f4efe2; --r2:#e53935; --r3:#8bc34a; --r4:#ec5c9a; --r5:#fdd835; --r6:#2e8b3e; --r7:#2b2b2b; --r8:#8d5a3b; --r9:#1e88e5; --r10:#fb8c00;
+  --u:clamp(26px,6vmin,60px);
   --resalte:#ffe27a; --tinta-bien:#2f7d1f; --tinta-falta:#c2185b; --tinta-sujeto:#1565c0; --tinta-pred:#b26a00;
   color-scheme:dark;
 }
@@ -363,6 +366,49 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .lec-lista .opcion{flex-basis:auto}
   .texto-lec{max-height:45vh}
 }
+
+/* ---------- Mi cuaderno ---------- */
+.abc{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(70px,11vmin,120px),1fr));gap:clamp(8px,1.4vmin,14px)}
+.letra-t{align-items:center;text-align:center;padding:clamp(8px,1.6vmin,16px) .3em;gap:.1em}
+.letra-t .tarjeta-nombre{font-family:var(--f-texto);font-weight:700;font-size:var(--t-l)}
+.letra-t.bloqueada{opacity:.4;border-style:dotted}
+.letra-t.activa{border-style:solid;border-color:var(--verde)}
+.letra-t.lista{border-style:solid;border-color:var(--amarilla)}
+.estado-l{font-size:var(--t-s);color:var(--tiza-suave)}
+.estado-l .estrella{width:1.2em;height:1.2em}
+.letra-grande{display:flex;align-items:baseline;justify-content:center;gap:.25em;font-family:var(--f-texto);font-weight:700;line-height:1;color:var(--tiza)}
+.letra-grande .may{font-size:clamp(4rem,22vmin,12rem)}
+.letra-grande .min{font-size:clamp(3rem,16vmin,9rem);color:var(--amarilla)}
+.cartulina .letra-grande{color:var(--tinta)}
+.cartulina .letra-grande .min{color:var(--tinta-falta)}
+.letra-menu{align-items:center;justify-content:center;text-align:center}
+.letra-menu .fila-botones{justify-content:center}
+.opcion.letra-op .op-t{font-family:var(--f-texto);font-weight:700;font-size:var(--t-xxl);line-height:1}
+.regleta-fon{display:flex;gap:4px;justify-content:center;margin-top:.3em}
+.caja-f{display:inline-flex;align-items:center;justify-content:center;width:clamp(30px,6vmin,56px);height:clamp(30px,6vmin,56px);border:3px solid currentColor;font-family:var(--f-texto);font-weight:700;font-size:var(--t-m);transition:all .2s ease}
+.cartulina .caja-f{color:var(--tinta)}
+.caja-f.on{background:var(--amarilla);color:var(--pizarra-hondo);border-color:var(--amarilla)}
+.frase-puntos{display:flex;flex-wrap:wrap;gap:.5em .9em;justify-content:center;max-width:30em}
+.pal-punto{display:inline-flex;flex-direction:column;align-items:center;gap:.25em;font-weight:700;font-size:var(--t-l);padding:.1em .2em;border-radius:8px}
+.pal-punto i{width:.45em;height:.45em;border-radius:50%;background:var(--tiza-tenue)}
+.pal-punto.on{color:var(--amarilla)}
+.pal-punto.on i{background:var(--amarilla)}
+/* ---------- Regletas ---------- */
+.tren{display:flex;flex-direction:column;gap:6px;align-items:flex-start;margin-block:auto;padding:clamp(10px,2vmin,20px);background:var(--papel);border-radius:12px;box-shadow:0 7px 0 var(--papel-sombra);max-width:100%;overflow-x:auto}
+.fila-r{display:flex}
+.regleta{position:relative;display:inline-flex;height:calc(var(--u)*1.1);width:calc(var(--u)*var(--n));background:var(--c);border:3px solid rgba(0,0,0,.55);border-radius:6px;box-sizing:border-box}
+.regleta i{flex:1;border-right:2px solid rgba(0,0,0,.18)}
+.regleta i:last-of-type{border-right:0}
+.regleta b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-titulo);font-weight:800;font-size:calc(var(--u)*.62);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.regleta.total{opacity:.55}
+.vacio-r{position:relative;display:inline-flex;height:calc(var(--u)*1.1)}
+.hueco-r{width:var(--u);height:100%;border:3px dashed var(--tinta-suave);box-sizing:border-box;border-radius:4px;transition:all .2s ease}
+.hueco-r.on{background:var(--resalte);border-style:solid;border-color:var(--tinta)}
+.vacio-r b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-titulo);font-weight:800;font-size:calc(var(--u)*.7);color:var(--tinta-suave);pointer-events:none}
+.opcion .regleta.op-r{--u:clamp(20px,4.2vmin,42px)}
+.vis-centro .caja-f{width:clamp(40px,9vmin,84px);height:clamp(40px,9vmin,84px);font-size:var(--t-l)}
+/* ---------- Aviso de voz ---------- */
+#aviso-voz{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 2vmin);transform:translateX(-50%);max-width:min(92vw,46em);background:var(--amarilla);color:var(--pizarra-hondo);font-family:var(--f-titulo);font-weight:600;font-size:var(--t-m);padding:.55em 1.1em;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:11;text-align:center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -379,6 +425,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   </div>
 </div>
 <div id="aviso" role="status" hidden></div>
+<div id="aviso-voz" role="alert" hidden><b>Para escuchar la voz:</b> presiona OK en el control remoto de la tele (o toca la pantalla) una vez.</div>
 
 <script src="vendor/peerjs.min.js"></script>
 <script src="vendor/qrcode.js"></script>
@@ -403,10 +450,11 @@ var ESTRELLA='<svg class="estrella" viewBox="0 0 24 24" aria-hidden="true"><path
 var CHECK='<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M8 44 L36 70 L92 10" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--verde)"/></svg>';
 
 var PERFILES={
-  peque:{nombre:'Peque',grado:'Primero de básica',ops:['contar','sumar','restar'],lect:['silabas','armar','leer','rimas','adivinanzas','cuentos','trabalenguas'],mision:6,resumen:'Números con objetos, sílabas, palabras y cuentos'},
+  peque:{nombre:'Peque',grado:'Primero de básica',ops:['contar','sumar','restar','regletas'],lect:['cuaderno','silabas','armar','leer','rimas','adivinanzas','cuentos','trabalenguas'],mision:6,resumen:'Números con objetos, sílabas, palabras y cuentos'},
   grande:{nombre:'Grande',grado:'Quinto de básica',ops:['sumar','restar','multiplicar','dividir'],lect:['comprension','refranes','ortografia','vocabulario','oraciones','adivinanzas','trabalenguas'],mision:8,resumen:'Las cuatro operaciones, lectura y ortografía'}
 };
 var OPS={contar:{nombre:'Contar',simbolo:'123'},sumar:{nombre:'Sumar',simbolo:'+'},restar:{nombre:'Restar',simbolo:'−'},multiplicar:{nombre:'Multiplicar',simbolo:'×'},dividir:{nombre:'Dividir',simbolo:'÷'},
+  cuaderno:{nombre:'Mi cuaderno',lec:1},regletas:{nombre:'Forma el número',lec:1},
   silabas:{nombre:'¿Con qué empieza?',lec:1},armar:{nombre:'Arma la palabra',lec:1},leer:{nombre:'Lee y busca',lec:1},rimas:{nombre:'Rimas',lec:1},adivinanzas:{nombre:'Adivinanzas',lec:1},cuentos:{nombre:'Cuentos',lec:1},trabalenguas:{nombre:'Trabalenguas',lec:1},
   comprension:{nombre:'Lectura',lec:1},refranes:{nombre:'Refranes y dichos',lec:1},ortografia:{nombre:'Ortografía',lec:1},vocabulario:{nombre:'Vocabulario',lec:1},oraciones:{nombre:'Ordena la oración',lec:1}};
 var DESC={
@@ -414,6 +462,8 @@ var DESC={
     contar:['Hasta 5','Hasta 10','Hasta 12','Hasta 16','Hasta 20'],
     sumar:['Hasta 5, con objetos','Hasta 10, con objetos','Hasta 10, con objetos','Hasta 10, solo números','Hasta 15, solo números'],
     restar:['Hasta 5, tachando','Hasta 10, tachando','Hasta 10, con objetos','Hasta 10, solo números','Hasta 15, solo números'],
+    cuaderno:['Letra, sílabas y aplausos','Sílabas inversas y palabras','Lectura, dictado y sonidos','Contar palabras y ordenar oraciones','Dictados más difíciles'],
+    regletas:['Forma el 3, 4 y 5','Forma el 6 y el 7','Forma el 8, 9 y 10','Los amigos del 10','Solo con números'],
     silabas:['Vocales: ¿con cuál empieza?','Sílabas con M, P, S y L','Sílabas con T, N, D, R y más','Sílabas que se parecen','La sílaba que falta'],
     armar:['Palabras de 2 sílabas','2 sílabas, con una de más','Palabras de 3 sílabas','3 sílabas, con dos de más','Palabras largas y difíciles'],
     leer:['Palabras cortas, separadas','Palabras que se parecen','Palabras de 3 sílabas','Palabras con bl, tr, ll, ch','Oraciones cortas'],
@@ -445,10 +495,11 @@ var CLAVE='pizarra-numeros-v1';
 function base(){
   var b={voz:true};
   ['peque','grande'].forEach(function(k){var nv={};PERFILES[k].ops.concat(PERFILES[k].lect).forEach(function(o){nv[o]=1;});b[k]={niveles:nv,stats:{},estrellas:0,vistos:{}};});
+  b.peque.letras=['M'];b.peque.abc={};
   return b;
 }
 var DATOS=base();
-try{var g=JSON.parse(localStorage.getItem(CLAVE));if(g&&g.peque&&g.grande){['peque','grande'].forEach(function(k){Object.assign(DATOS[k].niveles,g[k].niveles||{});DATOS[k].stats=g[k].stats||{};DATOS[k].estrellas=g[k].estrellas||0;DATOS[k].vistos=g[k].vistos||{};});DATOS.voz=g.voz!==false;}}catch(e){}
+try{var g=JSON.parse(localStorage.getItem(CLAVE));if(g&&g.peque&&g.grande){['peque','grande'].forEach(function(k){Object.assign(DATOS[k].niveles,g[k].niveles||{});DATOS[k].stats=g[k].stats||{};DATOS[k].estrellas=g[k].estrellas||0;DATOS[k].vistos=g[k].vistos||{};});if(g.peque.letras)DATOS.peque.letras=g.peque.letras;DATOS.peque.abc=g.peque.abc||{};DATOS.voz=g.voz!==false;}}catch(e){}
 function guardar(){try{localStorage.setItem(CLAVE,JSON.stringify(DATOS));}catch(e){}}
 function stat(){var s=DATOS[S.p].stats;if(!s[S.op])s[S.op]={intentos:0,aciertos:0,explicaciones:0};return s[S.op];}
 
@@ -466,18 +517,44 @@ function elegirVoz(){
 }
 if('speechSynthesis' in window){vozES=elegirVoz();speechSynthesis.onvoiceschanged=function(){vozES=elegirVoz();};}
 function vozDe(t){return t.replace(/×/g,' por ').replace(/÷/g,' entre ').replace(/−/g,' menos ').replace(/\+/g,' más ').replace(/=/g,' es igual a ');}
+var VOZ={soporte:'speechSynthesis' in window,estado:'desconocido',error:null,desbloqueada:false,pendiente:null,fallos:0};
+function activado(){try{return VOZ.desbloqueada||!navigator.userActivation||navigator.userActivation.hasBeenActive;}catch(e){return true;}}
+['keydown','pointerdown','touchstart','click'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.isTrusted&&!VOZ.desbloqueada){VOZ.desbloqueada=true;desbloquearVoz();}},true);});
+function desbloquearVoz(){
+  var av=document.getElementById('aviso-voz');if(av)av.hidden=true;
+  if(VOZ.soporte){try{var u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}
+  if(VOZ.estado==='bloqueada')VOZ.estado='desconocido';
+  if(VOZ.pendiente){var p=VOZ.pendiente;VOZ.pendiente=null;setTimeout(function(){decir(p.t,p.o);},250);}
+}
+function mostrarAvisoVoz(){var av=document.getElementById('aviso-voz');if(av&&!VOZ.desbloqueada)av.hidden=false;}
+function puedeHablarTV(){return VOZ.soporte&&VOZ.estado!=='muda';}
+function duracion(t,o){return Math.max(1500,t.length*80/((o&&o.rate)||1));}
+function relayCelular(t,o){if(typeof CTRL==='undefined'||!CTRL.conns.length)return;var m={t:'decir',texto:t,rate:(o&&o.rate)||1,peque:S.p==='peque',tvHabla:puedeHablarTV()&&activado()};CTRL.conns.forEach(function(c){enviar(c,m);});}
 function decir(t,o){
   o=o||{};var fin1=o.onend||function(){};
-  if(!vozOn||!('speechSynthesis' in window)){setTimeout(fin1,Math.min(o.max||700,700));return;}
+  if(!vozOn){setTimeout(fin1,Math.min(o.max||700,700));return;}
+  relayCelular(t,o);
+  var hecho=false;var fin=function(){if(hecho)return;hecho=true;fin1();};
+  if(!puedeHablarTV()){setTimeout(fin,o.max||duracion(t,o));return;}
+  if(!activado()){VOZ.estado='bloqueada';VOZ.pendiente={t:t,o:{rate:o.rate}};mostrarAvisoVoz();setTimeout(fin,o.max||duracion(t,o));return;}
   try{speechSynthesis.cancel();}catch(e){}
   var u=new SpeechSynthesisUtterance(t);
   if(vozES){u.voice=vozES;u.lang=vozES.lang;}else{u.lang='es-US';}
   u.rate=(o.rate||1)*(S.p==='peque'?0.88:0.97);u.pitch=1.05;
   if(o.onboundary)u.onboundary=o.onboundary;
-  var hecho=false;var fin=function(){if(hecho)return;hecho=true;fin1();};
-  u.onend=fin;u.onerror=fin;
+  var empezo=false;
+  u.onstart=function(){empezo=true;VOZ.estado='ok';VOZ.fallos=0;};
+  u.onend=fin;
+  u.onerror=function(e){VOZ.error=e.error;
+    if(e.error==='not-allowed'){VOZ.estado='bloqueada';VOZ.desbloqueada=false;mostrarAvisoVoz();}
+    else if(e.error==='synthesis-unavailable'||e.error==='language-unavailable'||e.error==='voice-unavailable'||e.error==='audio-hardware'){VOZ.estado='muda';}
+    else if(e.error!=='interrupted'&&e.error!=='canceled'){VOZ.fallos++;VOZ.estado=VOZ.fallos>=2?'muda':'error';}
+    setTimeout(fin,e.error==='interrupted'||e.error==='canceled'?0:duracion(t,o));};
   setTimeout(fin,o.max||Math.max(2500,t.length*95/(o.rate||1)));
-  setTimeout(function(){try{speechSynthesis.speak(u);}catch(e){fin();}},40);
+  setTimeout(function(){
+    try{speechSynthesis.speak(u);}catch(e){VOZ.estado='muda';fin();return;}
+    setTimeout(function(){if(!empezo&&!hecho&&VOZ.estado!=='ok'){VOZ.fallos++;if(VOZ.fallos>=2&&VOZ.estado!=='bloqueada')VOZ.estado='muda';}},3000);
+  },40);
 }
 function hablarP(t,max){return new Promise(function(r){decir(t,{onend:r,max:max});});}
 function numPalabra(n){return PALABRAS[n]||String(n);}
@@ -915,10 +992,11 @@ function pantallaInicio(){
     '<p class="eyebrow">Para la tele, la tablet o el celular</p>'+
     '<h1 class="titulo">Pizarra de Números</h1>'+
     '<p class="lema">Aquí no se adivina. Si te equivocas, la pizarra te enseña cómo se hace, paso a paso.</p>'+
-    '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza grande" id="b-empezar">Empezar</button><button type="button" data-nav class="btn" id="b-voz">'+vozTxt()+'</button></div>'+
+    '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza grande" id="b-empezar">Empezar</button><button type="button" data-nav class="btn" id="b-voz">'+vozTxt()+'</button><button type="button" data-nav class="btn btn-suave" id="b-sonido">Probar sonido</button></div>'+
     '<p class="ayuda">Usa las flechas del control y el botón OK. También puedes tocar la pantalla.</p></div>'+
     (window.Peer?'<div class="portada-muestra" id="conexion"></div>':'<div class="portada-muestra" aria-hidden="true">'+renderCol(vm,false)+'<p class="eyebrow">El 1 amarillo es lo que llevamos</p></div>')+'</div>';
   on('#b-empezar',function(){decir('¡Hola!');pantallaJugadores();});
+  on('#b-sonido',pantallaSonido);
   on('#b-voz',function(){alternarVoz();this.textContent=vozTxt();});
   enfocar('#b-empezar');alVolver=null;pintarConexion();
 }
@@ -1118,7 +1196,7 @@ function pantallaExplicacion(lista,op){
     var ev=$('.evid',pantalla);if(ev&&ev.scrollIntoView)ev.scrollIntoView({block:'center'});
     hablarP(paso.voz||vozDe(paso.texto.replace(/<[^>]+>/g,'').replace(/[«»]/g,''))).then(function(){if(tok===animTok&&paso.anim)return correrAnim(paso.anim,tok);});
   }
-  alVolver=function(){animTok++;op.alFinal();};
+  alVolver=op.alVolver||function(){animTok++;op.alFinal();};
   pintar();
 }
 function eqFinal(p){
@@ -1139,12 +1217,13 @@ function pantallaAcierto(subio){
 }
 function pantallaFin(){
   modoJuego=null;animTok++;S.oyente=null;
+  if(S.op==='cuaderno'&&S.letra){var abc=DATOS.peque.abc||(DATOS.peque.abc={});abc[S.letra.l]=Math.max(abc[S.letra.l]||0,S.aciertos);guardar();}
   var msg=S.ayudas===0?'Trabajaste con mucha atención en todos los ejercicios.':'Viste '+S.ayudas+' '+(S.ayudas===1?'explicación':'explicaciones')+' y seguiste intentando. Así es como se aprende.';
   var est=range(0,S.total).map(function(i){return i<S.aciertos?ESTRELLA:ESTRELLA.replace('class="estrella"','class="estrella vacia"');}).join('');
   pantalla.innerHTML='<div class="fin"><p class="eyebrow">'+OPS[S.op].nombre+' · '+PERFILES[S.p].nombre+'</p><h1 class="titulo-sec">¡Misión cumplida!</h1><div class="fila-estrellas" aria-label="'+S.aciertos+' estrellas">'+est+'</div>'+
     '<p class="sub">Respondiste bien '+S.aciertos+' de '+S.total+'. '+msg+'</p>'+
     '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza grande" id="b-otra">Otra misión</button><button type="button" data-nav class="btn" id="b-menu">Elegir otro juego</button></div></div>';
-  on('#b-otra',function(){iniciarMision(S.op);});
+  on('#b-otra',function(){if(S.op==='cuaderno'&&S.letra)practicarLetra(S.letra);else iniciarMision(S.op);});
   on('#b-menu',volverJuegos);
   enfocar('#b-otra');alVolver=volverJuegos;
   decir('¡Misión cumplida! Respondiste bien '+S.aciertos+' de '+S.total+'. '+msg);
@@ -1155,7 +1234,8 @@ function pantallaProgreso(){
     var pf=PERFILES[pid];
     var filas=pf.ops.concat(pf.lect).map(function(op){var n=DATOS[pid].niveles[op],st=DATOS[pid].stats[op]||{intentos:0,aciertos:0,explicaciones:0},pct=st.intentos?Math.round(st.aciertos*100/st.intentos):null;
       return '<tr><th scope="row">'+OPS[op].nombre+'</th><td>'+puntosNivel(n)+'<span class="nivel-txt">Nivel '+n+' · '+DESC[pid][op][n-1]+'</span></td><td class="num">'+st.aciertos+' de '+st.intentos+(pct!==null?' <span class="pct">('+pct+' %)</span>':'')+'</td><td class="num">'+st.explicaciones+'</td></tr>';}).join('');
-    return '<section class="prog-bloque"><h2>'+pf.nombre+'<span>'+pf.grado+' · '+DATOS[pid].estrellas+' estrellas</span></h2><div class="tabla-scroll"><table><thead><tr><th scope="col">Juego</th><th scope="col">Nivel actual</th><th scope="col">Respuestas bien</th><th scope="col">Explicaciones vistas</th></tr></thead><tbody>'+filas+'</tbody></table></div></section>';
+    var extra=pid==='peque'?'<p class="sub">Letras que ya conoce: vocales y '+(letrasConocidas().join(', ')||'ninguna')+'. Letras practicadas con 6 o más aciertos: '+(Object.keys(DATOS.peque.abc||{}).filter(function(l){return DATOS.peque.abc[l]>=6;}).join(', ')||'ninguna todavía')+'.</p>':'';
+    return '<section class="prog-bloque"><h2>'+pf.nombre+'<span>'+pf.grado+' · '+DATOS[pid].estrellas+' estrellas</span></h2>'+extra+'<div class="tabla-scroll"><table><thead><tr><th scope="col">Juego</th><th scope="col">Nivel actual</th><th scope="col">Respuestas bien</th><th scope="col">Explicaciones vistas</th></tr></thead><tbody>'+filas+'</tbody></table></div></section>';
   }
   pantalla.innerHTML='<div class="progreso"><p class="eyebrow">Para papá y mamá</p><h1 class="titulo-sec">Progreso</h1><p class="sub">Si un juego acumula muchas explicaciones vistas, ese es el tema para practicar juntos en el cuaderno. El progreso se guarda solo en este dispositivo.</p>'+
     bloque('peque')+bloque('grande')+
@@ -1585,12 +1665,12 @@ function crearLec(gemelo){
 }
 
 /* ---------- Pantallas de lectura ---------- */
-function volverJuegos(){animTok++;S.oyente=null;if(S.area)pantallaJuegos(S.area);else pantallaMenu(false);}
+function volverJuegos(){animTok++;S.oyente=null;if(S.op==='cuaderno'&&S.p==='peque')return S.letra?pantallaLetra(S.letra):pantallaAbc();if(S.area)pantallaJuegos(S.area);else pantallaMenu(false);}
 function cabezaLec(p){return '<div class="cabeza-juego"><p class="eyebrow">'+OPS[S.op].nombre+' · Nivel '+p.nivel+'</p><span class="aciertos-lec" aria-label="'+S.aciertos+' respuestas bien">✓ '+S.aciertos+'</span>'+palitos()+'</div>';}
 function opcionHTML(o,i){
   var letra='ABCDE'.charAt(i);
-  return '<button type="button" data-nav class="opcion'+(o.clase?' '+o.clase:'')+(o.img&&!o.t?' solo-img':'')+'" data-i="'+i+'" data-letra="'+letra+'" data-txt="'+esc(o.t||'')+'"'+(o.img?' data-img="'+o.img+'"':'')+' aria-label="'+esc(letra+(o.t?': '+o.t:''))+'">'+
-    '<span class="letra" aria-hidden="true">'+letra+'</span>'+(o.img?dib(o.img,'dib-op'):'')+(o.t?'<span class="op-t">'+esc(o.t)+'</span>':'')+(o.sub?'<span class="op-sub">'+esc(o.sub)+'</span>':'')+'</button>';
+  return '<button type="button" data-nav class="opcion'+(o.clase?' '+o.clase:'')+(o.img&&!o.t?' solo-img':'')+'" data-i="'+i+'" data-letra="'+letra+'" data-txt="'+esc(o.t||o.txtTel||'')+'"'+(o.img?' data-img="'+o.img+'"':'')+' aria-label="'+esc(letra+((o.t||o.txtTel)?': '+(o.t||o.txtTel):''))+'">'+
+    '<span class="letra" aria-hidden="true">'+letra+'</span>'+(o.img?dib(o.img,'dib-op'):'')+(o.html||'')+(o.t?'<span class="op-t">'+esc(o.t)+'</span>':'')+(o.sub?'<span class="op-sub">'+esc(o.sub)+'</span>':'')+'</button>';
 }
 function mostrarLec(p){
   S.bloqueado=false;S.usado5050=false;S.oyente=null;S.tituloTel=p.titulo||'';
@@ -1764,6 +1844,7 @@ function pantallaTextoGrande(){
 }
 function iniciarLectura(op){
   var n=DATOS[S.p].niveles[op]||1;
+  if(op==='cuaderno')return pantallaAbc();
   if(op==='cuentos'){S.texto=elegirTexto(L.cuentosPeque,n,'cuentos');S.total=S.texto.preguntas.length;return pantallaCuento(0);}
   if(op==='comprension'){S.texto=elegirTexto(L.textos,n,'comprension');S.total=S.texto.preguntas.length;return pantallaTextoGrande();}
   S.total=op==='trabalenguas'?3:(S.p==='peque'?6:8);
@@ -1775,6 +1856,260 @@ function ayudaLec(){
   if(p.ayudaTxt){aviso(p.ayudaTxt,false);decir(p.ayudaTxt);return;}
   if(p.gemelo){var ej=crearLec(true);pantallaExplicacion(ej.explicar(),{titulo:'Ejemplo con otra palabra',textoFinal:'Volver a mi ejercicio',alFinal:function(){mostrarLec(S.prob);}});return;}
   var h=p.pista?p.pista(S.armado?S.armado.length:0):'Piensa con calma.';aviso(h,false);decir(vozDe(h));
+}
+
+/* ======================= MI CUADERNO: letra por letra, solo con lo que ya sabe ======================= */
+var ABC=(L.abecedario||[]).map(function(x){
+  var ejs=x.ej.map(function(e){var sil=null,r=e;if(e.indexOf(':')>0){sil=e.split(':')[0];r=e.split(':')[1];}
+    var i=r.lastIndexOf(' '),ss=r.slice(0,i).split('-'),w={w:ss.join(''),s:ss,e:r.slice(i+1)};
+    var idx=sil?ss.map(sinT).indexOf(sil):0;return {sil:sil||sinT(ss[0]),w:w,idx:idx<0?0:idx};});
+  var fam=x.v?[x.l.toLowerCase()]:(x.fam?x.fam.split(' '):VOCALES.map(function(v){return x.l.toLowerCase()+v;}));
+  return {l:x.l,nombre:x.n,vocal:!!x.v,nota:x.nota||'',fam:fam,ejs:ejs};
+});
+var ABCX={};ABC.forEach(function(a){ABCX[a.l]=a;});
+function letrasConocidas(){var k=DATOS.peque.letras||(DATOS.peque.letras=['M']);return k;}
+function token(t){return sinT(String(t).toLowerCase()).replace(/ll/g,'ł').replace(/ch/g,'ç').replace(/qu/g,'q').replace(/gu(?=[ei])/g,'g').replace(/ü/g,'u');}
+function setConocido(){var s={};letrasConocidas().forEach(function(l){s[token(l)]=1;});return s;}
+function palabraConocida(w,set){set=set||setConocido();var t=token(w);if(t==='y')return true;for(var i=0;i<t.length;i++){var c=t.charAt(i);if('aeiou'.indexOf(c)>=0)continue;if(!set[c])return false;}return true;}
+function fraseConocida(f,set){return f.replace(/[¿?¡!.,;:]/g,'').split(/\s+/).every(function(w){return palabraConocida(w,set);});}
+var LEX=(L.lexico||'').split(/\s+/).filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i;}).map(function(x){var ss=x.split('-'),w=ss.join(''),pw=PALX[w.toLowerCase()];return {w:w,s:ss,e:pw?pw.e:null};});
+function lexConocido(foco){
+  var set=setConocido(),c=LEX.filter(function(x){return palabraConocida(x.w,set);});
+  if(foco){var f=token(foco),con=c.filter(function(x){return token(x.w).indexOf(f)>=0;});if(con.length>=4)return {todas:c,foco:con};}
+  return {todas:c,foco:c};
+}
+function frasesConocidas(){var set=setConocido();return (L.frasesCuaderno||[]).filter(function(f){return fraseConocida(f,set);});}
+function nombreDe(l){var a=ABCX[l.toUpperCase()];return a?a.nombre:l;}
+function sonidosDe(w){var t=token(w),out=[];for(var i=0;i<t.length;i++){var c=t.charAt(i);if(c==='h')continue;out.push(c==='ł'?'ll':c==='ç'?'ch':c==='q'?'qu':c);}return out;}
+function letraGrande(l){return '<div class="letra-grande"><span class="may">'+esc(l)+'</span><span class="min">'+esc(l.toLowerCase())+'</span></div>';}
+
+/* Lección de una letra: presentación paso a paso */
+function leccionLetra(a){
+  var pasos=[{texto:'Esta es la letra '+a.l+'. Se llama «'+a.nombre+'». Así se escribe en mayúscula y en minúscula.',voz:'Esta es la letra '+a.nombre+'. Mayúscula y minúscula.',vis:{tipo:'html',html:letraGrande(a.l)}}];
+  var r=L.rasgos&&L.rasgos[a.l.toLowerCase()];if(r)pasos.push({texto:r,vis:{tipo:'html',html:letraGrande(a.l)}});
+  if(a.vocal){
+    pasos.push({texto:'La '+a.l+' es una vocal. Suena «'+a.l.toLowerCase()+'», y suena sola.',voz:'La '+a.nombre+' es una vocal. Suena '+a.nombre+'.',vis:{tipo:'html',html:chipsHTML(VOCALES.map(function(v){return v.toUpperCase();}),'',VOCALES.indexOf(a.l.toLowerCase()))}});
+  } else {
+    pasos.push({texto:'La '+a.l+' se junta con las vocales y forma sílabas: '+a.fam.map(function(x){return x.toUpperCase();}).join(', ')+'.'+(a.nota?' '+a.nota:''),voz:'La '+a.nombre+' se junta con las vocales. Escucha.',vis:{tipo:'html',html:chipsHTML(a.fam.map(function(x){return cap(x);}),'')},anim:{tipo:'resaltar',sel:'.sil',voces:a.fam,final:a.nota||null}});
+  }
+  a.ejs.forEach(function(e){
+    var S1=e.sil.toUpperCase();
+    pasos.push({texto:S1+' de '+e.w.w+': '+e.w.s.join(' - ')+'.',voz:e.sil+'... de '+e.w.w+'.',vis:{tipo:'html',html:'<div class="exp-col">'+dib(e.w.e,'dib-media')+chipsHTML(e.w.s.map(function(x){return x.toUpperCase();}),'',e.idx)+'</div>'},anim:{tipo:'resaltar',sel:'.sil',voces:e.w.s.map(sinT),fin:e.idx,final:e.w.w+'.'}});
+  });
+  pasos.push({texto:'¡Muy bien! Ya conoces la '+a.l+'. Ahora vamos a practicar.',vis:{tipo:'html',html:'<div class="rima-exp">'+a.ejs.map(function(e){return '<div class="rima-pal">'+dib(e.w.e,'dib-chica')+'<p>'+esc(e.w.w)+'</p></div>';}).join('')+'</div>'}});
+  pantallaExplicacion(pasos,{titulo:'Letra '+a.l,textoFinal:'¡A practicar la '+a.l+'!',alFinal:function(){practicarLetra(a);},alVolver:function(){animTok++;pantallaAbc();}});
+}
+function esConocida(a){return a.vocal||letrasConocidas().indexOf(a.l)>=0;}
+function pantallaAbc(){
+  modoJuego='lectura';animTok++;S.op='cuaderno';S.letra=null;S.prob=null;S.tituloTel='Mi cuaderno: elige una letra';setJugador('peque');
+  var abc=DATOS.peque.abc||(DATOS.peque.abc={});
+  var sig=ABC.filter(function(a){return esConocida(a)&&!(abc[a.l]>=6);})[0];
+  pantalla.innerHTML='<div class="seccion"><h1 class="titulo-sec">Mi cuaderno</h1><p class="sub">Elige una letra. Solo se practican las vocales y las letras que ya vio en la escuela.</p>'+
+    '<div class="abc" role="group" aria-label="Abecedario">'+ABC.map(function(a){var ok=esConocida(a),est=abc[a.l]>=6;
+      return '<button type="button" data-nav class="tarjeta letra-t'+(ok?'':' bloqueada')+(est?' lista':'')+'" data-l="'+a.l+'" aria-label="Letra '+a.l+(ok?'':', todavía no')+'"><span class="tarjeta-nombre">'+esc(a.l)+' '+esc(a.l.toLowerCase())+'</span>'+(est?'<span class="estado-l">'+ESTRELLA+'</span>':ok?'':'<span class="estado-l">aún no</span>')+'</button>';}).join('')+'</div>'+
+    '<div class="fila-botones"><button type="button" data-nav class="btn btn-suave" id="b-letras">Letras que ya conoce</button><button type="button" data-nav class="btn btn-suave" id="b-volver">Volver</button></div></div>';
+  $$('.letra-t',pantalla).forEach(function(b){b.addEventListener('click',function(){var a=ABCX[b.dataset.l];
+    if(!esConocida(a)){aviso('La '+a.l+' todavía no. Cuando la vea en la escuela, actívala en «Letras que ya conoce».',true);return;}
+    pantallaLetra(a);});});
+  on('#b-letras',pantallaLetrasConocidas);on('#b-volver',function(){S.op=null;pantallaJuegos('letras');});
+  alVolver=function(){S.op=null;pantallaJuegos('letras');};
+  S.oyente=function(alts){var s=normal(alts[0]||'').replace(/^(la |letra |la letra )/,'');var a=ABC.filter(function(x){return normal(x.nombre)===s||x.l.toLowerCase()===s;})[0];if(a){var b=$('.letra-t[data-l="'+a.l+'"]',pantalla);if(b)pulsar(b);return 'Letra '+a.l;}return null;};
+  enfocar(sig?'.letra-t[data-l="'+sig.l+'"]':'.letra-t');
+  decir(sig?'Elige una letra. Te toca la '+sig.nombre+'.':'Elige una letra.');
+}
+function pantallaLetra(a){
+  modoJuego='lectura';animTok++;S.letra=a;S.tituloTel='Letra '+a.l;
+  var mejor=(DATOS.peque.abc||{})[a.l]||0;
+  pantalla.innerHTML='<div class="seccion letra-menu">'+letraGrande(a.l)+
+    '<p class="sub">'+(mejor?'Tu mejor práctica: '+mejor+' de 8.':'Primero aprende la letra y después practica.')+'</p>'+
+    '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza grande" id="b-aprender">Aprender la '+esc(a.l)+'</button><button type="button" data-nav class="btn grande" id="b-practicar">Practicar la '+esc(a.l)+'</button><button type="button" data-nav class="btn btn-suave" id="b-volver">Volver</button></div></div>';
+  on('#b-aprender',function(){leccionLetra(a);});on('#b-practicar',function(){practicarLetra(a);});on('#b-volver',pantallaAbc);
+  alVolver=pantallaAbc;S.oyente=null;
+  enfocar(mejor?'#b-practicar':'#b-aprender');
+  decir('La letra '+a.nombre+'. ¿Aprendemos o practicamos?');
+}
+function pantallaLetrasConocidas(){
+  modoJuego='lectura';animTok++;S.tituloTel='Letras que ya conoce';
+  var cons=ABC.filter(function(a){return !a.vocal;}),k=letrasConocidas();
+  pantalla.innerHTML='<div class="seccion"><p class="eyebrow">Para papá y mamá</p><h1 class="titulo-sec">Letras que ya conoce</h1><p class="sub">Activa solo las letras que ya vio en la escuela. Las vocales siempre están activas. Los ejercicios de lectura y dictado usan solo palabras con estas letras.</p>'+
+    '<div class="abc" role="group" aria-label="Letras">'+cons.map(function(a){var on=k.indexOf(a.l)>=0;return '<button type="button" data-nav class="tarjeta letra-t'+(on?' activa':' bloqueada')+'" data-l="'+a.l+'" aria-pressed="'+on+'"><span class="tarjeta-nombre">'+esc(a.l)+' '+esc(a.l.toLowerCase())+'</span><span class="estado-l">'+(on?'sí':'no')+'</span></button>';}).join('')+'</div>'+
+    '<p class="sub" id="cuenta-lex"></p><div class="fila-botones"><button type="button" data-nav class="btn btn-tiza" id="b-listo">Listo</button></div></div>';
+  function contar(){var n=lexConocido().todas.length,f=frasesConocidas().length;$('#cuenta-lex',pantalla).textContent='Con estas letras hay '+n+' palabras y '+f+' oraciones para leer.';}
+  $$('.letra-t',pantalla).forEach(function(b){b.addEventListener('click',function(){var l=b.dataset.l,i=k.indexOf(l);if(i>=0)k.splice(i,1);else k.push(l);guardar();var on=k.indexOf(l)>=0;b.classList.toggle('activa',on);b.classList.toggle('bloqueada',!on);b.setAttribute('aria-pressed',on);$('.estado-l',b).textContent=on?'sí':'no';contar();});});
+  on('#b-listo',pantallaAbc);alVolver=pantallaAbc;S.oyente=null;contar();enfocar('.letra-t');
+}
+function practicarLetra(a){
+  S.op='cuaderno';S.letra=a;S.n=0;S.total=8;S.aciertos=0;S.ayudas=0;S.racha=0;S.fallos=0;S.prob=null;S.comodines=2;S.usadosCuad={};
+  nuevoTurno(false);
+}
+function tiposCuaderno(n,a){
+  if(a.vocal)return n<=2?['letra','vocal','aplausos']:['letra','vocal','aplausos','oye-pal','sonidos'];
+  var t=[['letra','oye-sil','aplausos'],['letra','oye-sil','inversa','aplausos','oye-pal'],['oye-sil','inversa','oye-pal','lee-pal','dictado','sonidos'],['oye-pal','dictado','sonidos','cuenta-pal','ordena','inversa'],['dictado','ordena','sonidos','cuenta-pal','oye-pal']][n-1];
+  return t;
+}
+function noRepetir(lista,k,idf){var u=S.usadosCuad[k]||(S.usadosCuad[k]=[]);var l=lista.filter(function(x){return u.indexOf(idf(x))<0;});if(!l.length){u.length=0;l=lista;}var x=pick(l);u.push(idf(x));return x;}
+function chipsPal(w,on){return chipsHTML(w.s.map(function(x){return x;}),'',on);}
+LEC_GEN['peque:cuaderno']=function(n){
+  var a=S.letra,tipos=tiposCuaderno(n,a),tipo=tipos[S.n%tipos.length],lx=lexConocido(a.vocal?null:a.l),p={tipo:'opciones',gemelo:true,cuad:tipo},m;
+  var lc=a.l.toLowerCase();
+  if((tipo==='oye-pal'||tipo==='lee-pal'||tipo==='dictado'||tipo==='sonidos')&&lx.todas.length<4)tipo='aplausos';
+  if((tipo==='ordena')&&frasesConocidas().length<2)tipo='dictado';
+  if(tipo==='lee-pal'&&!lx.foco.some(function(x){return x.e;}))tipo='oye-pal';
+  if(tipo==='inversa'&&!/^[mpslndrt]$/.test(lc))tipo='oye-sil';
+  p.cuad=tipo;
+  if(tipo==='letra'){
+    var may=Math.random()<.5,obj=may?a.l:lc,par=((L.parecidas&&L.parecidas[lc])||['x','k','w','z','f']).filter(function(x){return x!==obj;});
+    m=mezclarOps([obj].concat(barajar(par).slice(0,n<=1?2:3)).map(function(x){return {t:x,voz:x,clase:'letra-op'};}),0);
+    p.consigna='¿Cuál es la '+(may?'mayúscula':'minúscula')+' de la «'+a.nombre+'»?';p.titulo=p.consigna;
+    p.estimulo=cartulina('<p class="texto-adiv">Busca la letra <b>'+esc(a.nombre)+'</b> '+(may?'MAYÚSCULA':'minúscula')+'.</p>');
+    p.voz='Busca la '+a.nombre+' '+(may?'mayúscula':'minúscula')+'.';
+    p.final='¡Esa es la '+obj+'!';p.finalVoz='Esa es la '+a.nombre+'.';
+    p.pista=function(){return (L.rasgos&&L.rasgos[lc])||'Mira bien su forma.';};
+    p.explicar=function(){return [{texto:'Esta es la '+a.l+' mayúscula y esta es la '+lc+' minúscula. '+((L.rasgos&&L.rasgos[lc])||''),voz:'Esta es la '+a.nombre+'. '+((L.rasgos&&L.rasgos[lc])||''),vis:{tipo:'html',html:letraGrande(a.l)}}];};
+  } else if(tipo==='vocal'){
+    var cand=PAL.filter(function(x){return sinT(x.w).charAt(0)===lc;}),otras=PALJ.filter(function(x){return /^[aeiou]/.test(sinT(x.w))&&sinT(x.w).charAt(0)!==lc;});
+    var w=noRepetir(cand.length?cand:PAL,'v',function(x){return x.w;});
+    m=mezclarOps([w].concat(barajar(otras).slice(0,2)).map(function(x){return {img:x.e,t:x.w,voz:x.w,clase:'pal'};}),0);
+    p.consigna='¿Cuál empieza con la '+a.l+'?';p.titulo=p.consigna;p.estimulo=cartulina(letraGrande(a.l));
+    p.voz='¿Cuál empieza con la '+a.nombre+'?';p.final=cap(w.w)+' empieza con '+a.l+'.';p.finalVoz=w.w+' empieza con '+a.nombre+'.';
+    p.pista=function(){return 'Di cada palabra despacio y escucha cómo empieza.';};
+    p.explicar=function(){return [{texto:cap(w.w)+' empieza con la '+a.l+': '+w.s.join(' - ')+'.',voz:w.w+'. Empieza con '+a.nombre+'.',vis:{tipo:'html',html:'<div class="exp-col">'+dib(w.e,'dib-media')+'<p class="palabra-exp"><span class="resalta">'+esc(w.w.charAt(0))+'</span>'+esc(w.w.slice(1))+'</p></div>'}}];};
+  } else if(tipo==='oye-sil'||tipo==='inversa'){
+    var fam=tipo==='oye-sil'?a.fam:VOCALES.map(function(v){return v+lc;});
+    var sil=noRepetir(fam,tipo,function(x){return x;});
+    var mix=function(x,i){return n>=2&&i%2?x.toUpperCase():(n>=2?cap(x):x.toUpperCase());};
+    m=mezclarOps(fam.map(function(x,i){return {t:mix(x,i),voz:x};}),fam.indexOf(sil));
+    p.consigna=tipo==='oye-sil'?'Escucha y elige la sílaba.':'Escucha: primero la vocal y después la '+lc+'.';p.titulo='Escucha y elige: ¿cuál dijo la profe?';
+    p.estimulo=cartulina(dib('👂','dib-grande')+'<p class="texto-adiv">Escucha a la profe.</p>');
+    p.voz='Escucha bien... '+sil+'... ¿Cuál es '+sil+'?';p.final='¡Sí! '+sil.toUpperCase()+'.';p.finalVoz=sil+'.';
+    p.pista=function(){return 'Escucha otra vez: '+sil+'. ¿Con qué letra empieza?';};
+    p.explicar=function(){
+      if(tipo==='inversa'){var v=sil.charAt(0);return [{texto:'Primero suena la vocal '+v.toUpperCase()+' y después la '+lc+': '+sil.toUpperCase()+'.',voz:'Primero la '+v+', después la '+a.nombre+'. '+sil+'.',vis:{tipo:'html',html:chipsHTML([v.toUpperCase(),lc,sil.toUpperCase()],'')},anim:{tipo:'resaltar',sel:'.sil',voces:[v,a.nombre,sil],fin:2}}];}
+      var v2=sil.slice(-1);return [{texto:'La '+a.l+' con la '+v2.toUpperCase()+' suena '+sil.toUpperCase()+'.',voz:'La '+a.nombre+' con la '+v2+' suena '+sil+'.',vis:{tipo:'html',html:chipsHTML(fam.map(function(x){return x.toUpperCase();}),'')},anim:{tipo:'resaltar',sel:'.sil',voces:fam,fin:fam.indexOf(sil)}}];};
+  } else if(tipo==='aplausos'){
+    var pool=lx.todas.length>=3?lx.foco:PALJ.filter(function(x){return x.s.length<=4;});
+    var w2=noRepetir(pool,'apl',function(x){return x.w;}),k=w2.s.length;
+    var nums=barajar([1,2,3,4,5].filter(function(x){return x!==k;})).slice(0,n<=1?2:3);
+    m=mezclarOps([k].concat(nums).map(function(x){return {t:String(x),voz:numPalabra(x)};}),0);
+    p.consigna='¿Cuántos aplausos tiene?';p.titulo='¿Cuántos aplausos (sílabas) tiene «'+w2.w+'»?';
+    p.estimulo=cartulina((w2.e?dib(w2.e,'dib-grande'):'')+'<p class="palabra-lec">'+esc(w2.w)+'</p>');
+    p.voz='Aplaude conmigo: '+w2.w+'. ¿Cuántos aplausos?';p.final=cap(w2.w)+': '+w2.s.join(' - ')+'. '+k+(k===1?' aplauso.':' aplausos.');p.finalVoz=w2.s.map(sinT).join(', ')+'. '+numPalabra(k)+'.';
+    p.pista=function(){return 'Aplaude despacio con cada pedacito: '+w2.s.join(', ')+'.';};
+    p.explicar=function(){return [{texto:'Aplaudimos con cada sílaba: '+w2.s.join(' - ')+'. Son '+k+'.',voz:'Aplaudimos con cada sílaba.',vis:{tipo:'html',html:chipsHTML(w2.s.map(function(x){return x.toUpperCase();}),'')},anim:{tipo:'resaltar',sel:'.sil',voces:w2.s.map(sinT),final:'Son '+numPalabra(k)+' aplausos.'}}];};
+  } else if(tipo==='oye-pal'||tipo==='lee-pal'){
+    var pool2=tipo==='lee-pal'?lx.foco.filter(function(x){return x.e;}):lx.foco;
+    var w3=noRepetir(pool2,tipo,function(x){return x.w;});
+    var otros=barajar(lx.todas.filter(function(x){return x.w!==w3.w&&(tipo!=='lee-pal'||x.e);}));
+    otros.sort(function(x,y){return (token(y.w).charAt(0)===token(w3.w).charAt(0))-(token(x.w).charAt(0)===token(w3.w).charAt(0));});
+    var nd=n<=2?2:3,ds=[];otros.forEach(function(x){if(ds.length<nd&&!ds.some(function(d){return d.e&&d.e===x.e;})&&!(tipo==='lee-pal'&&x.e===w3.e))ds.push(x);});
+    if(tipo==='oye-pal'){
+      m=mezclarOps([w3].concat(ds).map(function(x){return {t:x.w,voz:x.w,clase:'pal'};}),0);
+      p.consigna='Escucha y busca la palabra.';p.titulo='¿Cuál palabra dijo la profe?';
+      p.estimulo=cartulina(dib('👂','dib-grande')+'<p class="texto-adiv">Escucha y lee las palabras.</p>');
+      p.voz='Busca la palabra... '+w3.w+'.';
+    } else {
+      m=mezclarOps([w3].concat(ds).map(function(x){return {img:x.e,voz:x.w};}),0);
+      p.consigna='Lee la palabra y busca su dibujo.';p.titulo=w3.w;
+      p.estimulo=cartulina('<p class="palabra-lec">'+esc(w3.w)+'</p>');p.voz='Lee la palabra y busca su dibujo.';
+    }
+    p.final='¡Sí! Dice '+w3.w+'.';p.finalVoz='Dice '+w3.w+'.';
+    p.pista=function(){return 'Lee despacio, sílaba por sílaba. Empieza con '+w3.s[0]+'.';};
+    p.explicar=function(){return [{texto:'Leemos despacio: '+w3.s.join(' - ')+'. Dice «'+w3.w+'».',voz:'Leemos despacio.',vis:{tipo:'html',html:'<div class="exp-col">'+(w3.e?dib(w3.e,'dib-media'):'')+chipsHTML(w3.s,'')+'</div>'},anim:{tipo:'resaltar',sel:'.sil',voces:w3.s.map(sinT),final:w3.w+'.'}}];};
+  } else if(tipo==='sonidos'){
+    var w4=noRepetir(lx.foco.filter(function(x){return x.w.length<=6;}),'son',function(x){return x.w;}),so=sonidosDe(w4.w),k2=so.length;
+    var nums2=barajar([k2-2,k2-1,k2+1,k2+2].filter(function(x){return x>0;})).slice(0,3);
+    m=mezclarOps([k2].concat(nums2).map(function(x){return {t:String(x),voz:numPalabra(x)};}),0);
+    p.consigna='Regleta: ¿cuántos sonidos tiene?';p.titulo='¿Cuántos sonidos (letras) tiene «'+w4.w+'»?';
+    p.estimulo=cartulina((w4.e?dib(w4.e,'dib-media'):'')+'<p class="palabra-lec">'+esc(w4.w)+'</p>'+regletaFon(so.length,null));
+    p.voz='¿Cuántos sonidos tiene '+w4.w+'? Cuenta las letras.';p.final=cap(w4.w)+' tiene '+k2+' sonidos: '+so.join(' - ')+'.';p.finalVoz=w4.w+' tiene '+numPalabra(k2)+' sonidos.';
+    p.pista=function(){return 'Pon el dedo en cada letra y cuenta.';};
+    p.explicar=function(){return [{texto:'Ponemos un sonido en cada cuadrito: '+so.join(' - ')+'. Son '+k2+' sonidos.',voz:'Ponemos un sonido en cada cuadrito. Contamos.',vis:{tipo:'html',html:regletaFon(so.length,so)},anim:{tipo:'resaltar',sel:'.caja-f',voces:so.map(function(x,i){return numPalabra(i+1);}),final:w4.w+' tiene '+numPalabra(k2)+' sonidos.'}}];};
+  } else if(tipo==='cuenta-pal'){
+    var fr=noRepetir(n>=5?L.frasesCuaderno:frasesConocidas().concat(L.frasesCuaderno.slice(-4)),'cp',function(x){return x;});
+    var ws=fr.replace(/[.!?]/g,'').split(/\s+/),k3=ws.length;
+    var nums3=barajar([k3-2,k3-1,k3+1,k3+2].filter(function(x){return x>0;})).slice(0,3);
+    m=mezclarOps([k3].concat(nums3).map(function(x){return {t:String(x),voz:numPalabra(x)};}),0);
+    p.consigna='¿Cuántas palabras tiene la oración?';p.titulo=fr;
+    p.estimulo=cartulina('<p class="frase-lec">'+esc(fr)+'</p><p class="texto-adiv">Pon un puntito debajo de cada palabra.</p>');
+    p.voz='Escucha y cuenta las palabras: '+fr;p.final='«'+fr+'» tiene '+k3+' palabras.';p.finalVoz='Tiene '+numPalabra(k3)+' palabras.';
+    p.pista=function(){return 'Lee despacio y cuenta con los dedos cada palabra.';};
+    p.explicar=function(){return [{texto:'Ponemos un puntito debajo de cada palabra y contamos. Son '+k3+'.',voz:'Contamos las palabras.',vis:{tipo:'html',html:'<div class="frase-puntos">'+ws.map(function(w){return '<span class="pal-punto"><span class="pp-t">'+esc(w)+'</span><i></i></span>';}).join('')+'</div>'},anim:{tipo:'resaltar',sel:'.pal-punto',voces:ws.map(function(x,i){return numPalabra(i+1);}),final:'Son '+numPalabra(k3)+' palabras.'}}];};
+  } else if(tipo==='dictado'){
+    var pool5=lx.foco.filter(function(x){return x.s.length>=2&&!/^[A-ZÁÉÍÓÚ]/.test(x.w);});if(!pool5.length)pool5=lx.todas.filter(function(x){return !/^[A-ZÁÉÍÓÚ]/.test(x.w);});
+    var w5=noRepetir(pool5,'dic',function(x){return x.w;});
+    var usadas=w5.s.map(function(x){return sinT(x).toLowerCase();}),extra=[];
+    barajar(lx.todas).some(function(o){o.s.forEach(function(x){var t=sinT(x).toLowerCase();if(extra.length<(n>=4?3:2)&&usadas.indexOf(t)<0&&extra.indexOf(t)<0)extra.push(t);});return extra.length>=(n>=4?3:2);});
+    var sol=w5.s.map(function(x){return x.toLowerCase();}),pz=barajar(sol.concat(extra));
+    if(pz.join()===sol.join())pz=pz.slice(1).concat(pz[0]);
+    return {tipo:'armar',cuad:'dictado',w:w5,sol:sol,piezas:pz,sep:'',maxErr:2,gemelo:true,consigna:'Dictado: escucha y escribe la palabra.',titulo:'Dictado',
+      voz:'Dictado. Escribe... '+w5.w+'.',estimulo:cartulina(dib('👂','dib-media')+'<p class="texto-adiv">Escucha y arma la palabra con las sílabas.</p>'),
+      final:'¡'+cap(w5.w)+'!',finalVoz:w5.s.map(sinT).join(', ')+'. '+w5.w+'.',
+      pista:function(){return 'Escucha despacio: '+w5.s.join(', ')+'.';},
+      explicar:function(){return [{texto:'Se escribe así: '+w5.s.join(' - ')+'.',voz:'Escucha y mira cómo se escribe.',vis:{tipo:'html',html:'<div class="exp-col">'+(w5.e?dib(w5.e,'dib-media'):'')+chipsHTML(w5.s,'')+'</div>'},anim:{tipo:'resaltar',sel:'.sil',voces:w5.s.map(sinT),final:w5.w+'.'}}];}};
+  } else {
+    var fr2=noRepetir(frasesConocidas(),'ord',function(x){return x;});
+    var sol2=fr2.split(' '),pz2=barajar(sol2);if(pz2.join(' ')===fr2)pz2=pz2.slice(1).concat(pz2[0]);
+    return {tipo:'armar',cuad:'ordena',sol:sol2,piezas:pz2,sep:' ',maxErr:3,gemelo:false,consigna:'Dictado: escucha la oración y ordénala.',titulo:'Dictado de oración',
+      voz:'Dictado. '+fr2,estimulo:'',final:fr2,finalVoz:fr2,
+      pista:function(k){return k===0?'La oración empieza con mayúscula.':'Escucha otra vez: '+fr2;},
+      explicar:function(){return [{texto:'La oración es: «'+fr2+'». Empieza con mayúscula y termina con punto.',vis:{tipo:'html',html:'<p class="frase-exp">'+esc(fr2)+'</p>'}}];}};
+  }
+  p.ops=m.ops;p.ok=m.ok;return p;
+};
+function regletaFon(n,letras){return '<div class="regleta-fon" aria-hidden="true">'+range(0,n).map(function(i){return '<span class="caja-f">'+(letras?esc(letras[i]):'')+'</span>';}).join('')+'</div>';}
+
+/* ======================= FORMA EL NÚMERO (regletas de colores) ======================= */
+function regletaHTML(n,cls,unidades){return '<span class="regleta '+(cls||'')+'" style="--n:'+n+';--c:var(--r'+n+')">'+(unidades?range(0,n).map(function(){return '<i></i>';}).join(''):'')+'<b>'+n+'</b></span>';}
+function trenHTML(T,a,b,lleno){
+  return '<div class="tren"><div class="fila-r">'+regletaHTML(T,'total',true)+'</div><div class="fila-r">'+regletaHTML(a,'',true)+
+    (lleno?regletaHTML(b,'llega',true):'<span class="vacio-r" style="--n:'+b+'">'+range(0,b).map(function(){return '<span class="hueco-r"></span>';}).join('')+'<b>?</b></span>')+'</div></div>';
+}
+LEC_GEN['peque:regletas']=function(n){
+  var T=n===1?rnd(3,5):n===2?rnd(6,7):n===3?rnd(8,10):n===4?10:rnd(5,10);
+  var a=rnd(1,T-1),b=T-a,p={tipo:'opciones',gemelo:true,lista:n<5};
+  var cand=[b-2,b-1,b+1,b+2].filter(function(x){return x>=1&&x<=9&&x!==b;});
+  var ds=barajar(cand).slice(0,n<=1?2:3);
+  if(n<5){
+    var m=mezclarOps([b].concat(ds).map(function(x){return {html:regletaHTML(x,'op-r',n<=3),t:'',voz:numPalabra(x),txtTel:String(x)};}),0);
+    p.ops=m.ops;p.ok=m.ok;p.consigna='¿Qué regleta falta para formar el '+T+'?';p.titulo=p.consigna;
+    p.estimulo=trenHTML(T,a,b,false);
+    p.voz='Tenemos '+a+'. ¿Qué regleta falta para formar el '+T+'?';
+  } else {
+    var m5=mezclarOps([b].concat(ds).map(function(x){return {t:String(x),voz:numPalabra(x)};}),0);
+    p.ops=m5.ops;p.ok=m5.ok;p.consigna='¿Qué número falta?';p.titulo=a+' + ? = '+T;
+    p.estimulo=cartulina('<p class="refran">'+a+' + <span class="hueco">?</span> = '+T+'</p>');
+    p.voz=a+' más ¿cuánto? es igual a '+T+'.';
+  }
+  p.T=T;p.a=a;p.b=b;
+  p.final=a+' y '+b+' forman el '+T+'.';p.finalVoz=a+' y '+b+' forman el '+T+'.';
+  p.pista=function(){return n<5?'Cuenta los cuadritos vacíos.':'Empieza en '+a+' y cuenta con los dedos hasta llegar a '+T+'.';};
+  p.explicar=function(){return [
+    {texto:'Al '+a+' le faltan cuadritos para llegar al '+T+'. Contamos los vacíos.',voz:'Contamos los cuadritos vacíos.',vis:{tipo:'html',html:trenHTML(T,a,b,false)},anim:{tipo:'resaltar',sel:'.hueco-r',voces:range(1,b+1).map(numPalabra),final:'Faltan '+numPalabra(b)+'.'}},
+    {texto:a+' + '+b+' = '+T+'. La regleta del '+b+' completa el '+T+'.',vis:{tipo:'html',html:trenHTML(T,a,b,true)}}];};
+  return p;
+};
+
+/* ======================= VOZ: diagnóstico y respaldo en el celular ======================= */
+function pantallaSonido(){
+  modoJuego=null;animTok++;S.oyente=null;
+  var vs=VOZ.soporte?(speechSynthesis.getVoices()||[]):[],es=vs.filter(function(v){return /^es/i.test(v.lang||'');});
+  var act=activado();
+  var filas=[
+    ['El navegador de esta pantalla tiene voz',VOZ.soporte?'Sí':'No'],
+    ['Voces instaladas',VOZ.soporte?vs.length+' ('+es.length+' en español)':'—'],
+    ['Voz elegida',vozES?vozES.name+' · '+vozES.lang:(VOZ.soporte?'La predeterminada':'—')],
+    ['Voz activada con el control o un toque',act?'Sí':'Todavía no'],
+    ['Resultado de la última prueba',{ok:'Habló bien',bloqueada:'Bloqueada: falta presionar OK',muda:'No suena: este navegador no tiene voz',error:'Error: '+(VOZ.error||''),desconocido:'Sin probar'}[VOZ.estado]||VOZ.estado],
+    ['Celulares conectados',String(CTRL.conns.length)]
+  ];
+  var consejo=!VOZ.soporte||VOZ.estado==='muda'?'Este navegador de la tele no puede hablar. Opciones: 1) Abre el juego en Chrome del celular y usa «Enviar pantalla» a la tele: la voz sale por la tele. 2) Activa «Voz en el celular» en el control. 3) En Android TV, instala un navegador basado en Chrome y el motor de voz de Google.':
+    !act?'Presiona OK en el control remoto de la tele una vez. Los navegadores no dejan hablar a una página hasta que alguien la toca en esa misma pantalla.':
+    'Si la prueba habla, todo está bien. Si no escuchas nada, revisa el volumen de la tele.';
+  pantalla.innerHTML='<div class="seccion"><p class="eyebrow">Para papá y mamá</p><h1 class="titulo-sec">Probar sonido</h1>'+
+    '<div class="tabla-scroll"><table><tbody>'+filas.map(function(f){return '<tr><th scope="row">'+f[0]+'</th><td>'+esc(f[1])+'</td></tr>';}).join('')+'</tbody></table></div>'+
+    '<p class="sub">'+consejo+'</p><div class="fila-botones"><button type="button" data-nav class="btn btn-tiza" id="b-probar">Probar la voz</button><button type="button" data-nav class="btn btn-suave" id="b-volver">Volver</button></div></div>';
+  on('#b-probar',function(){VOZ.prueba=true;decir('Hola. Si me escuchas, el sonido funciona.');setTimeout(pantallaSonido,3500);});
+  on('#b-volver',pantallaInicio);alVolver=pantallaInicio;enfocar('#b-probar');
 }
 
 /* ---------- Celular como control y micrófono ----------
@@ -1889,7 +2224,7 @@ function recibir(m,c){
   }
 }
 
-if(/[?&]prueba/.test(location.search))window.__PZ={S:S,D:function(){return DATOS;},LEC_GEN:LEC_GEN,crearLec:crearLec,mostrarLec:mostrarLec,iniciarMision:iniciarMision,nuevoTurno:nuevoTurno,pantallaExplicacion:pantallaExplicacion,pantallaJuegos:pantallaJuegos,elegirLec:elegirLec};
+if(/[?&]prueba/.test(location.search))window.__PZ={VOZ:VOZ,pantallaAbc:pantallaAbc,practicarLetra:practicarLetra,leccionLetra:leccionLetra,ABCX:ABCX,S:S,D:function(){return DATOS;},LEC_GEN:LEC_GEN,crearLec:crearLec,mostrarLec:mostrarLec,iniciarMision:iniciarMision,nuevoTurno:nuevoTurno,pantallaExplicacion:pantallaExplicacion,pantallaJuegos:pantallaJuegos,elegirLec:elegirLec};
 iniciarPuente();
 pantallaInicio();
 })();

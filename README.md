@@ -8,10 +8,13 @@ Cada juego tiene 5 niveles. El nivel sube con 3 aciertos seguidos y baja si fall
 
 **Números.** Primero: contar, sumar y restar con objetos. Quinto: suma, resta, multiplicación y división en columna.
 
+**Números para primero:** además de contar, sumar y restar, **Forma el número** usa regletas de colores como en la escuela: ¿qué regleta falta para formar el 6, el 9 o el 10? Si se equivoca, la profe cuenta los cuadritos vacíos uno por uno.
+
 **Letras para primero de básica**
 
 | Juego | Qué practica |
 |---|---|
+| Mi cuaderno | Abecedario de la A a la Z. Cada letra tiene una lección (mayúscula, minúscula, familia de sílabas y palabras con dibujo) y una práctica de 8 ejercicios como los del cuaderno: reconocer la letra, escuchar la sílaba, sílabas inversas (am, em…), aplausos, leer palabras, dictado, regleta fonológica (contar sonidos) y contar palabras de una oración. **Solo usa palabras con las letras que ya conoce**: vocales y M al inicio. Papá o mamá activan cada letra nueva en «Letras que ya conoce». |
 | ¿Con qué empieza? | Ven un dibujo y eligen la vocal o la sílaba inicial (MA ME MI MO MU). Después, la sílaba que falta. |
 | Arma la palabra | Ordenan sílabas para formar la palabra del dibujo. |
 | Lee y busca | Leen una palabra u oración y eligen su dibujo. |
@@ -67,6 +70,15 @@ El micrófono del celular solo funciona en una página con **HTTPS**. GitHub Pag
    - en cuentos y trabalenguas, el texto completo en voz alta: el juego marca en verde lo que leyeron bien y en rosado lo que faltó.
 
 El código de la tele se guarda, así que el celular se reconecta solo la próxima vez. Pueden conectarse dos celulares a la vez, uno por niño.
+
+## Si no se escucha la voz
+
+La voz la produce el navegador que tiene abierto el juego. Hay dos causas comunes:
+
+1. **Falta un toque en la tele.** Los navegadores no dejan hablar a una página hasta que alguien presiona algo en esa misma pantalla. Si todo se controla desde el celular, aparece un aviso amarillo: presiona **OK en el control remoto de la tele** una vez. Mientras tanto, el celular dice las frases.
+2. **El navegador de la tele no tiene voz** (pasa en muchos navegadores de televisores). Entra a **Probar sonido** en la pantalla de inicio: muestra si hay voz, cuántas voces en español tiene y el resultado de una prueba. Si no tiene voz:
+   - abre el juego en **Chrome del celular** y usa **Enviar pantalla** a la tele: la imagen y la voz salen por la tele;
+   - o deja que hable el celular: en el control, el botón **Voz en el celular** tiene tres modos: «solo si la tele no habla» (predeterminado), «siempre» y «apagada».
 
 ## Cómo funciona la conexión
 

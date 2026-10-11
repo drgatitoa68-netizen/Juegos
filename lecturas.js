@@ -29,6 +29,64 @@ palabras: [
 'za-pa-to 👞','za-na-ho-ria 🥕','yo-yo 🪀','pla-to 🍽️','prin-ce-sa 👸','ra-ma 🌿'
 ],
 
+/* ---------- Abecedario (primero): letra por letra, de la A a la Z ----------
+   v: vocal. fam: familia de sílabas si no es la normal (consonante + a e i o u).
+   ej: 'sílaba:pa-la-bra emoji' (la sílaba que se aprende y una palabra que la tiene). */
+abecedario: [
+{l:'A', n:'a', v:1, ej:['a-be-ja 🐝','ár-bol 🌳','a-vión ✈️','a-ni-llo 💍','a-ra-ña 🕷️']},
+{l:'B', n:'be', ej:['ba:ba-lle-na 🐋','be:be-bé 👶','bi:bi-ci-cle-ta 🚲','bo:bo-ta 👢','bu:bú-ho 🦉']},
+{l:'C', n:'ce', ej:['ca:ca-sa 🏠','ce:ce-bo-lla 🧅','ci:ci-ne 🎬','co:co-ne-jo 🐰','cu:cu-cha-ra 🥄'], nota:'Con A, O y U suena fuerte: ca, co, cu. Con E e I suena suave: ce, ci.'},
+{l:'CH', n:'che', ej:['cha:cha-que-ta 🧥','che:le-che 🥛','chi:chi-le 🌶️','cho:cho-co-la-te 🍫','chu:chu-pe-te 🍭'], nota:'La CH son dos letras que juntas suenan como una sola.'},
+{l:'D', n:'de', ej:['da:da-do 🎲','de:de-do ☝️','di:di-no-sau-rio 🦕','do:do-na 🍩','du:du-cha 🚿']},
+{l:'E', n:'e', v:1, ej:['e-le-fan-te 🐘','es-tre-lla ⭐','es-co-ba 🧹','e-ri-zo 🦔']},
+{l:'F', n:'efe', ej:['fa:so-fá 🛋️','fe:ca-fé ☕','fi:fi-de-o 🍝','fo:fo-ca 🦭']},
+{l:'G', n:'ge', ej:['ga:ga-to 🐱','ge:ge-la-ti-na 🍮','gi:gi-ra-sol 🌻','go:go-rra 🧢','gu:gu-sa-no 🐛'], nota:'Con E e I suena como la J: ge, gi.'},
+{l:'H', n:'hache', ej:['ha:ha-da 🧚','he:he-la-do 🍦','hi:hi-po-pó-ta-mo 🦛','ho:ho-ja 🍃','hu:hu-ra-cán 🌀'], nota:'La H no suena: es muda. «Hada» se lee «ada».'},
+{l:'I', n:'i', v:1, ej:['i-gua-na 🦎','is-la 🏝️','i-mán 🧲']},
+{l:'J', n:'jota', ej:['ja:ja-bón 🧼','je:je-rin-ga 💉','ji:ji-ra-fa 🦒','jo:o-jo 👁️','ju:ju-go 🧃']},
+{l:'K', n:'ka', ej:['ka:ka-ra-te 🥋','ki:ki-wi 🥝','ko:ko-a-la 🐨'], nota:'La K se usa en pocas palabras.'},
+{l:'L', n:'ele', ej:['la:lá-piz ✏️','le:le-ón 🦁','li:li-món 🍋','lo:lo-ro 🦜','lu:lu-na 🌙']},
+{l:'LL', n:'doble ele', ej:['lla:lla-ve 🔑','lle:ca-lle 🛣️','lli:ga-lli-na 🐔','llo:po-llo 🍗','llu:llu-via 🌧️'], nota:'La LL son dos L juntas que suenan como una sola.'},
+{l:'M', n:'eme', ej:['ma:ma-no ✋','me:me-lón 🍈','mi:mi-cró-fo-no 🎤','mo:mo-no 🐒','mu:mu-ñe-ca 🪆']},
+{l:'N', n:'ene', ej:['na:na-ran-ja 🍊','ne:co-ne-jo 🐰','ni:ni-ño 🧒','no:no-che 🌃','nu:nu-be ☁️']},
+{l:'Ñ', n:'eñe', ej:['ña:a-ra-ña 🕷️','ñe:mu-ñe-ca 🪆','ño:ni-ño 🧒'], nota:'La Ñ es una letra que solo tiene el español.'},
+{l:'O', n:'o', v:1, ej:['o-so 🐻','o-ve-ja 🐑','o-re-ja 👂','o-la 🌊']},
+{l:'P', n:'pe', ej:['pa:pa-to 🦆','pe:pe-ra 🍐','pi:pi-ña 🍍','po:po-lli-to 🐤','pu:pu-ño 👊']},
+{l:'Q', n:'cu', fam:'que qui', ej:['que:que-so 🧀','qui:mos-qui-to 🦟'], nota:'La Q siempre va con la U: que, qui. Esa U no suena.'},
+{l:'R', n:'erre', ej:['ra:ra-tón 🐭','re:re-ga-lo 🎁','ri:ri-no-ce-ron-te 🦏','ro:ro-sa 🌹'], nota:'Al inicio de la palabra, la R suena fuerte.'},
+{l:'S', n:'ese', ej:['sa:sa-po 🐸','se:se-má-fo-ro 🚦','si:si-lla 🪑','so:so-pa 🍲','su:su-ma ➕']},
+{l:'T', n:'te', ej:['ta:ta-za ☕','te:te-lé-fo-no ☎️','ti:ti-je-ra ✂️','to:to-ma-te 🍅','tu:tu-li-pán 🌷']},
+{l:'U', n:'u', v:1, ej:['u-vas 🍇','u-ni-cor-nio 🦄']},
+{l:'V', n:'ve', ej:['va:va-ca 🐄','ve:ve-la 🕯️','vi:ví-de-o 📹','vo:pa-vo 🦃']},
+{l:'W', n:'doble ve', fam:'wa we wi', ej:['wa:wa-fle 🧇','wi:ki-wi 🥝'], nota:'La W se usa en pocas palabras y suena como «u».'},
+{l:'X', n:'equis', fam:'xa xe xi xo xu', ej:['xe:bo-xe-o 🥊','xi:ta-xi 🚕','xo:sa-xo-fón 🎷'], nota:'La X suena «ks», como en taxi.'},
+{l:'Y', n:'ye', ej:['ya:ya-te 🛥️','yo:yo-yo 🪀'], nota:'Sola, la Y suena como la vocal I: «y».'},
+{l:'Z', n:'zeta', fam:'za zo zu', ej:['za:za-pa-to 👞','zo:zo-rro 🦊'], nota:'Con E e I casi siempre usamos la C: cereza, cine.'}
+],
+
+/* ---------- Mi cuaderno (primero): palabras y oraciones para leer con las letras que ya conoce ----------
+   El juego solo usa las que tienen letras aprendidas (vocales + las que papá o mamá activen). */
+lexico: 'ma-má ma-mi Me-mo mi-mo mi-ma a-mo a-ma mí-a mí-o E-ma E-mi Mi-mí e-me Mo-mo mi-me mu-mu '+
+ 'pa-pá pa-pi Pe-pe pi-pa pu-ma ma-pa po-mo Pe-pa a-pio pa-pa mo-pa pu-pa '+
+ 'sa-po so-pa o-so o-sa me-sa ma-sa pi-so pa-so pe-so pe-sa su-mo Su-si Sa-mi a-sa mi-sa sa-pi-to '+
+ 'lu-na lu-pa li-ma lo-ma lo-mo pa-la pa-lo pe-lo pi-la sa-la a-la o-la La-lo Lo-la Lu-lú mu-la ma-lo pa-lo-ma pa-le-ta mu-le-ta '+
+ 'pa-to ta-pa te-la ti-na to-ma to-ma-te mo-to pe-lo-ta ma-le-ta pa-ta ma-ta tí-o tí-a Ti-to To-to la-ta pa-ti-to me-ta '+
+ 'ne-na ne-ne mo-no ma-no pi-no la-na A-na no-ta mi-na tu-na na-ta pe-na sa-no e-na-no lu-na '+
+ 'da-do de-do du-da nu-do ni-do la-do to-do mo-da so-da Da-ni da-ma',
+frasesCuaderno: [
+'Mi mamá me mima.','Amo a mi mamá.','Mi mamá me ama.','Memo mima a mamá.','Ema ama a Memo.','Mimí me mima.','Mamá mima a Ema.','Emi ama a mamá.','Mamá y Memo me miman.',
+'Mi papá me ama.','Pepe ama a papá.','Papá mima a Pepa.','Mi mamá ama a papá.','Pepe y Pepa me miman.',
+'Susi pisa el piso.','Ese oso es mío.','Sami amasa la masa.','La sopa es de mamá.',
+'La luna sale.','Lola usa la lupa.','Lalo lame la paleta.','La paloma sale.',
+'Tito toma sopa.','El pato pisa la tina.','Mi tía tapa la olla.','Toto toma la pelota.',
+'Ana mima al mono.','Nena tiene un pino.','La mano de Ana.',
+'Dani da el dado.','Mi dedo duele.',
+'La paloma es un ave.','Tiene dos patas.','Tiene pico y come semillas.','Tiene plumas y vuela.'
+],
+/* Pistas de forma para no confundir letras parecidas */
+rasgos: {m:'La m minúscula tiene dos montañitas. La n tiene una sola.', n:'La n tiene una sola montañita. La m tiene dos.', p:'La p tiene la barriguita a la derecha y el palito hacia abajo.', d:'La d tiene la barriguita a la izquierda y el palito hacia arriba.', b:'La b tiene la barriguita a la derecha y el palito hacia arriba.', q:'La q tiene la barriguita a la izquierda y el palito hacia abajo.', l:'La l es un palito alto y derecho.', t:'La t tiene una crucecita.', s:'La s se mueve como una serpiente.', a:'La a es redondita con un palito.', e:'La e tiene una rayita en el medio.', i:'La i tiene un puntito arriba.', o:'La o es una ruedita.', u:'La u es como un vasito abierto arriba.'},
+parecidas: {m:['n','w','u','N','W'], n:['m','u','h','M','Ñ'], p:['q','b','d','R','B'], d:['b','p','q','D','B'], b:['d','p','q','D','P'], q:['p','g','d','O','P'], l:['i','t','I','L','1'], t:['f','l','i','T','F'], s:['z','c','S','Z','5'], a:['o','e','d','A','O'], e:['a','c','o','E','F'], i:['l','j','t','I','L'], o:['a','c','e','O','Q'], u:['n','v','w','U','V'], r:['n','v','R','P','B'], c:['e','o','C','G','O'], f:['t','l','F','E','T'], g:['q','p','G','C','O'], v:['u','w','V','U','Y'], z:['s','x','Z','S','N'], j:['i','g','J','L','I'], h:['n','b','H','N','K'], y:['v','g','Y','V','X']},
+
 /* ---------- Rimas (primero) ---------- */
 rimas: [
 {fin:'ato', ws:['gato','pato','zapato','plato']},
@@ -501,5 +559,5 @@ grande: [
 },
 
 /* Íconos de las tarjetas del menú */
-iconos: {silabas:'🐝', armar:'🧩', leer:'👀', rimas:'🎵', adivinanzas:'🤔', cuentos:'📖', trabalenguas:'👅', comprension:'📚', refranes:'🦉', ortografia:'✏️', vocabulario:'🔤', oraciones:'🧩'}
+iconos: {cuaderno:'📒', regletas:'📏', abecedario:'🔤', silabas:'🐝', armar:'🧩', leer:'👀', rimas:'🎵', adivinanzas:'🤔', cuentos:'📖', trabalenguas:'👅', comprension:'📚', refranes:'🦉', ortografia:'✏️', vocabulario:'🔤', oraciones:'🧩'}
 };
