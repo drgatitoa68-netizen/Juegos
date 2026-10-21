@@ -409,6 +409,67 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .vis-centro .caja-f{width:clamp(40px,9vmin,84px);height:clamp(40px,9vmin,84px);font-size:var(--t-l)}
 /* ---------- Aviso de voz ---------- */
 #aviso-voz{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 2vmin);transform:translateX(-50%);max-width:min(92vw,46em);background:var(--amarilla);color:var(--pizarra-hondo);font-family:var(--f-titulo);font-weight:600;font-size:var(--t-m);padding:.55em 1.1em;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:11;text-align:center}
+
+/* ---------- Apoyos ---------- */
+body.tranquilo *,body.tranquilo *::before,body.tranquilo *::after{animation:none!important;transition:none!important}
+body.tranquilo .opcion:focus,body.tranquilo .opcion:hover,body.tranquilo .tarjeta:focus,body.tranquilo .tarjeta:hover,body.tranquilo .sil.on{transform:none}
+#pausa{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(18,40,34,.97);padding:16px}
+.pausa-c{max-width:34em;text-align:center;display:flex;flex-direction:column;gap:1em;align-items:center}
+.plan-pasos{margin:0;padding-left:1.4em;font-size:var(--t-m);line-height:1.5;max-width:40ch;display:flex;flex-direction:column;gap:.4em}
+.apoyos{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-block:.4em .8em}
+.apoyo-t{font-size:var(--t-s);min-height:2.2em}
+.apoyo-t.on{border-style:solid;border-color:var(--verde);color:var(--verde)}
+/* ---------- Plano cartesiano: eje X azul, eje Y rosado, siempre ---------- */
+.plano{width:100%;height:auto;max-height:min(62vh,100%);display:block;font-family:var(--f-titulo)}
+.plano .fondo{fill:var(--papel)}
+.plano .g{stroke:#d9d2bd;stroke-width:1.5}
+.plano .et{paint-order:stroke;stroke:var(--papel);stroke-width:5px;stroke-linejoin:round}
+.plano .eje-x{stroke:var(--tinta-sujeto);stroke-width:4}
+.plano .flecha-x,.plano .nom-x,.plano .lbl-x{fill:var(--tinta-sujeto)}
+.plano .eje-y{stroke:var(--tinta-falta);stroke-width:4}
+.plano .flecha-y,.plano .nom-y,.plano .lbl-y{fill:var(--tinta-falta)}
+.plano text{font-weight:800;font-size:17px;text-anchor:middle}
+.plano .lbl-o{fill:var(--tinta);font-size:17px}
+.plano .nom-x,.plano .nom-y{font-size:22px}
+.plano .poli{fill:rgba(21,101,192,.12);stroke:var(--tinta-suave);stroke-width:2.5;stroke-dasharray:6 4}
+.plano .pto{fill:var(--tinta);stroke:var(--papel);stroke-width:2}
+.plano .pto.meta{fill:#e65100}
+.plano .et{fill:var(--tinta);font-size:16px;text-anchor:start}
+.plano .origen{fill:none;stroke:var(--tinta);stroke-width:3}
+.plano .paso{stroke-width:9;stroke-linecap:round;opacity:.18}
+.plano .paso.px{stroke:var(--tinta-sujeto)}
+.plano .paso.py{stroke:var(--tinta-falta)}
+.plano .paso.on{opacity:1}
+.plano .cursor circle{fill:rgba(255,211,90,.35);stroke:#b28704;stroke-width:4}
+.plano .cursor line{stroke:#b28704;stroke-width:2.5}
+.plano .nodo{fill:transparent;cursor:pointer}
+.plano-juego .cartulina{transform:none;padding:clamp(8px,1.6vmin,16px)}
+.cx{color:var(--celeste);font-weight:800}
+.cy{color:var(--rosa);font-weight:800}
+.cartulina .cx,.leyenda-plano .cx{color:var(--tinta-sujeto)}
+.cartulina .cy,.leyenda-plano .cy{color:var(--tinta-falta)}
+.leyenda-plano{margin:.3em 0 0;font-family:var(--f-titulo);font-weight:600;font-size:var(--t-s);display:flex;gap:1.2em;justify-content:center;background:var(--papel);border-radius:8px;padding:.2em .8em}
+.pos{margin:0;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-l)}
+.cruz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". ar ." "iz mk de" ". ab .";gap:8px;max-width:30em}
+.cruz #b-arriba{grid-area:ar}.cruz #b-izq{grid-area:iz}.cruz #b-marcar{grid-area:mk}.cruz #b-der{grid-area:de}.cruz #b-abajo{grid-area:ab}
+.cruz .btn{font-size:var(--t-s);padding:.4em .3em}
+.vis-centro .plano{max-height:min(70vh,100%)}
+
+/* ---------- Tabla posicional ---------- */
+.num-grande{margin:0;font-family:var(--f-titulo);font-weight:800;font-size:var(--t-xl);line-height:1.1;color:var(--tinta);font-variant-numeric:tabular-nums;letter-spacing:.03em}
+.num-grande.en-pizarra{color:var(--tiza)}
+.num-letras{margin:0;font-weight:700;font-size:var(--t-m);line-height:1.35;color:var(--tinta);max-width:30ch;text-align:center}
+.vis-centro .num-grande,.vis-centro .num-letras{color:var(--tiza)}
+.tabla-pos-wrap{overflow-x:auto;max-width:100%}
+.tabla-pos{border-collapse:collapse;min-width:0;width:auto;margin-inline:auto;font-family:var(--f-titulo);background:var(--papel);color:var(--tinta);border-radius:8px}
+.tabla-pos th,.tabla-pos td{border:2px solid #cfc6ad;text-align:center;padding:0}
+.tabla-pos th.per{font-size:var(--t-s);font-weight:600;padding:.2em .4em;color:var(--tinta-suave)}
+.tabla-pos th.col{font-size:var(--t-s);font-weight:800;padding:.2em .3em;min-width:2.4em}
+.tabla-pos .ini-per{border-left:4px solid var(--tinta)}
+.tabla-pos .td-dig{display:flex;align-items:center;justify-content:center;width:clamp(36px,6.4vmin,62px);height:clamp(40px,7vmin,68px);font-weight:800;font-size:var(--t-l);transition:all .2s ease}
+.tabla-pos .td-dig.on{background:var(--resalte)}
+.tabla-pos .celda-t{width:clamp(36px,6.4vmin,62px);height:clamp(40px,7vmin,68px);margin:0;border:0;border-radius:0;background:transparent;color:var(--tinta);font-size:var(--t-l)}
+.tabla-pos .celda-t.activo{background:rgba(255,211,90,.45);box-shadow:inset 0 0 0 3px #b28704}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -425,6 +486,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   </div>
 </div>
 <div id="aviso" role="status" hidden></div>
+<div id="pausa" role="dialog" aria-modal="true" aria-label="Descanso" hidden><div class="pausa-c"><p class="eyebrow">Pausa</p><h2 class="titulo-sec">Descanso</h2><p class="sub">Respira despacio. Puedes estirarte o tomar agua. Cuando estés listo, presiona Seguir.</p><button type="button" class="btn btn-tiza grande" id="b-seguir">Seguir</button></div></div>
 <div id="aviso-voz" role="alert" hidden><b>Para escuchar la voz:</b> presiona OK en el control remoto de la tele (o toca la pantalla) una vez.</div>
 
 <script src="vendor/peerjs.min.js"></script>
@@ -451,10 +513,10 @@ var CHECK='<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M8 44 L36 70 L9
 
 var PERFILES={
   peque:{nombre:'Peque',grado:'Primero de básica',ops:['contar','sumar','restar','regletas'],lect:['cuaderno','silabas','armar','leer','rimas','adivinanzas','cuentos','trabalenguas'],mision:6,resumen:'Números con objetos, sílabas, palabras y cuentos'},
-  grande:{nombre:'Grande',grado:'Quinto de básica',ops:['sumar','restar','multiplicar','dividir'],lect:['comprension','refranes','ortografia','vocabulario','oraciones','adivinanzas','trabalenguas'],mision:8,resumen:'Las cuatro operaciones, lectura y ortografía'}
+  grande:{nombre:'Grande',grado:'Quinto de básica',ops:['sumar','restar','multiplicar','dividir','posicional','plano'],lect:['comprension','refranes','ortografia','vocabulario','oraciones','adivinanzas','trabalenguas'],mision:8,resumen:'Las cuatro operaciones, lectura y ortografía'}
 };
 var OPS={contar:{nombre:'Contar',simbolo:'123'},sumar:{nombre:'Sumar',simbolo:'+'},restar:{nombre:'Restar',simbolo:'−'},multiplicar:{nombre:'Multiplicar',simbolo:'×'},dividir:{nombre:'Dividir',simbolo:'÷'},
-  cuaderno:{nombre:'Mi cuaderno',lec:1},regletas:{nombre:'Forma el número',lec:1},
+  plano:{nombre:'Plano cartesiano',lec:1},posicional:{nombre:'Números grandes',lec:1},cuaderno:{nombre:'Mi cuaderno',lec:1},regletas:{nombre:'Forma el número',lec:1},
   silabas:{nombre:'¿Con qué empieza?',lec:1},armar:{nombre:'Arma la palabra',lec:1},leer:{nombre:'Lee y busca',lec:1},rimas:{nombre:'Rimas',lec:1},adivinanzas:{nombre:'Adivinanzas',lec:1},cuentos:{nombre:'Cuentos',lec:1},trabalenguas:{nombre:'Trabalenguas',lec:1},
   comprension:{nombre:'Lectura',lec:1},refranes:{nombre:'Refranes y dichos',lec:1},ortografia:{nombre:'Ortografía',lec:1},vocabulario:{nombre:'Vocabulario',lec:1},oraciones:{nombre:'Ordena la oración',lec:1}};
 var DESC={
@@ -476,6 +538,8 @@ var DESC={
     restar:['Dos cifras sin prestar','Dos cifras prestando','Tres cifras prestando','Prestando a través del cero','Cuatro cifras'],
     multiplicar:['Tablas del 2, 3, 4, 5 y 10','Tablas del 6 al 9','Dos cifras por una','Dos cifras por 6, 7, 8 o 9','Tres cifras por una'],
     dividir:['Repartir: tablas del 2 al 5','Repartir: tablas del 6 al 9','Dos cifras entre una','Tres cifras entre una','Tres cifras entre 6, 7, 8 o 9'],
+    posicional:['Hasta decenas de mil','Hasta centenas de mil','Millones','Decenas y centenas de millón','Con ceros en el medio'],
+    plano:['Ejes y origen','Leer coordenadas','Ubicar puntos','Figuras en el plano','Movimientos y patrones'],
     comprension:['Cuentos e informativos cortos','Fábulas e instructivos','Leyendas y fábulas','Ecuador y cartas','Textos más largos'],
     refranes:['Dichos y expresiones','Refranes fáciles','Refranes difíciles','Completa el refrán','¿Qué refrán va aquí?'],
     ortografia:['B y V · M antes de B y P','C, S y Z','G, J y H','LL e Y · R y RR','Tildes'],
@@ -496,10 +560,11 @@ function base(){
   var b={voz:true};
   ['peque','grande'].forEach(function(k){var nv={};PERFILES[k].ops.concat(PERFILES[k].lect).forEach(function(o){nv[o]=1;});b[k]={niveles:nv,stats:{},estrellas:0,vistos:{}};});
   b.peque.letras=['M'];b.peque.abc={};
+  b.peque.apoyo={tranquilo:false,plan:false,sinAuto:false};b.grande.apoyo={tranquilo:true,plan:true,sinAuto:true};b.grande.errPlano={};
   return b;
 }
 var DATOS=base();
-try{var g=JSON.parse(localStorage.getItem(CLAVE));if(g&&g.peque&&g.grande){['peque','grande'].forEach(function(k){Object.assign(DATOS[k].niveles,g[k].niveles||{});DATOS[k].stats=g[k].stats||{};DATOS[k].estrellas=g[k].estrellas||0;DATOS[k].vistos=g[k].vistos||{};});if(g.peque.letras)DATOS.peque.letras=g.peque.letras;DATOS.peque.abc=g.peque.abc||{};DATOS.voz=g.voz!==false;}}catch(e){}
+try{var g=JSON.parse(localStorage.getItem(CLAVE));if(g&&g.peque&&g.grande){['peque','grande'].forEach(function(k){Object.assign(DATOS[k].niveles,g[k].niveles||{});DATOS[k].stats=g[k].stats||{};DATOS[k].estrellas=g[k].estrellas||0;DATOS[k].vistos=g[k].vistos||{};});if(g.peque.letras)DATOS.peque.letras=g.peque.letras;DATOS.peque.abc=g.peque.abc||{};['peque','grande'].forEach(function(k){if(g[k].apoyo)DATOS[k].apoyo=g[k].apoyo;});DATOS.grande.errPlano=g.grande.errPlano||{};DATOS.voz=g.voz!==false;}}catch(e){}
 function guardar(){try{localStorage.setItem(CLAVE,JSON.stringify(DATOS));}catch(e){}}
 function stat(){var s=DATOS[S.p].stats;if(!s[S.op])s[S.op]={intentos:0,aciertos:0,explicaciones:0};return s[S.op];}
 
@@ -604,6 +669,7 @@ function setJugador(pid){
   if(!pid){j.hidden=true;e.hidden=true;return;}
   j.textContent=PERFILES[pid].nombre+' · '+PERFILES[pid].grado;j.hidden=false;
   e.innerHTML=ESTRELLA+'<span>'+DATOS[pid].estrellas+'</span>';e.hidden=false;
+  if(typeof aplicarApoyos==='function')aplicarApoyos();
 }
 function puntosNivel(n){return '<span class="puntos-nivel" aria-hidden="true">'+range(1,6).map(function(i){return '<i class="'+(i<=n?'on':'')+'"></i>';}).join('')+'</span>';}
 function palitos(){return '<span class="palitos" aria-label="Ejercicio '+(S.n+1)+' de '+S.total+'">'+range(0,S.total).map(function(i){return '<i class="'+(i<S.n?'hecho':i===S.n?'ahora':'')+'"></i>';}).join('')+'</span>';}
@@ -630,6 +696,8 @@ document.addEventListener('keydown',function(e){
   if(dir){e.preventDefault();mover(dir);return;}
   if(e.keyCode===23){e.preventDefault();if(document.activeElement&&document.activeElement.click)document.activeElement.click();return;}
   if(k==='Enter'&&navegables().indexOf(document.activeElement)<0){e.preventDefault();mover('down');return;}
+  if(/^[0-9]$/.test(k)&&modoJuego==='lectura'&&$('.tabla-juego',pantalla)){e.preventDefault();escribirTabla(+k);return;}
+  if(k==='Backspace'&&modoJuego==='lectura'&&$('.tabla-juego',pantalla)){e.preventDefault();borrarTabla();return;}
   if(/^[1-5]$/.test(k)&&modoJuego==='lectura'&&$('.opcion',pantalla)){e.preventDefault();elegirLec(+k-1);return;}
   if(/^[0-9]$/.test(k)){
     if(modoJuego==='grande'){e.preventDefault();escribir(+k);return;}
@@ -972,8 +1040,8 @@ function correrAnim(an,tok){
     return c2;
   }
   if(an.tipo==='resaltar'){
-    var els=$$(an.sel,pantalla),c4=Promise.resolve();
-    els.forEach(function(el,i){c4=c4.then(function(){if(!vivo())return;els.forEach(function(x){x.classList.remove('on');});el.classList.add('on');return hablarP(an.voces&&an.voces[i]!=null?an.voces[i]:el.textContent.toLowerCase(),1800);});});
+    var els=$$(an.sel,pantalla),c4=Promise.resolve();if(an.reverso)els.reverse();
+    els.forEach(function(el,i){c4=c4.then(function(){if(!vivo())return;if(!an.acumular)els.forEach(function(x){x.classList.remove('on');});el.classList.add('on');return hablarP(an.voces&&an.voces[i]!=null?an.voces[i]:el.textContent.toLowerCase(),1800);});});
     return c4.then(function(){if(!vivo())return;els.forEach(function(x,i){x.classList.toggle('on',an.fin==null||i===an.fin);});if(an.final)return hablarP(an.final,3000);});
   }
   if(an.tipo==='repartir'){
@@ -1038,10 +1106,10 @@ function pantallaJuegos(area,hablar){
   if(hablar)decir('¿Qué juego quieres?');
 }
 function iniciarMision(op){
-  S.op=op;S.n=0;S.aciertos=0;S.ayudas=0;S.racha=0;S.fallos=0;S.prob=null;S.comodines=2;S.texto=null;S.oyente=null;
-  if(esLec(op))return iniciarLectura(op);
-  S.total=PERFILES[S.p].mision;
-  nuevoTurno(false);
+  S.op=op;S.n=0;S.aciertos=0;S.ayudas=0;S.racha=0;S.fallos=0;S.prob=null;S.comodines=2;S.texto=null;S.oyente=null;S.ultimaEleccion=null;
+  var empezar=function(){if(esLec(op))return iniciarLectura(op);S.total=PERFILES[S.p].mision;nuevoTurno(false);};
+  if(apoyo().plan&&op!=='cuaderno'){S.total=!esLec(op)?PERFILES[S.p].mision:op==='trabalenguas'?3:(op==='cuentos'||op==='comprension')?(S.p==='peque'?4:5):(S.p==='peque'?6:8);return pantallaPlan(op,empezar);}
+  empezar();
 }
 function nuevoTurno(gemelo){
   if(esLec(S.op)){S.prob=crearLec(gemelo);S.intentos=1;S.conAyuda=!!gemelo&&!!S.prob.gemelo;mostrarLec(S.prob);return;}
@@ -1234,13 +1302,17 @@ function pantallaProgreso(){
     var pf=PERFILES[pid];
     var filas=pf.ops.concat(pf.lect).map(function(op){var n=DATOS[pid].niveles[op],st=DATOS[pid].stats[op]||{intentos:0,aciertos:0,explicaciones:0},pct=st.intentos?Math.round(st.aciertos*100/st.intentos):null;
       return '<tr><th scope="row">'+OPS[op].nombre+'</th><td>'+puntosNivel(n)+'<span class="nivel-txt">Nivel '+n+' · '+DESC[pid][op][n-1]+'</span></td><td class="num">'+st.aciertos+' de '+st.intentos+(pct!==null?' <span class="pct">('+pct+' %)</span>':'')+'</td><td class="num">'+st.explicaciones+'</td></tr>';}).join('');
-    var extra=pid==='peque'?'<p class="sub">Letras que ya conoce: vocales y '+(letrasConocidas().join(', ')||'ninguna')+'. Letras practicadas con 6 o más aciertos: '+(Object.keys(DATOS.peque.abc||{}).filter(function(l){return DATOS.peque.abc[l]>=6;}).join(', ')||'ninguna todavía')+'.</p>':'';
+    var ap=DATOS[pid].apoyo||{},ep=DATOS.grande.errPlano||{};
+    var apoyos='<div class="apoyos" data-pid="'+pid+'"><span class="eyebrow">Apoyos</span>'+[['tranquilo','Modo tranquilo: sin movimientos'],['plan','Mostrar el plan antes de empezar'],['sinAuto','Avanzar solo con el botón']].map(function(a){return '<button type="button" data-nav class="btn btn-suave apoyo-t'+(ap[a[0]]?' on':'')+'" data-k="'+a[0]+'" aria-pressed="'+!!ap[a[0]]+'">'+(ap[a[0]]?'✓ ':'')+a[1]+'</button>';}).join('')+'</div>';
+    var errTxt=pid==='grande'&&Object.keys(ep).length?'<p class="sub">Errores frecuentes: '+[['invertido','plano: números al revés'],['x','plano: primer número (X)'],['y','plano: segundo número (Y)'],['otro','plano: otros'],['tabla-izquierda','tabla posicional: empezó por la izquierda']].filter(function(e){return ep[e[0]];}).map(function(e){return e[1]+': '+ep[e[0]];}).join(' · ')+'.'+(ep.invertido>=3?' Practiquen juntos: «primero caminas (X), después subes (Y)».':'')+'</p>':'';
+    var extra=apoyos+errTxt+(pid==='peque'?'<p class="sub">Letras que ya conoce: vocales y '+(letrasConocidas().join(', ')||'ninguna')+'. Letras practicadas con 6 o más aciertos: '+(Object.keys(DATOS.peque.abc||{}).filter(function(l){return DATOS.peque.abc[l]>=6;}).join(', ')||'ninguna todavía')+'.</p>':'');
     return '<section class="prog-bloque"><h2>'+pf.nombre+'<span>'+pf.grado+' · '+DATOS[pid].estrellas+' estrellas</span></h2>'+extra+'<div class="tabla-scroll"><table><thead><tr><th scope="col">Juego</th><th scope="col">Nivel actual</th><th scope="col">Respuestas bien</th><th scope="col">Explicaciones vistas</th></tr></thead><tbody>'+filas+'</tbody></table></div></section>';
   }
   pantalla.innerHTML='<div class="progreso"><p class="eyebrow">Para papá y mamá</p><h1 class="titulo-sec">Progreso</h1><p class="sub">Si un juego acumula muchas explicaciones vistas, ese es el tema para practicar juntos en el cuaderno. El progreso se guarda solo en este dispositivo.</p>'+
     bloque('peque')+bloque('grande')+
     '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza" id="b-volver">Volver</button><button type="button" data-nav class="btn btn-suave" id="b-borrarp">Borrar progreso</button></div></div>';
   on('#b-volver',function(){pantallaJugadores();});
+  $$('.apoyo-t',pantalla).forEach(function(b){b.addEventListener('click',function(){var pid=b.parentNode.dataset.pid,k=b.dataset.k,ap=DATOS[pid].apoyo||(DATOS[pid].apoyo={});ap[k]=!ap[k];guardar();pantallaProgreso();enfocar('.apoyos[data-pid="'+pid+'"] .apoyo-t[data-k="'+k+'"]');});});
   var conf=false;
   on('#b-borrarp',function(){if(!conf){conf=true;this.textContent='Sí, borrar todo';return;}var v=DATOS.voz;DATOS=base();DATOS.voz=v;guardar();pantallaProgreso();aviso('Progreso borrado.',false);});
   enfocar('#b-volver');alVolver=function(){pantallaJugadores();};
@@ -1676,6 +1748,8 @@ function mostrarLec(p){
   S.bloqueado=false;S.usado5050=false;S.oyente=null;S.tituloTel=p.titulo||'';
   if(p.tipo==='armar')return pantallaArmar(p);
   if(p.tipo==='traba')return pantallaTraba(p);
+  if(p.tipo==='plano')return pantallaPlano(p);
+  if(p.tipo==='tabla')return pantallaTabla(p);
   return pantallaOpciones(p);
 }
 function pantallaOpciones(p){
@@ -1684,7 +1758,8 @@ function pantallaOpciones(p){
     '<section class="lec-estimulo">'+cabezaLec(p)+(p.consigna&&!p.pregunta?'<p class="consigna-lec">'+esc(p.consigna)+'</p>':'')+p.estimulo+'</section>'+
     '<section class="lec-resp">'+(p.pregunta?'<p class="pregunta">'+p.pregunta+'</p>':'')+
     '<div class="opciones n'+p.ops.length+'" role="group" aria-label="Opciones">'+p.ops.map(opcionHTML).join('')+'</div>'+
-    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+(p.ops.length>=4?btnL('b-5050','50:50 · quedan '+S.comodines,S.comodines<1):'')+btnL('b-como',S.p==='peque'?'Ayúdame':'Pista')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+(p.ops.length>=4?btnL('b-5050','50:50 · quedan '+S.comodines,S.comodines<1):'')+btnL('b-como',S.p==='peque'?'Ayúdame':'Pista')+btnL('b-pausa','Pausa')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+  on('#b-pausa',pausar);
   $$('.opcion',pantalla).forEach(function(b){b.addEventListener('click',function(){elegirLec(+b.dataset.i);});});
   on('#b-oir',function(){decir(vozDe(p.voz||p.titulo));});
   on('#b-5050',usar5050);on('#b-como',ejemplo);on('#b-salir',volverJuegos);
@@ -1704,6 +1779,7 @@ function usar5050(){
 function elegirLec(i){
   var p=S.prob;if(S.bloqueado||!p||!p.ops)return;
   var b=$('.opcion[data-i="'+i+'"]',pantalla);if(!b||b.disabled)return;
+  S.ultimaEleccion=i;
   if(i===p.ok){S.bloqueado=true;$$('.opcion',pantalla).forEach(function(x){if(x!==b)x.disabled=true;});b.classList.add('bien');return acierto();}
   b.classList.add('mal');b.disabled=true;
   var quedan=$$('.opcion:not(:disabled)',pantalla).length;
@@ -1732,7 +1808,7 @@ function oyenteOpciones(alts){
 function celebrarLec(subio){
   var p=S.prob,tok=++animTok,n=DATOS[S.p].niveles[S.op];
   var msg=(S.conAyuda||S.intentos>1)?pick(['¡Muy bien! Lo lograste.','¡Eso es!','¡Bien hecho!']):pick(['¡Muy bien!','¡Excelente!','¡Correcto!','¡Así se hace!','¡Bravo!']);
-  var cont=$('.lec-resp',pantalla)||pantalla,fb=$('.lec-botones, .acciones-traba',pantalla);if(fb)fb.hidden=true;
+  var cont=$('.lec-resp',pantalla)||pantalla;$$('.lec-botones, .acciones-traba, .cruz, .tabla-juego .teclado',pantalla).forEach(function(x){x.hidden=true;});
   var fest=document.createElement('div');fest.className='festejo';fest.setAttribute('role','status');
   fest.innerHTML='<div class="sello">'+CHECK+'</div><div class="festejo-txt"><p class="acierto-titulo">'+msg+'</p>'+(p.final?'<p class="festejo-final">'+esc(p.final)+'</p>':'')+(subio?'<p class="sube">'+ESTRELLA+'Subiste al nivel '+n+': '+DESC[S.p][S.op][n-1]+'</p>':'')+'</div>'+btnL('b-sig',S.n+1>=S.total?'Ver mi misión':'Siguiente',false,'btn-tiza');
   cont.appendChild(fest);S.oyente=null;
@@ -1740,7 +1816,7 @@ function celebrarLec(subio){
   enfocar('#b-sig');
   var dicho=msg+' '+(p.finalVoz!=null?p.finalVoz:(p.final||''))+(subio?' ¡Subiste al nivel '+n+'!':'');
   hablarP(vozDe(dicho.replace(/[«»]/g,''))).then(function(){
-    if(S.p==='peque')return sleep(900).then(function(){if(tok===animTok)siguienteTurno(false);});
+    if(S.p==='peque'&&!apoyo().sinAuto)return sleep(900).then(function(){if(tok===animTok)siguienteTurno(false);});
   });
 }
 
@@ -1751,7 +1827,8 @@ function pantallaArmar(p){
   var frase=p.sep===' ';
   pantalla.innerHTML='<div class="lec armar'+(frase?' armar-frase':'')+'"><section class="lec-estimulo">'+cabezaLec(p)+'<p class="consigna-lec">'+esc(p.consigna)+'</p>'+(p.estimulo||'')+'<div class="armado'+(frase?' frase':'')+'" id="armado" aria-live="polite"></div></section>'+
     '<section class="lec-resp"><div class="piezas" role="group" aria-label="Piezas">'+p.piezas.map(function(x,i){return '<button type="button" data-nav class="pieza'+(frase?' palabra':'')+'" data-i="'+i+'" data-txt="'+esc(x)+'">'+esc(x)+'</button>';}).join('')+'</div>'+
-    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+btnL('b-quitar','Quitar la última',true)+btnL('b-como',S.p==='peque'?'Ayúdame':'Pista')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+btnL('b-quitar','Quitar la última',true)+btnL('b-como',S.p==='peque'?'Ayúdame':'Pista')+btnL('b-pausa','Pausa')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+  on('#b-pausa',pausar);
   actualizarArmado();
   $$('.pieza',pantalla).forEach(function(b){b.addEventListener('click',function(){ponerPieza(+b.dataset.i);});});
   on('#b-oir',function(){decir(p.voz);});on('#b-quitar',quitarPieza);on('#b-como',ejemplo);on('#b-salir',volverJuegos);
@@ -2112,6 +2189,337 @@ function pantallaSonido(){
   on('#b-volver',pantallaInicio);alVolver=pantallaInicio;enfocar('#b-probar');
 }
 
+/* ======================= APOYOS (previsibilidad, calma, ritmo propio) ======================= */
+function apoyo(){var a=S.p&&DATOS[S.p]?DATOS[S.p].apoyo:null;return a||{};}
+function aplicarApoyos(){document.body.classList.toggle('tranquilo',!!apoyo().tranquilo);}
+function pausar(){
+  var ya=$('#pausa');if(ya&&!ya.hidden)return;
+  animTok++;try{speechSynthesis.cancel();}catch(e){}
+  var pz=$('#pausa'),antes=document.activeElement;pz.hidden=false;
+  var b=$('#b-seguir');b.focus();
+  b.onclick=function(){pz.hidden=true;if(antes&&antes.isConnected)enfocar(antes);};
+  decir('Descanso. Cuando estés listo, presiona Seguir.');
+}
+function pantallaPlan(op,empezar){
+  modoJuego='lectura';animTok++;S.oyente=null;
+  var n=DATOS[S.p].niveles[op]||1,total=S.total||PERFILES[S.p].mision;
+  S.tituloTel='Plan: '+OPS[op].nombre;
+  pantalla.innerHTML='<div class="seccion plan"><p class="eyebrow">El plan de hoy</p><h1 class="titulo-sec">'+esc(OPS[op].nombre)+'</h1>'+
+    '<ol class="plan-pasos"><li><b>'+total+' ejercicios.</b> Nivel '+n+': '+esc(DESC[S.p][op][n-1])+'.</li>'+
+    '<li>Si te equivocas, la profe te explica paso a paso. Equivocarse está bien: así se aprende.</li>'+
+    '<li>Tú decides cuándo pasar al siguiente.</li>'+
+    '<li>Puedes pedir una <b>pausa</b> cuando quieras.</li></ol>'+
+    '<div class="fila-botones"><button type="button" data-nav class="btn btn-tiza grande" id="b-empezar-plan">Empezar</button><button type="button" data-nav class="btn btn-suave" id="b-volver">Volver</button></div></div>';
+  on('#b-empezar-plan',function(){animTok++;empezar();});on('#b-volver',volverJuegos);alVolver=volverJuegos;
+  enfocar('#b-empezar-plan');
+  decir('El plan de hoy: '+OPS[op].nombre+'. '+total+' ejercicios. Puedes pedir una pausa cuando quieras.');
+}
+
+/* ======================= PLANO CARTESIANO (quinto) ======================= */
+var PLANO_MAX=[0,5,5,6,8,10];
+function par(x,y){return '('+x+', '+y+')';}
+function parHTML(x,y){return '(<span class="cx">'+x+'</span>, <span class="cy">'+y+'</span>)';}
+function planoSVG(o){
+  var M=o.max,c=40,pl=44,pt=26,pr=34,pb=40,W=pl+M*c+pr,H=pt+M*c+pb;
+  function X(x){return pl+x*c;}function Y(y){return pt+(M-y)*c;}
+  var h='<svg class="plano'+(o.clic?' clicable':'')+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Plano cartesiano de 0 a '+M+'">'+'<rect class="fondo" x="0" y="0" width="'+W+'" height="'+H+'" rx="10"/>';
+  for(var i=0;i<=M;i++){h+='<line class="g" x1="'+X(i)+'" y1="'+Y(0)+'" x2="'+X(i)+'" y2="'+Y(M)+'"/><line class="g" x1="'+X(0)+'" y1="'+Y(i)+'" x2="'+X(M)+'" y2="'+Y(i)+'"/>';}
+  h+='<line class="eje-x" x1="'+X(0)+'" y1="'+Y(0)+'" x2="'+(X(M)+18)+'" y2="'+Y(0)+'"/><path class="flecha-x" d="M'+(X(M)+24)+' '+Y(0)+' l-10 -6 v12 z"/>';
+  h+='<line class="eje-y" x1="'+X(0)+'" y1="'+Y(0)+'" x2="'+X(0)+'" y2="'+(Y(M)-18)+'"/><path class="flecha-y" d="M'+X(0)+' '+(Y(M)-24)+' l-6 10 h12 z"/>';
+  for(i=1;i<=M;i++){h+='<text class="lbl-x" x="'+X(i)+'" y="'+(Y(0)+26)+'">'+i+'</text><text class="lbl-y" x="'+(X(0)-14)+'" y="'+(Y(i)+6)+'">'+i+'</text>';}
+  h+='<text class="lbl-o" x="'+(X(0)-12)+'" y="'+(Y(0)+24)+'">0</text>';
+  h+='<text class="nom-x" x="'+(X(M)+22)+'" y="'+(Y(0)+28)+'">X</text><text class="nom-y" x="'+(X(0)+14)+'" y="'+(Y(M)-14)+'">Y</text>';
+  if(o.poligono){h+='<polygon class="poli" points="'+o.poligono.map(function(p){return X(p[0])+','+Y(p[1]);}).join(' ')+'"/>';}
+  if(o.camino){var cx=o.camino[0],cy=o.camino[1];
+    for(i=0;i<cx;i++)h+='<line class="paso px'+(o.caminoLleno?' on':'')+'" x1="'+X(i)+'" y1="'+Y(0)+'" x2="'+X(i+1)+'" y2="'+Y(0)+'"/>';
+    for(i=0;i<cy;i++)h+='<line class="paso py'+(o.caminoLleno?' on':'')+'" x1="'+X(cx)+'" y1="'+Y(i)+'" x2="'+X(cx)+'" y2="'+Y(i+1)+'"/>';}
+  if(o.origen)h+='<circle class="origen" cx="'+X(0)+'" cy="'+Y(0)+'" r="11"/>';
+  (o.puntos||[]).forEach(function(p){h+='<circle class="pto'+(p.cls?' '+p.cls:'')+'" cx="'+X(p.x)+'" cy="'+Y(p.y)+'" r="9"/>'+(p.et?'<text class="et" x="'+(X(p.x)+12)+'" y="'+(Y(p.y)-10)+'">'+esc(p.et)+'</text>':'');});
+  if(o.cursor)h+='<g class="cursor"><circle cx="'+X(o.cursor[0])+'" cy="'+Y(o.cursor[1])+'" r="15"/><line x1="'+(X(o.cursor[0])-22)+'" y1="'+Y(o.cursor[1])+'" x2="'+(X(o.cursor[0])+22)+'" y2="'+Y(o.cursor[1])+'"/><line x1="'+X(o.cursor[0])+'" y1="'+(Y(o.cursor[1])-22)+'" x2="'+X(o.cursor[0])+'" y2="'+(Y(o.cursor[1])+22)+'"/></g>';
+  if(o.clic){for(var a=0;a<=M;a++)for(var b=0;b<=M;b++)h+='<circle class="nodo" data-x="'+a+'" data-y="'+b+'" cx="'+X(a)+'" cy="'+Y(b)+'" r="16"/>';}
+  return h+'</svg>';
+}
+function leyendaPlano(){return '<p class="leyenda-plano"><span class="cx">Eje X: camina →</span> <span class="cy">Eje Y: sube ↑</span></p>';}
+/* Explicación del camino: siempre igual, paso por paso, en lenguaje literal */
+function pasosCamino(M,x,y,extra){
+  var base={max:M,origen:true,puntos:[{x:x,y:y,et:par(x,y),cls:'meta'}]},L2=[];
+  L2.push({texto:(extra?extra+' ':'')+'Empezamos siempre en el origen: el punto (0, 0), donde se cruzan los dos ejes.',vis:{tipo:'html',html:planoSVG(Object.assign({},base,{camino:[x,y]}))}});
+  L2.push({texto:x?'Primero caminamos hacia la derecha, por el eje X (azul): '+x+' '+(x===1?'paso':'pasos')+'.':'El primer número es 0: no caminamos hacia la derecha.',voz:x?'Primero caminamos hacia la derecha. Contamos.':'El primer número es cero. No caminamos.',vis:{tipo:'html',html:planoSVG(Object.assign({},base,{camino:[x,y]}))},anim:x?{tipo:'resaltar',sel:'.px',voces:range(1,x+1).map(numPalabra),acumular:true}:null});
+  L2.push({texto:y?'Después subimos, como en el eje Y (rosado): '+y+' '+(y===1?'paso':'pasos')+'.':'El segundo número es 0: no subimos.',voz:y?'Después subimos. Contamos.':'El segundo número es cero. No subimos.',vis:{tipo:'html',html:planoSVG(Object.assign({},base,{camino:[x,y]})).replace(/class="paso px"/g,'class="paso px on"')},anim:y?{tipo:'resaltar',sel:'.py',voces:range(1,y+1).map(numPalabra),acumular:true}:null});
+  L2.push({texto:'Llegamos al punto '+par(x,y)+'. Regla: el primer número dice cuánto caminar hacia la derecha (X) y el segundo cuánto subir (Y).',vis:{tipo:'html',html:planoSVG(Object.assign({},base,{camino:[x,y],caminoLleno:true}))+leyendaPlano()}});
+  return L2;
+}
+function errPlano(tipo){var e=DATOS.grande.errPlano||(DATOS.grande.errPlano={});e[tipo]=(e[tipo]||0)+1;guardar();}
+function diagnostico(x,y,gx,gy){
+  if(gx===y&&gy===x&&x!==y)return {tipo:'invertido',txt:'Pusiste los números al revés: '+par(gx,gy)+' en lugar de '+par(x,y)+'.'};
+  if(gx===x&&gy!==y)return {tipo:'y',txt:'El primer número está bien. Revisa cuánto subir.'};
+  if(gy===y&&gx!==x)return {tipo:'x',txt:'El segundo número está bien. Revisa cuánto caminar a la derecha.'};
+  return {tipo:'otro',txt:'Empieza en el origen y cuenta los pasos uno por uno.'};
+}
+function opsCoordenadas(x,y,M){
+  var c=[[y,x],[x+1,y],[x,y+1],[x-1,y],[x,y-1],[x+1,y+1]].filter(function(p){return p[0]>=0&&p[1]>=0&&p[0]<=M&&p[1]<=M&&!(p[0]===x&&p[1]===y);});
+  var u=[];c.forEach(function(p){if(!u.some(function(q){return q[0]===p[0]&&q[1]===p[1];}))u.push(p);});
+  var ds=(x!==y?[u[0]]:[]).concat(barajar(u.slice(x!==y?1:0))).slice(0,3);
+  var m=mezclarOps([[x,y]].concat(ds).map(function(p){return {t:par(p[0],p[1]),voz:p[0]+' '+p[1],xy:p};}),0);
+  return m;
+}
+function puntoAleatorio(M,min){var x,y;do{x=rnd(min||0,M);y=rnd(min||0,M);}while(x===y&&Math.random()<.7);return [x,y];}
+LEC_GEN['grande:plano']=function(n){
+  var M=PLANO_MAX[n],tipos=[null,['cual-eje','en-x','en-y','origen'],['leer'],['ubicar','leer'],['figura-leer','figura-ubicar'],['mover','patron','ubicar']][n];
+  var tipo=tipos[S.n%tipos.length],p={tipo:'opciones',gemelo:true,plano:tipo,lista:false};
+  if(tipo==='cual-eje'){
+    var cual=pick(['X','Y']);
+    var m=mezclarOps([{t:cual==='X'?'La línea horizontal (acostada)':'La línea vertical (parada)',voz:cual==='X'?'horizontal':'vertical'},{t:cual==='X'?'La línea vertical (parada)':'La línea horizontal (acostada)',voz:cual==='X'?'vertical':'horizontal'}],0);
+    p.ops=m.ops;p.ok=m.ok;p.lista=true;p.consigna='¿Cuál es el eje '+cual+'?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M}));p.voz='¿Cuál es el eje '+cual+'?';
+    p.final=cual==='X'?'El eje X es la línea horizontal, acostada como el piso.':'El eje Y es la línea vertical, parada como una pared.';
+    p.pista=function(){return 'Horizontal es acostada, como el piso. Vertical es parada, como una pared.';};
+    p.explicar=function(){return [{texto:'El eje X es la línea horizontal (azul), acostada como el piso. El eje Y es la línea vertical (rosada), parada como una pared.',vis:{tipo:'html',html:planoSVG({max:M,origen:true})+leyendaPlano()}}];};
+  } else if(tipo==='en-x'||tipo==='en-y'){
+    var k=rnd(1,M),pt=tipo==='en-x'?[k,0]:[0,k];
+    var ds=barajar([k-1,k+1,k+2].filter(function(v){return v>=0&&v<=M&&v!==k;})).slice(0,2);
+    var m2=mezclarOps([k].concat(ds).map(function(v){return {t:String(v),voz:numPalabra(v)};}),0);
+    p.ops=m2.ops;p.ok=m2.ok;p.consigna='¿Qué número marca el punto A en el eje '+(tipo==='en-x'?'X':'Y')+'?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M,puntos:[{x:pt[0],y:pt[1],et:'A',cls:'meta'}]}));p.voz=p.consigna;
+    p.final='El punto A está en el '+k+' del eje '+(tipo==='en-x'?'X':'Y')+'.';
+    p.pista=function(){return 'Cuenta las rayitas desde el 0.';};
+    p.explicar=function(){return [{texto:'Contamos desde el 0 por el eje '+(tipo==='en-x'?'X, hacia la derecha':'Y, hacia arriba')+': llegamos al '+k+'.',voz:'Contamos desde el cero.',vis:{tipo:'html',html:planoSVG({max:M,origen:true,camino:tipo==='en-x'?[k,0]:[0,k],puntos:[{x:pt[0],y:pt[1],et:'A',cls:'meta'}]})},anim:{tipo:'resaltar',sel:'.paso',voces:range(1,k+1).map(numPalabra),acumular:true}}];};
+  } else if(tipo==='origen'){
+    var m3=mezclarOps([{t:'El origen',voz:'origen'},{t:'El eje X',voz:'eje equis'},{t:'El eje Y',voz:'eje ye'},{t:'Un vértice',voz:'vertice'}],0);
+    p.ops=m3.ops;p.ok=m3.ok;p.lista=true;p.consigna='¿Cómo se llama el punto (0, 0), donde se cruzan los ejes?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M,origen:true}));p.voz='¿Cómo se llama el punto donde se cruzan los dos ejes?';
+    p.final='Se llama origen. Sus coordenadas son (0, 0). Desde ahí empezamos a contar.';
+    p.pista=function(){return 'Es el punto donde todo empieza.';};
+    p.explicar=function(){return [{texto:'El punto donde se cruzan el eje X y el eje Y se llama origen. Sus coordenadas son (0, 0). Siempre empezamos a contar desde ahí.',vis:{tipo:'html',html:planoSVG({max:M,origen:true})}}];};
+  } else if(tipo==='leer'||tipo==='figura-leer'){
+    var xy,pts,poli=null,et='A';
+    if(tipo==='leer'){xy=puntoAleatorio(M,0);if(xy[0]===0&&xy[1]===0)xy=[rnd(1,M),rnd(1,M)];pts=[{x:xy[0],y:xy[1],et:'A',cls:'meta'}];}
+    else{var f=figura(M);poli=f.v;var ix=rnd(0,f.v.length-1);xy=f.v[ix];et=f.et[ix];pts=f.v.map(function(v,i){return {x:v[0],y:v[1],et:f.et[i],cls:i===ix?'meta':''};});}
+    var m4=opsCoordenadas(xy[0],xy[1],M);
+    p.ops=m4.ops;p.ok=m4.ok;p.consigna=tipo==='leer'?'¿Cuáles son las coordenadas del punto A?':'¿Cuáles son las coordenadas del vértice '+et+'?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M,puntos:pts,poligono:poli})+leyendaPlano());p.voz=p.consigna;
+    p.xy=xy;p.final='El punto '+et+' está en '+par(xy[0],xy[1])+': '+xy[0]+' a la derecha y '+xy[1]+' hacia arriba.';
+    p.pista=function(i){var g=p.ops[i]&&p.ops[i].xy;var d=g?diagnostico(xy[0],xy[1],g[0],g[1]):null;if(d)errPlano(d.tipo);return (d?d.txt+' ':'')+'Primero cuenta hacia la derecha (X) y después hacia arriba (Y).';};
+    p.explicar=function(){var g=S.ultimaEleccion!=null&&p.ops[S.ultimaEleccion]?p.ops[S.ultimaEleccion].xy:null,d=g?diagnostico(xy[0],xy[1],g[0],g[1]):null;if(d)errPlano(d.tipo);return pasosCamino(M,xy[0],xy[1],d?d.txt:'');};
+  } else if(tipo==='mover'){
+    var a=[rnd(0,M-4),rnd(0,M-4)],dx=rnd(1,3),dy=rnd(1,3),izq=a[0]>=dx+1&&Math.random()<.4,baja=a[1]>=dy+1&&Math.random()<.3;
+    if(!izq&&a[0]+dx>M)izq=true;var bx=izq?a[0]-dx:a[0]+dx,by=baja?a[1]-dy:a[1]+dy;bx=Math.max(0,Math.min(M,bx));by=Math.max(0,Math.min(M,by));
+    var m5=opsCoordenadas(bx,by,M);
+    var orden=(izq?dx+' a la izquierda':dx+' a la derecha')+' y '+(baja?dy+' hacia abajo':dy+' hacia arriba');
+    p.ops=m5.ops;p.ok=m5.ok;p.consigna='El robot está en '+par(a[0],a[1])+'. Se mueve '+orden+'. ¿Dónde queda?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M,puntos:[{x:a[0],y:a[1],et:'Robot',cls:'meta'}]}));p.voz=p.consigna;
+    p.final='Queda en '+par(bx,by)+'.';
+    p.pista=function(){return 'A la derecha se suma al primer número; a la izquierda se resta. Arriba se suma al segundo; abajo se resta.';};
+    p.explicar=function(){return [{texto:'Primer número: '+a[0]+(izq?' − ':' + ')+dx+' = '+bx+'. Segundo número: '+a[1]+(baja?' − ':' + ')+dy+' = '+by+'. El robot queda en '+par(bx,by)+'.',vis:{tipo:'html',html:planoSVG({max:M,puntos:[{x:a[0],y:a[1],et:'Inicio'},{x:bx,y:by,et:par(bx,by),cls:'meta'}]})}}];};
+  } else if(tipo==='patron'){
+    var sx=rnd(0,2),sy=rnd(0,2),px=rnd(1,2),py=rnd(1,2);while(sx+3*px>M||sy+3*py>M){px=1;py=1;if(sx+3>M)sx=0;if(sy+3>M)sy=0;}
+    var serie=[0,1,2].map(function(i){return [sx+i*px,sy+i*py];}),sig=[sx+3*px,sy+3*py];
+    var m6=opsCoordenadas(sig[0],sig[1],M);
+    p.ops=m6.ops;p.ok=m6.ok;p.consigna='Los puntos siguen un patrón: '+serie.map(function(q){return par(q[0],q[1]);}).join(', ')+'. ¿Cuál es el siguiente?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M,puntos:serie.map(function(q,i){return {x:q[0],y:q[1],et:String.fromCharCode(65+i)};})}));p.voz='Los puntos siguen un patrón. ¿Cuál es el siguiente?';
+    p.final='El patrón suma '+px+' al primer número y '+py+' al segundo: el siguiente es '+par(sig[0],sig[1])+'.';
+    p.pista=function(){return 'Mira cuánto cambia el primer número de un punto al otro, y cuánto cambia el segundo.';};
+    p.explicar=function(){return [{texto:'El primer número va '+serie.map(function(q){return q[0];}).join(', ')+': suma '+px+'. El segundo va '+serie.map(function(q){return q[1];}).join(', ')+': suma '+py+'. El siguiente es '+par(sig[0],sig[1])+'.',vis:{tipo:'html',html:planoSVG({max:M,puntos:serie.map(function(q,i){return {x:q[0],y:q[1],et:String.fromCharCode(65+i)};}).concat([{x:sig[0],y:sig[1],et:'D',cls:'meta'}])})}}];};
+  } else {
+    /* ubicar / figura-ubicar: el niño mueve el cursor desde el origen */
+    var obj,f2=null,ptsU=[];
+    if(tipo==='ubicar'){obj=puntoAleatorio(M,0);if(obj[0]===0&&obj[1]===0)obj=[rnd(1,M),rnd(1,M)];}
+    else{f2=figura(M,true);obj=f2.v[3];ptsU=f2.v.slice(0,3).map(function(v,i){return {x:v[0],y:v[1],et:f2.et[i]};});}
+    return {tipo:'plano',plano:tipo,gemelo:true,max:M,obj:obj,puntos:ptsU,fig:f2,
+      consigna:tipo==='ubicar'?'Ubica el punto '+par(obj[0],obj[1])+'.':'Ubica el vértice D para completar el rectángulo ABCD.',
+      titulo:tipo==='ubicar'?'Ubica el punto '+par(obj[0],obj[1]):'Completa el rectángulo: ubica el vértice D',
+      voz:tipo==='ubicar'?'Ubica el punto '+obj[0]+' '+obj[1]+'. Empieza en el origen.':'Ubica el vértice D para completar el rectángulo.',
+      final:'Llegaste a '+par(obj[0],obj[1])+'.',
+      pista:function(){return 'Mueve primero a la derecha (X) y después hacia arriba (Y).';},
+      explicar:function(){var d=S.cursorFallo?diagnostico(obj[0],obj[1],S.cursorFallo[0],S.cursorFallo[1]):null;
+        if(tipo==='figura-ubicar'){var L3=[{texto:'En un rectángulo, D está alineado con los otros vértices: tiene el mismo primer número que '+f2.et[2]+' y el mismo segundo número que '+f2.et[0]+'. Por eso D es '+par(obj[0],obj[1])+'.',vis:{tipo:'html',html:planoSVG({max:M,poligono:f2.v,puntos:f2.v.map(function(v,i){return {x:v[0],y:v[1],et:f2.et[i]+' '+par(v[0],v[1]),cls:i===3?'meta':''};})})}}];return L3.concat(pasosCamino(M,obj[0],obj[1],''));}
+        return pasosCamino(M,obj[0],obj[1],d?d.txt:'');}};
+  }
+  return p;
+};
+/* Rectángulos alineados con la cuadrícula; ordenados A (abajo izq), B (abajo der), C (arriba der), D (arriba izq) */
+function figura(M,paraUbicar){
+  var w=rnd(2,Math.min(5,M-1)),h=rnd(2,Math.min(4,M-1)),x0=rnd(0,M-w),y0=rnd(0,M-h);
+  var v=[[x0,y0],[x0+w,y0],[x0+w,y0+h],[x0,y0+h]];
+  if(!paraUbicar&&Math.random()<.4){v=[[x0,y0],[x0+w,y0],[x0+Math.round(w/2),y0+h]];return {v:v,et:['A','B','C']};}
+  return {v:v,et:['A','B','C','D']};
+}
+function pantallaPlano(p){
+  modoJuego='lectura';animTok++;S.cur=[0,0];S.cursorFallo=null;
+  var M=p.max;
+  function pintar(){
+    var box=$('#plano-box',pantalla);
+    box.innerHTML=cartulina(planoSVG({max:M,origen:true,puntos:p.puntos,poligono:p.fig?p.fig.v.slice(0,3):null,cursor:S.cur,clic:true}));
+    $('#pos',pantalla).innerHTML='Estás en '+parHTML(S.cur[0],S.cur[1]);
+    S.tituloTel=p.titulo+' · Estás en '+par(S.cur[0],S.cur[1]);
+    $$('.nodo',pantalla).forEach(function(nd){nd.addEventListener('click',function(){S.cur=[+nd.dataset.x,+nd.dataset.y];pintar();});});
+  }
+  pantalla.innerHTML='<div class="lec plano-juego"><section class="lec-estimulo">'+cabezaLec(p)+'<div id="plano-box"></div></section>'+
+    '<section class="lec-resp"><p class="pregunta">'+esc(p.consigna).replace(/\((\d+), (\d+)\)/,function(_,a,b){return parHTML(a,b);})+'</p><p class="pos" id="pos" aria-live="polite"></p>'+
+    '<div class="cruz" role="group" aria-label="Mover el punto">'+
+      '<button type="button" data-nav class="btn mueve" id="b-arriba" aria-label="Arriba">↑ Arriba</button>'+
+      '<button type="button" data-nav class="btn mueve" id="b-izq" aria-label="Izquierda">← Izquierda</button>'+
+      '<button type="button" data-nav class="btn btn-tiza" id="b-marcar">Marcar aquí</button>'+
+      '<button type="button" data-nav class="btn mueve" id="b-der" aria-label="Derecha">Derecha →</button>'+
+      '<button type="button" data-nav class="btn mueve" id="b-abajo" aria-label="Abajo">↓ Abajo</button></div>'+
+    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+btnL('b-origen','Volver al origen')+btnL('b-como','Pista')+btnL('b-pausa','Pausa')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+  function mover(dx,dy){if(S.bloqueado)return;var nx=S.cur[0]+dx,ny=S.cur[1]+dy;if(nx<0||ny<0||nx>M||ny>M){aviso('Hasta ahí llega el plano.',false);return;}S.cur=[nx,ny];pintar();decir(dx?numPalabra(nx):numPalabra(ny));}
+  on('#b-der',function(){mover(1,0);});on('#b-izq',function(){mover(-1,0);});on('#b-arriba',function(){mover(0,1);});on('#b-abajo',function(){mover(0,-1);});
+  on('#b-origen',function(){S.cur=[0,0];pintar();});
+  on('#b-marcar',marcarPlano);on('#b-oir',function(){decir(p.voz);});on('#b-como',ejemplo);on('#b-pausa',pausar);on('#b-salir',volverJuegos);
+  alVolver=volverJuegos;
+  S.oyente=function(alts){var s=normal(alts[0]||'');var n=leerNumero(s);n=n===null?1:Math.min(n,M);
+    if(/derecha/.test(s)){for(var i=0;i<n;i++)mover(1,0);return 'Derecha '+n;}if(/izquierda/.test(s)){for(i=0;i<n;i++)mover(-1,0);return 'Izquierda '+n;}
+    if(/arriba|sube/.test(s)){for(i=0;i<n;i++)mover(0,1);return 'Arriba '+n;}if(/abajo|baja/.test(s)){for(i=0;i<n;i++)mover(0,-1);return 'Abajo '+n;}
+    if(/marca|aqui|listo/.test(s)){marcarPlano();return 'Marcar';}if(/origen/.test(s)){S.cur=[0,0];pintar();return 'Origen';}return null;};
+  pintar();enfocar('#b-der');decir(p.voz);
+}
+function marcarPlano(){
+  var p=S.prob;if(S.bloqueado||!p)return;var o=p.obj,c=S.cur;
+  if(c[0]===o[0]&&c[1]===o[1]){S.bloqueado=true;return acierto();}
+  var d=diagnostico(o[0],o[1],c[0],c[1]);errPlano(d.tipo);S.cursorFallo=c.slice();
+  if(S.intentos===1){S.intentos=2;var h=d.txt+' '+p.pista();aviso(h,false);decir(h);return;}
+  S.bloqueado=true;setTimeout(explicarError,600);
+}
+
+/* ======================= NÚMEROS GRANDES: lectura, escritura y tabla posicional (quinto) ======================= */
+var U30=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+var DEC10=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+var CEN10=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+function menor1000(n){if(n===100)return 'cien';var c=Math.floor(n/100),r=n%100,o=[];if(c)o.push(CEN10[c]);if(r){if(r<30)o.push(U30[r]);else{var d=Math.floor(r/10),u=r%10;o.push(DEC10[d]+(u?' y '+U30[u]:''));}}return o.join(' ');}
+function apoc(t){return /veintiuno$/.test(t)?t.replace(/veintiuno$/,'veintiún'):t.replace(/uno$/,'un');}
+function enLetras(n){if(n===0)return 'cero';var mi=Math.floor(n/1e6),ml=Math.floor(n/1000)%1000,r=n%1000,o=[];
+  if(mi)o.push(mi===1?'un millón':apoc(menor1000(mi))+' millones');if(ml)o.push(ml===1?'mil':apoc(menor1000(ml))+' mil');if(r)o.push(menor1000(r));return o.join(' ');}
+function fmtN(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ');}
+var COLS=['U','D','C','UM','DM','CM','UMi','DMi','CMi'];
+var COLN=['unidades','decenas','centenas','unidades de mil','decenas de mil','centenas de mil','unidades de millón','decenas de millón','centenas de millón'];
+function numeroNivel(n){
+  var dig=n===1?rnd(4,5):n===2?rnd(5,6):n===3?7:n===4?rnd(8,9):rnd(6,9),s=String(rnd(1,9));
+  for(var i=1;i<dig;i++)s+=n>=5&&Math.random()<.42?'0':String(rnd(0,9));
+  if(n>=5&&!/0[0-9]*[1-9]/.test(s.slice(1)))s=s.slice(0,2)+'0'+s.slice(3);
+  return +s;
+}
+function variantesNum(v){
+  var s=String(v),out=[];
+  for(var i=0;i<s.length-1;i++){if(s[i]!==s[i+1]){var t=s.split('');var a=t[i];t[i]=t[i+1];t[i+1]=a;if(t[0]!=='0')out.push(+t.join(''));}}
+  var z=s.indexOf('0',1);if(z>0)out.push(+(s.slice(0,z)+s.slice(z+1)));
+  out.push(v*10);if(s.length>4)out.push(Math.floor(v/10));
+  var k=rnd(0,s.length-1),d=+s[k];var t2=s.split('');t2[k]=String(d===9?8:d+1);out.push(+t2.join(''));
+  var u=[];out.forEach(function(x){if(x!==v&&x>0&&u.indexOf(x)<0)u.push(x);});
+  return barajar(u);
+}
+function tablaHTML(v,ncols,opts){
+  opts=opts||{};var s=v==null?'':String(v),h='<div class="tabla-pos-wrap"><table class="tabla-pos"><thead><tr>';
+  var per=[['Millones',6],['Miles',3],['Unidades',0]].filter(function(p){return p[1]<ncols;});
+  h+=per.map(function(p){return '<th colspan="3" class="per">'+p[0]+'</th>';}).join('')+'</tr><tr>';
+  for(var c=ncols-1;c>=0;c--)h+='<th class="col'+(c%3===2?' ini-per':'')+'">'+COLS[c]+'</th>';
+  h+='</tr></thead><tbody><tr>';
+  for(c=ncols-1;c>=0;c--){var d=s.length>c?s[s.length-1-c]:'';
+    if(opts.entrada)h+='<td class="'+(c%3===2?'ini-per':'')+'"><button type="button" data-nav class="slot celda-t'+(c===S.colAct?' activo':'')+'" data-c="'+c+'" aria-label="'+COLN[c]+'">'+(S.tabla[c]||'')+'</button></td>';
+    else h+='<td class="'+(c%3===2?'ini-per':'')+'"><span class="td-dig'+(d?' rl':'')+(opts.marcar===c?' on':'')+'" data-c="'+c+'">'+d+'</span></td>';}
+  return h+'</tr></tbody></table></div>';
+}
+function colsPara(v){return String(v).length>6?9:6;}
+function explicarTabla(v,extra){
+  var s=String(v),nc=colsPara(v),dig=s.split('').reverse();
+  return [
+    {texto:(extra?extra+' ':'')+'Los números se acomodan en la tabla empezando por la derecha: el último dígito va siempre en las unidades (U).',vis:{tipo:'html',html:'<p class="num-grande">'+fmtN(v)+'</p>'+tablaHTML(null,nc)}},
+    {texto:'Ponemos los dígitos de derecha a izquierda, uno en cada columna.',voz:'Ponemos los dígitos de derecha a izquierda.',vis:{tipo:'html',html:'<p class="num-grande">'+fmtN(v)+'</p>'+tablaHTML(v,nc)},anim:{tipo:'resaltar',sel:'.rl',reverso:true,acumular:true,voces:dig.map(function(d,i){return numPalabra(+d)+' en las '+COLN[i];})}},
+    {texto:'Se lee por períodos, de izquierda a derecha: '+fmtN(v)+' = «'+enLetras(v)+'».',vis:{tipo:'html',html:tablaHTML(v,nc)+'<p class="num-letras">'+esc(enLetras(v))+'</p>'}}
+  ];
+}
+LEC_GEN['grande:posicional']=function(n){
+  var tipos=[null,['tabla','valor-col','leer','escribir'],['tabla','valor-num','leer','escribir','descomponer'],['tabla','leer','periodos','escribir','valor-num','descomponer'],['tabla','leer','escribir','periodos','valor-col','descomponer'],['tabla','leer','escribir','descomponer','valor-num','periodos']][n];
+  var tipo=tipos[S.n%tipos.length],v=numeroNivel(n),s=String(v),p={tipo:'opciones',gemelo:true,lista:false,pos:tipo,v:v},m;
+  if(tipo==='tabla'){
+    return {tipo:'tabla',pos:'tabla',v:v,ncols:colsPara(v),gemelo:true,consigna:'Escribe '+fmtN(v)+' en la tabla.',titulo:'Escribe '+fmtN(v)+' en la tabla',
+      voz:'Escribe el número '+enLetras(v)+' en la tabla. Empieza por las unidades, a la derecha.',final:fmtN(v)+': '+enLetras(v)+'.',
+      pista:function(){return 'Empieza por la derecha: el último dígito va en las unidades (U).';},
+      explicar:function(){var e=S.errTabla||'';return explicarTabla(v,e);}};
+  }
+  if(tipo==='leer'){
+    var ds=variantesNum(v).slice(0,3);m=mezclarOps([v].concat(ds).map(function(x){return {t:enLetras(x),voz:enLetras(x)};}),0);
+    p.lista=true;p.consigna='¿Cómo se lee este número?';p.titulo='¿Cómo se lee '+fmtN(v)+'?';
+    p.estimulo=cartulina('<p class="num-grande">'+fmtN(v)+'</p>');p.voz='¿Cómo se lee este número? Lee las opciones con calma.';
+    p.final=fmtN(v)+' se lee: '+enLetras(v)+'.';p.finalVoz='Correcto.';
+    p.pista=function(){return 'Separa en períodos de tres desde la derecha y lee primero los millones, después los miles y al final las unidades.';};
+    p.explicar=function(){return explicarTabla(v,'');};
+  } else if(tipo==='escribir'){
+    var ds2=variantesNum(v).slice(0,3);m=mezclarOps([v].concat(ds2).map(function(x){return {t:fmtN(x),voz:String(x)};}),0);
+    p.consigna='¿Qué número es?';p.titulo=enLetras(v);
+    p.estimulo=cartulina('<p class="num-letras">'+esc(cap(enLetras(v)))+'</p>');p.voz=enLetras(v)+'. ¿Qué número es?';
+    p.final=cap(enLetras(v))+' se escribe '+fmtN(v)+'.';p.finalVoz='Correcto.';
+    p.pista=function(){return 'Ojo con los ceros: cada período tiene tres lugares. Si un lugar está vacío, se escribe 0.';};
+    p.explicar=function(){return explicarTabla(v,'');};
+  } else if(tipo==='valor-col'||tipo==='valor-num'){
+    var idx=[];for(var i=0;i<s.length;i++)if(s[i]!=='0')idx.push(i);var k=pick(idx),d=+s[k],pos=s.length-1-k;
+    var marca='<p class="num-grande">'+s.split('').map(function(c,i){return (i===k?'<span class="resalta">'+c+'</span>':c)+((s.length-1-i)%3===0&&i<s.length-1?' ':'');}).join('')+'</p>';
+    if(tipo==='valor-col'){
+      var cs=[pos].concat(barajar([pos-1,pos+1,pos+2,pos-2].filter(function(x){return x>=0&&x<9&&x!==pos;})).slice(0,3));
+      m=mezclarOps(cs.map(function(c){return {t:cap(COLN[c])+' ('+COLS[c]+')',voz:COLN[c]};}),0);p.lista=true;
+      p.consigna='¿En qué columna está el '+d+' marcado?';p.titulo='En '+fmtN(v)+', ¿en qué columna está el '+d+' marcado?';
+    } else {
+      var vs=[pos].concat(barajar([pos-1,pos+1,pos-2,pos+2].filter(function(x){return x>=0&&x<9&&x!==pos;})).slice(0,3));
+      m=mezclarOps(vs.map(function(c){return {t:fmtN(d*Math.pow(10,c)),voz:String(d*Math.pow(10,c))};}),0);
+      p.consigna='¿Cuánto vale el '+d+' marcado?';p.titulo='En '+fmtN(v)+', ¿cuánto vale el '+d+' marcado?';
+    }
+    p.estimulo=cartulina(marca);p.voz=p.consigna;
+    p.final='El '+d+' está en las '+COLN[pos]+': vale '+fmtN(d*Math.pow(10,pos))+'.';p.finalVoz='Correcto.';
+    p.pista=function(){return 'Cuenta las columnas desde la derecha: U, D, C, UM, DM, CM…';};
+    p.explicar=function(){return [{texto:'Contamos desde la derecha: el '+d+' está en las '+COLN[pos]+' ('+COLS[pos]+'). Por eso vale '+fmtN(d*Math.pow(10,pos))+'.',vis:{tipo:'html',html:marca+tablaHTML(v,colsPara(v),{marcar:pos})}}];};
+  } else if(tipo==='descomponer'){
+    var partes=[];for(var j=0;j<s.length;j++)if(s[j]!=='0')partes.push({d:+s[j],p:s.length-1-j});
+    var txt=function(ps){return ps.map(function(q){return fmtN(q.d*Math.pow(10,q.p));}).join(' + ');};
+    var mal=[];for(var t=0;t<6&&mal.length<3;t++){var cp=partes.map(function(q){return {d:q.d,p:q.p};});var r=rnd(0,cp.length-1);cp[r].p+=Math.random()<.5?1:-1;if(cp[r].p<0)cp[r].p=1;var tx=txt(cp);if(tx!==txt(partes)&&mal.indexOf(tx)<0)mal.push(tx);}
+    m=mezclarOps([txt(partes)].concat(mal).map(function(x){return {t:x,voz:x};}),0);p.lista=true;
+    p.consigna='¿Cuál es la descomposición de '+fmtN(v)+'?';p.titulo=p.consigna;
+    p.estimulo=cartulina('<p class="num-grande">'+fmtN(v)+'</p>');p.voz=p.consigna;
+    p.final=fmtN(v)+' = '+txt(partes)+'.';p.finalVoz='Correcto.';
+    p.pista=function(){return 'Cada dígito vale según su columna: el de las decenas vale diez veces, el de las centenas cien veces…';};
+    p.explicar=function(){return [{texto:'Cada dígito vale según su columna. '+fmtN(v)+' = '+txt(partes)+'.',vis:{tipo:'html',html:tablaHTML(v,colsPara(v))+'<p class="num-letras">'+txt(partes)+'</p>'}}];};
+  } else {
+    var raw=s,ok=fmtN(v),mal2=[];
+    [function(){return raw.replace(/(\d{3})(?=\d)/g,'$1 ').trim();},function(){return raw.slice(0,2)+' '+raw.slice(2,5)+' '+raw.slice(5);},function(){return raw.slice(0,4)+' '+raw.slice(4);},function(){return raw.replace(/\B(?=(\d{2})+(?!\d))/g,' ');}].forEach(function(f){var x=f().replace(/\s+/g,' ').trim();if(x!==ok&&mal2.indexOf(x)<0)mal2.push(x);});
+    m=mezclarOps([ok].concat(mal2.slice(0,3)).map(function(x){return {t:x,voz:x};}),0);
+    p.consigna='¿Cómo se separa en períodos?';p.titulo='¿Cómo se separa '+raw+' en períodos?';
+    p.estimulo=cartulina('<p class="num-grande">'+raw+'</p>');p.voz='¿Cómo se separa este número en períodos?';
+    p.final='Se separa de tres en tres desde la derecha: '+ok+'.';p.finalVoz='Correcto.';
+    p.pista=function(){return 'Cuenta tres cifras desde la derecha y deja un espacio; luego otras tres.';};
+    p.explicar=function(){return [{texto:'Contamos de tres en tres desde la derecha: unidades, miles, millones. Queda '+ok+'.',vis:{tipo:'html',html:'<p class="num-grande">'+ok+'</p>'+tablaHTML(v,colsPara(v))}}];};
+  }
+  p.ops=m.ops;p.ok=m.ok;return p;
+};
+function pantallaTabla(p){
+  modoJuego='lectura';animTok++;S.tabla={};S.colAct=0;S.errTabla='';
+  function pintar(){
+    $('#tabla-box',pantalla).innerHTML=tablaHTML(null,p.ncols,{entrada:true});
+    $$('.celda-t',pantalla).forEach(function(b){b.addEventListener('click',function(){S.colAct=+b.dataset.c;pintar();enfocar('.tecla[data-d="1"]');});});
+  }
+  var teclas=[1,2,3,4,5,6,7,8,9,0].map(function(d){return '<button type="button" data-nav class="tecla" data-d="'+d+'">'+d+'</button>';}).join('')+
+    '<button type="button" data-nav class="tecla borrar" id="b-borrar">Borrar</button><button type="button" data-nav class="tecla comprobar" id="b-comprobar">Comprobar</button>';
+  pantalla.innerHTML='<div class="lec tabla-juego"><section class="lec-estimulo">'+cabezaLec(p)+'<p class="num-grande en-pizarra">'+fmtN(p.v)+'</p><p class="consigna-lec">Empieza por la derecha: el último dígito va en las unidades (U).</p><div id="tabla-box"></div></section>'+
+    '<section class="lec-resp"><div class="teclado" role="group" aria-label="Teclado de números">'+teclas+'</div>'+
+    '<div class="fila-botones lec-botones">'+btnL('b-oir','Oír otra vez')+btnL('b-como','Pista')+btnL('b-pausa','Pausa')+btnL('b-salir','Salir',false,'btn-suave')+'</div></section></div>';
+  pintar();
+  $$('.tecla[data-d]',pantalla).forEach(function(b){b.addEventListener('click',function(){escribirTabla(+b.dataset.d);});});
+  on('#b-borrar',borrarTabla);on('#b-comprobar',comprobarTabla);on('#b-oir',function(){decir(p.voz);});on('#b-como',ejemplo);on('#b-pausa',pausar);on('#b-salir',volverJuegos);
+  alVolver=volverJuegos;
+  S.oyente=function(alts){var v=leerNumero(alts[0]||'');if(v===null)return null;String(v).split('').reverse().forEach(function(d,i){S.tabla[i]=d;});S.colAct=String(v).length;pintar();comprobarTabla();return 'Número: '+fmtN(v);};
+  S.pintarTabla=pintar;enfocar('.tecla[data-d="1"]');decir(p.voz);
+}
+function escribirTabla(d){if(S.bloqueado)return;var nc=S.prob.ncols;if(S.colAct>=nc){aviso('Ya no hay más columnas. Revisa o presiona Comprobar.',false);return;}S.tabla[S.colAct]=String(d);S.colAct=Math.min(S.colAct+1,nc);S.pintarTabla();}
+function borrarTabla(){if(S.bloqueado)return;var c=S.tabla[S.colAct]?S.colAct:S.colAct-1;if(c<0)return;delete S.tabla[c];S.colAct=c;S.pintarTabla();}
+function comprobarTabla(){
+  var p=S.prob;if(S.bloqueado||!p)return;var s=String(p.v),nc=p.ncols,bien=true,llenas=0;
+  for(var c=0;c<nc;c++){var esp=c<s.length?s[s.length-1-c]:'';if((S.tabla[c]||'')!==esp)bien=false;if(S.tabla[c])llenas++;}
+  if(bien){S.bloqueado=true;return acierto();}
+  var izq=true;for(c=0;c<s.length;c++){if((S.tabla[nc-1-c]||'')!==s[c])izq=false;}
+  var msg=izq?'Empezaste por la izquierda. En la tabla los números se acomodan desde la derecha: el último dígito va en las unidades.':llenas!==s.length?'El número tiene '+s.length+' dígitos y escribiste '+llenas+'. Un dígito en cada columna.':'Algunos dígitos están en otra columna. Revisa de derecha a izquierda.';
+  S.errTabla=msg;if(izq)errPlano('tabla-izquierda');
+  if(S.intentos===1){S.intentos=2;aviso(msg,false);decir(msg);S.tabla={};S.colAct=0;S.pintarTabla();return;}
+  S.bloqueado=true;setTimeout(explicarError,600);
+}
+
 /* ---------- Celular como control y micrófono ----------
    La tele abre una "sala" con un código. El celular se conecta directo (WebRTC) usando PeerJS.
    Para usar un servidor propio de PeerJS: abre la página con ?peer=host:puerto */
@@ -2199,7 +2607,9 @@ var COMANDOS=[
   {p:/despacio/,sel:['#b-lento']},
   {p:/rapido/,sel:['#b-rapido']},
   {p:/pregunta/,sel:['#b-sig']},
-  {p:/volver/,sel:['#b-volver']}
+  {p:/volver/,sel:['#b-volver']},
+  {p:/pausa|descanso/,sel:['#b-pausa']},
+  {p:/seguir/,sel:['#b-seguir']}
 ];
 function pulsar(el){enfocar(el);el.click();}
 function procesarVoz(t){
@@ -2224,7 +2634,7 @@ function recibir(m,c){
   }
 }
 
-if(/[?&]prueba/.test(location.search))window.__PZ={VOZ:VOZ,pantallaAbc:pantallaAbc,practicarLetra:practicarLetra,leccionLetra:leccionLetra,ABCX:ABCX,S:S,D:function(){return DATOS;},LEC_GEN:LEC_GEN,crearLec:crearLec,mostrarLec:mostrarLec,iniciarMision:iniciarMision,nuevoTurno:nuevoTurno,pantallaExplicacion:pantallaExplicacion,pantallaJuegos:pantallaJuegos,elegirLec:elegirLec};
+if(/[?&]prueba/.test(location.search))window.__PZ={enLetras:enLetras,pausar:pausar,VOZ:VOZ,pantallaAbc:pantallaAbc,practicarLetra:practicarLetra,leccionLetra:leccionLetra,ABCX:ABCX,S:S,D:function(){return DATOS;},LEC_GEN:LEC_GEN,crearLec:crearLec,mostrarLec:mostrarLec,iniciarMision:iniciarMision,nuevoTurno:nuevoTurno,pantallaExplicacion:pantallaExplicacion,pantallaJuegos:pantallaJuegos,elegirLec:elegirLec};
 iniciarPuente();
 pantallaInicio();
 })();

@@ -559,5 +559,5 @@ grande: [
 },
 
 /* Íconos de las tarjetas del menú */
-iconos: {cuaderno:'📒', regletas:'📏', abecedario:'🔤', silabas:'🐝', armar:'🧩', leer:'👀', rimas:'🎵', adivinanzas:'🤔', cuentos:'📖', trabalenguas:'👅', comprension:'📚', refranes:'🦉', ortografia:'✏️', vocabulario:'🔤', oraciones:'🧩'}
+iconos: {posicional:'🔢', plano:'🗺️', cuaderno:'📒', regletas:'📏', abecedario:'🔤', silabas:'🐝', armar:'🧩', leer:'👀', rimas:'🎵', adivinanzas:'🤔', cuentos:'📖', trabalenguas:'👅', comprension:'📚', refranes:'🦉', ortografia:'✏️', vocabulario:'🔤', oraciones:'🧩'}
 };

@@ -23,6 +23,13 @@ Cada juego tiene 5 niveles. El nivel sube con 3 aciertos seguidos y baja si fall
 | Cuentos | Cuentos cortos: la profe lee resaltando cada palabra y luego hace preguntas. Con el celular pueden leer ellos y el juego revisa qué palabras dijeron. |
 | Trabalenguas | Escuchan despacio y rápido, y luego lo dicen al micrófono. |
 
+**Números para quinto:** además de las cuatro operaciones:
+
+- **Números grandes:** tabla posicional (CMi DMi UMi | CM DM UM | C D U) que se llena empezando por las unidades, lectura y escritura en letras, valor de cada cifra, descomposición y separación en períodos. Si empieza a llenar la tabla por la izquierda, el juego lo detecta y lo explica.
+- **Plano cartesiano:** ejes y origen, leer coordenadas, ubicar puntos moviéndose desde el origen (primero a la derecha por X, después hacia arriba por Y), vértices de figuras, movimientos y patrones. Si pone los números al revés, lo detecta y lo cuenta en Progreso.
+
+**Apoyos (en Progreso):** modo tranquilo sin movimientos, el plan de la sesión antes de empezar, avanzar solo con el botón y una pausa disponible en cada ejercicio. En quinto vienen activados.
+
 **Letras para quinto de básica**
 
 | Juego | Qué practica |
