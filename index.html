@@ -470,6 +470,38 @@ body.tranquilo .opcion:focus,body.tranquilo .opcion:hover,body.tranquilo .tarjet
 .tabla-pos .td-dig.on{background:var(--resalte)}
 .tabla-pos .celda-t{width:clamp(36px,6.4vmin,62px);height:clamp(40px,7vmin,68px);margin:0;border:0;border-radius:0;background:transparent;color:var(--tinta);font-size:var(--t-l)}
 .tabla-pos .celda-t.activo{background:rgba(255,211,90,.45);box-shadow:inset 0 0 0 3px #b28704}
+
+/* ---------- Ángulos y reloj ---------- */
+.angulo,.reloj{width:100%;height:auto;max-height:min(58vh,100%);display:block;font-family:var(--f-titulo)}
+.reloj{max-width:min(46vh,100%);margin-inline:auto}
+.angulo .fondo{fill:var(--papel)}
+.angulo .transp{fill:rgba(30,136,229,.08);stroke:var(--tinta-sujeto);stroke-width:2}
+.angulo .tick{stroke:var(--tinta-sujeto);stroke-width:1.5}
+.angulo .num-ext{fill:var(--tinta-sujeto);font-size:11px;font-weight:800;text-anchor:middle}
+.angulo .num-int{fill:#9aa59f;font-size:9px;font-weight:600;text-anchor:middle}
+.angulo .sec{fill:rgba(255,211,90,.0);transition:fill .2s ease}
+.angulo .sec.on{fill:rgba(255,190,40,.55)}
+.angulo .rayo{stroke:var(--tinta);stroke-width:4;stroke-linecap:round}
+.angulo .rayo.medio{stroke-dasharray:7 5}
+.angulo .vertice{fill:var(--tinta)}
+.angulo .arco{fill:none;stroke:#e65100;stroke-width:4}
+.angulo .arco.p1{stroke:var(--tinta-falta)}
+.angulo .et-ang{fill:#e65100;font-size:15px;font-weight:800;text-anchor:middle;paint-order:stroke;stroke:var(--papel);stroke-width:4px}
+.angulo .et-ang.p1{fill:var(--tinta-falta)}
+.angulo .recto{fill:none;stroke:#e65100;stroke-width:4}
+.angulo .ref90{stroke:var(--tinta-suave);stroke-width:3;stroke-dasharray:6 6}
+.reloj .esfera{fill:var(--papel);stroke:var(--tinta);stroke-width:5}
+.reloj .t1{stroke:#b9b09a;stroke-width:1.5}.reloj .t5{stroke:var(--tinta);stroke-width:3}
+.reloj .hnum{fill:var(--tinta);font-size:19px;font-weight:800;text-anchor:middle;transition:fill .2s ease}
+.reloj .hnum.on,.reloj .hnum.cnt{fill:var(--tinta-sujeto)}
+.reloj .aguja-h{stroke:var(--tinta-falta);stroke-width:8;stroke-linecap:round}
+.reloj .aguja-m{stroke:var(--tinta-sujeto);stroke-width:5;stroke-linecap:round}
+.reloj .eje-r{fill:var(--tinta)}
+.leyenda-reloj{margin:.2em 0 0;font-family:var(--f-titulo);font-weight:700;display:flex;gap:1.2em;justify-content:center}
+.leyenda-reloj .ch{color:var(--tinta-falta)}.leyenda-reloj .cm{color:var(--tinta-sujeto)}
+.tramos{display:flex;flex-direction:column;gap:.5em;align-items:center}
+.tramos .sil{font-size:var(--t-m)}
+.cartulina .dib-chica{width:clamp(34px,7vmin,64px)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -513,10 +545,10 @@ var CHECK='<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M8 44 L36 70 L9
 
 var PERFILES={
   peque:{nombre:'Peque',grado:'Primero de básica',ops:['contar','sumar','restar','regletas'],lect:['cuaderno','silabas','armar','leer','rimas','adivinanzas','cuentos','trabalenguas'],mision:6,resumen:'Números con objetos, sílabas, palabras y cuentos'},
-  grande:{nombre:'Grande',grado:'Quinto de básica',ops:['sumar','restar','multiplicar','dividir','posicional','plano'],lect:['comprension','refranes','ortografia','vocabulario','oraciones','adivinanzas','trabalenguas'],mision:8,resumen:'Las cuatro operaciones, lectura y ortografía'}
+  grande:{nombre:'Grande',grado:'Quinto de básica',ops:['sumar','restar','multiplicar','dividir','posicional','plano','angulos','tiempo'],lect:['comprension','refranes','ortografia','vocabulario','oraciones','adivinanzas','trabalenguas'],mision:8,resumen:'Las cuatro operaciones, lectura y ortografía'}
 };
 var OPS={contar:{nombre:'Contar',simbolo:'123'},sumar:{nombre:'Sumar',simbolo:'+'},restar:{nombre:'Restar',simbolo:'−'},multiplicar:{nombre:'Multiplicar',simbolo:'×'},dividir:{nombre:'Dividir',simbolo:'÷'},
-  plano:{nombre:'Plano cartesiano',lec:1},posicional:{nombre:'Números grandes',lec:1},cuaderno:{nombre:'Mi cuaderno',lec:1},regletas:{nombre:'Forma el número',lec:1},
+  plano:{nombre:'Plano cartesiano',lec:1},posicional:{nombre:'Números grandes',lec:1},angulos:{nombre:'Ángulos',lec:1},tiempo:{nombre:'Medidas de tiempo',lec:1},cuaderno:{nombre:'Mi cuaderno',lec:1},regletas:{nombre:'Forma el número',lec:1},
   silabas:{nombre:'¿Con qué empieza?',lec:1},armar:{nombre:'Arma la palabra',lec:1},leer:{nombre:'Lee y busca',lec:1},rimas:{nombre:'Rimas',lec:1},adivinanzas:{nombre:'Adivinanzas',lec:1},cuentos:{nombre:'Cuentos',lec:1},trabalenguas:{nombre:'Trabalenguas',lec:1},
   comprension:{nombre:'Lectura',lec:1},refranes:{nombre:'Refranes y dichos',lec:1},ortografia:{nombre:'Ortografía',lec:1},vocabulario:{nombre:'Vocabulario',lec:1},oraciones:{nombre:'Ordena la oración',lec:1}};
 var DESC={
@@ -539,6 +571,8 @@ var DESC={
     multiplicar:['Tablas del 2, 3, 4, 5 y 10','Tablas del 6 al 9','Dos cifras por una','Dos cifras por 6, 7, 8 o 9','Tres cifras por una'],
     dividir:['Repartir: tablas del 2 al 5','Repartir: tablas del 6 al 9','Dos cifras entre una','Tres cifras entre una','Tres cifras entre 6, 7, 8 o 9'],
     posicional:['Hasta decenas de mil','Hasta centenas de mil','Millones','Decenas y centenas de millón','Con ceros en el medio'],
+    angulos:['Tipos de ángulos','Medir de 10 en 10','Medir de 5 en 5','Sumar ángulos','Ángulos que faltan'],
+    tiempo:['Reloj y equivalencias','Reloj de 5 en 5 y conversiones','Horas y minutos','Duración de una etapa','Sumar tiempos'],
     plano:['Ejes y origen','Leer coordenadas','Ubicar puntos','Figuras en el plano','Movimientos y patrones'],
     comprension:['Cuentos e informativos cortos','Fábulas e instructivos','Leyendas y fábulas','Ecuador y cartas','Textos más largos'],
     refranes:['Dichos y expresiones','Refranes fáciles','Refranes difíciles','Completa el refrán','¿Qué refrán va aquí?'],
@@ -1040,7 +1074,7 @@ function correrAnim(an,tok){
     return c2;
   }
   if(an.tipo==='resaltar'){
-    var els=$$(an.sel,pantalla),c4=Promise.resolve();if(an.reverso)els.reverse();
+    var els=$$(an.sel,pantalla),c4=Promise.resolve();if(an.reverso)els.reverse();if(an.limite!=null)els=els.slice(0,an.limite);
     els.forEach(function(el,i){c4=c4.then(function(){if(!vivo())return;if(!an.acumular)els.forEach(function(x){x.classList.remove('on');});el.classList.add('on');return hablarP(an.voces&&an.voces[i]!=null?an.voces[i]:el.textContent.toLowerCase(),1800);});});
     return c4.then(function(){if(!vivo())return;els.forEach(function(x,i){x.classList.toggle('on',an.fin==null||i===an.fin);});if(an.final)return hablarP(an.final,3000);});
   }
@@ -1753,7 +1787,7 @@ function mostrarLec(p){
   return pantallaOpciones(p);
 }
 function pantallaOpciones(p){
-  modoJuego='lectura';animTok++;
+  modoJuego='lectura';animTok++;if(S.comodines==null)S.comodines=2;
   pantalla.innerHTML='<div class="lec'+(p.lista?' lec-lista':'')+(p.ancho?' lec-ancho':'')+'">'+
     '<section class="lec-estimulo">'+cabezaLec(p)+(p.consigna&&!p.pregunta?'<p class="consigna-lec">'+esc(p.consigna)+'</p>':'')+p.estimulo+'</section>'+
     '<section class="lec-resp">'+(p.pregunta?'<p class="pregunta">'+p.pregunta+'</p>':'')+
@@ -2306,17 +2340,17 @@ LEC_GEN['grande:plano']=function(n){
     if(!izq&&a[0]+dx>M)izq=true;var bx=izq?a[0]-dx:a[0]+dx,by=baja?a[1]-dy:a[1]+dy;bx=Math.max(0,Math.min(M,bx));by=Math.max(0,Math.min(M,by));
     var m5=opsCoordenadas(bx,by,M);
     var orden=(izq?dx+' a la izquierda':dx+' a la derecha')+' y '+(baja?dy+' hacia abajo':dy+' hacia arriba');
-    p.ops=m5.ops;p.ok=m5.ok;p.consigna='El robot está en '+par(a[0],a[1])+'. Se mueve '+orden+'. ¿Dónde queda?';p.titulo=p.consigna;
-    p.estimulo=cartulina(planoSVG({max:M,puntos:[{x:a[0],y:a[1],et:'Robot',cls:'meta'}]}));p.voz=p.consigna;
+    p.ops=m5.ops;p.ok=m5.ok;p.consigna='El ciclista está en '+par(a[0],a[1])+'. Pedalea '+orden+'. ¿Dónde queda?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M,puntos:[{x:a[0],y:a[1],et:'Ciclista',cls:'meta'}]}));p.voz=p.consigna;
     p.final='Queda en '+par(bx,by)+'.';
     p.pista=function(){return 'A la derecha se suma al primer número; a la izquierda se resta. Arriba se suma al segundo; abajo se resta.';};
-    p.explicar=function(){return [{texto:'Primer número: '+a[0]+(izq?' − ':' + ')+dx+' = '+bx+'. Segundo número: '+a[1]+(baja?' − ':' + ')+dy+' = '+by+'. El robot queda en '+par(bx,by)+'.',vis:{tipo:'html',html:planoSVG({max:M,puntos:[{x:a[0],y:a[1],et:'Inicio'},{x:bx,y:by,et:par(bx,by),cls:'meta'}]})}}];};
+    p.explicar=function(){return [{texto:'Primer número: '+a[0]+(izq?' − ':' + ')+dx+' = '+bx+'. Segundo número: '+a[1]+(baja?' − ':' + ')+dy+' = '+by+'. El ciclista queda en '+par(bx,by)+'.',vis:{tipo:'html',html:planoSVG({max:M,puntos:[{x:a[0],y:a[1],et:'Inicio'},{x:bx,y:by,et:par(bx,by),cls:'meta'}]})}}];};
   } else if(tipo==='patron'){
     var sx=rnd(0,2),sy=rnd(0,2),px=rnd(1,2),py=rnd(1,2);while(sx+3*px>M||sy+3*py>M){px=1;py=1;if(sx+3>M)sx=0;if(sy+3>M)sy=0;}
     var serie=[0,1,2].map(function(i){return [sx+i*px,sy+i*py];}),sig=[sx+3*px,sy+3*py];
     var m6=opsCoordenadas(sig[0],sig[1],M);
-    p.ops=m6.ops;p.ok=m6.ok;p.consigna='Los puntos siguen un patrón: '+serie.map(function(q){return par(q[0],q[1]);}).join(', ')+'. ¿Cuál es el siguiente?';p.titulo=p.consigna;
-    p.estimulo=cartulina(planoSVG({max:M,puntos:serie.map(function(q,i){return {x:q[0],y:q[1],et:String.fromCharCode(65+i)};})}));p.voz='Los puntos siguen un patrón. ¿Cuál es el siguiente?';
+    p.ops=m6.ops;p.ok=m6.ok;p.consigna='Las paradas de la ruta siguen un patrón: '+serie.map(function(q){return par(q[0],q[1]);}).join(', ')+'. ¿Cuál es el siguiente?';p.titulo=p.consigna;
+    p.estimulo=cartulina(planoSVG({max:M,puntos:serie.map(function(q,i){return {x:q[0],y:q[1],et:String.fromCharCode(65+i)};})}));p.voz='Las paradas de la ruta siguen un patrón. ¿Cuál es la siguiente?';
     p.final='El patrón suma '+px+' al primer número y '+py+' al segundo: el siguiente es '+par(sig[0],sig[1])+'.';
     p.pista=function(){return 'Mira cuánto cambia el primer número de un punto al otro, y cuánto cambia el segundo.';};
     p.explicar=function(){return [{texto:'El primer número va '+serie.map(function(q){return q[0];}).join(', ')+': suma '+px+'. El segundo va '+serie.map(function(q){return q[1];}).join(', ')+': suma '+py+'. El siguiente es '+par(sig[0],sig[1])+'.',vis:{tipo:'html',html:planoSVG({max:M,puntos:serie.map(function(q,i){return {x:q[0],y:q[1],et:String.fromCharCode(65+i)};}).concat([{x:sig[0],y:sig[1],et:'D',cls:'meta'}])})}}];};
@@ -2519,6 +2553,168 @@ function comprobarTabla(){
   if(S.intentos===1){S.intentos=2;aviso(msg,false);decir(msg);S.tabla={};S.colAct=0;S.pintarTabla();return;}
   S.bloqueado=true;setTimeout(explicarError,600);
 }
+
+/* ======================= ÁNGULOS (quinto) — tema: la ruta del ciclista ======================= */
+var CX=180,CY=190,RT=150;
+function pol(r,g){var a=g*Math.PI/180;return [CX+r*Math.cos(a),CY-r*Math.sin(a)];}
+function anguloSVG(o){
+  var g=o.deg,h='<svg class="angulo" viewBox="0 0 360 220" role="img" aria-label="Ángulo"><rect class="fondo" x="0" y="0" width="360" height="220" rx="10"/>';
+  if(o.transp){
+    h+='<path class="transp" d="M'+(CX-RT)+' '+CY+' A'+RT+' '+RT+' 0 0 1 '+(CX+RT)+' '+CY+' Z"/>';
+    if(o.sectores){var paso=o.paso||10;for(var k=0;k<o.sectores;k+=paso){var e=Math.min(k+paso,o.sectores),p1=pol(RT,k),p2=pol(RT,e);h+='<path class="sec" d="M'+CX+' '+CY+' L'+p1[0].toFixed(1)+' '+p1[1].toFixed(1)+' A'+RT+' '+RT+' 0 0 0 '+p2[0].toFixed(1)+' '+p2[1].toFixed(1)+' Z"/>';}}
+    for(var t=0;t<=180;t+=5){var lg=t%10===0?14:8,a1=pol(RT,t),a2=pol(RT-lg,t);h+='<line class="tick" x1="'+a1[0].toFixed(1)+'" y1="'+a1[1].toFixed(1)+'" x2="'+a2[0].toFixed(1)+'" y2="'+a2[1].toFixed(1)+'"/>';
+      if(t%10===0){var q=pol(RT-26,t),q2=pol(RT-46,t);h+='<text class="num-ext" x="'+q[0].toFixed(1)+'" y="'+(q[1]+4).toFixed(1)+'">'+t+'</text>';if(t%30===0)h+='<text class="num-int" x="'+q2[0].toFixed(1)+'" y="'+(q2[1]+4).toFixed(1)+'">'+(180-t)+'</text>';}}
+  }
+  if(o.ref90){var r9=pol(165,90);h+='<line class="ref90" x1="'+CX+'" y1="'+CY+'" x2="'+r9[0]+'" y2="'+r9[1]+'"/>';}
+  if(o.partes){o.partes.forEach(function(pt,i){var a=pol(48+i*16,pt[0]),b=pol(48+i*16,pt[1]),m=pol(80,(pt[0]+pt[1])/2);h+='<path class="arco p'+i+'" d="M'+a[0].toFixed(1)+' '+a[1].toFixed(1)+' A'+(48+i*16)+' '+(48+i*16)+' 0 0 0 '+b[0].toFixed(1)+' '+b[1].toFixed(1)+'"/><text class="et-ang p'+i+'" x="'+m[0].toFixed(1)+'" y="'+(m[1]+5).toFixed(1)+'">'+(pt[2]||'')+'</text>';});}
+  else if(g>0&&g<180&&g!==90){var a0=pol(36,0),ag=pol(36,g);h+='<path class="arco" d="M'+a0[0]+' '+a0[1]+' A36 36 0 0 0 '+ag[0].toFixed(1)+' '+ag[1].toFixed(1)+'"/>';}
+  else if(g===90){h+='<path class="recto" d="M'+(CX+24)+' '+CY+' v-24 h-24"/>';}
+  else if(g===180){h+='<path class="arco" d="M'+(CX+36)+' '+CY+' A36 36 0 0 0 '+(CX-36)+' '+CY+'"/>';}
+  var r0=pol(172,0),rg=pol(172,g);
+  h+='<line class="rayo" x1="'+CX+'" y1="'+CY+'" x2="'+r0[0]+'" y2="'+r0[1]+'"/><line class="rayo" x1="'+CX+'" y1="'+CY+'" x2="'+rg[0].toFixed(1)+'" y2="'+rg[1].toFixed(1)+'"/>';
+  if(o.medio!=null){var rm=pol(172,o.medio);h+='<line class="rayo medio" x1="'+CX+'" y1="'+CY+'" x2="'+rm[0].toFixed(1)+'" y2="'+rm[1].toFixed(1)+'"/>';}
+  h+='<circle class="vertice" cx="'+CX+'" cy="'+CY+'" r="5"/>';
+  if(o.bici){var bp=pol(172,g);h+='<image href="img/1f6b4.svg" x="'+(bp[0]-16).toFixed(1)+'" y="'+(bp[1]-36).toFixed(1)+'" width="32" height="32"/>';}
+  return h+'</svg>';
+}
+function tipoAngulo(g){return g<90?'agudo':g===90?'recto':g<180?'obtuso':'llano';}
+var DEF_ANG={agudo:'mide menos de 90°: es más cerrado que la esquina de un cuaderno',recto:'mide exactamente 90°: es como la esquina de un cuaderno',obtuso:'mide más de 90° y menos de 180°: es más abierto que la esquina de un cuaderno',llano:'mide 180°: sus lados forman una línea recta'};
+function explicarMedida(g,elegido){
+  var extra=elegido===180-g&&g!==90?'Leíste la fila de números de adentro: marca '+(180-g)+'. Siempre empieza a contar desde el 0 que está en el lado del ángulo. ':'';
+  var paso=g%10===0?10:5,vs=[];for(var k=paso;k<=g;k+=paso)vs.push(String(k));
+  return [
+    {texto:extra+'Ponemos el centro del graduador en el vértice (el punto donde se juntan los lados) y un lado sobre el 0.',vis:{tipo:'html',html:anguloSVG({deg:g,transp:true})}},
+    {texto:'Contamos desde el 0 hasta el otro lado, de '+paso+' en '+paso+'.',voz:'Contamos desde el cero.',vis:{tipo:'html',html:anguloSVG({deg:g,transp:true,sectores:g,paso:paso})},anim:{tipo:'resaltar',sel:'.sec',voces:vs,acumular:true}},
+    {texto:'El ángulo mide '+g+'°. Es un ángulo '+tipoAngulo(g)+' porque '+DEF_ANG[tipoAngulo(g)]+'.',vis:{tipo:'html',html:anguloSVG({deg:g,transp:true})}}];
+}
+LEC_GEN['grande:angulos']=function(n){
+  var tipos=[null,['clasificar'],['medir','clasificar'],['medir','clasificar','medir'],['sumar-ang','medir'],['falta','sumar-ang','medir']][n];
+  var tipo=tipos[S.n%tipos.length],p={tipo:'opciones',gemelo:true,ang:tipo},m,g;
+  if(tipo==='clasificar'){
+    var cl=pick(['agudo','agudo','recto','obtuso','obtuso','llano']);
+    g=cl==='agudo'?rnd(2,8)*10:cl==='recto'?90:cl==='obtuso'?rnd(10,17)*10:180;if(n>=3&&cl!=='recto'&&cl!=='llano')g+=pick([0,5]);
+    m=mezclarOps(['agudo','recto','obtuso','llano'].map(function(x){return {t:cap(x),voz:x};}),['agudo','recto','obtuso','llano'].indexOf(cl));
+    p.consigna='La ruta del ciclista hace esta curva. ¿Qué tipo de ángulo es?';p.titulo='¿Qué tipo de ángulo es? (curva de la ruta)';
+    p.estimulo=cartulina(anguloSVG({deg:g,bici:true}));p.voz='La ruta del ciclista hace esta curva. ¿Qué tipo de ángulo es?';
+    p.final='Es '+cl+': '+DEF_ANG[cl]+'.';p.finalVoz='Correcto. Es '+cl+'.';
+    p.pista=function(){return 'Compáralo con la esquina de un cuaderno, que mide 90°. ¿Es más cerrado, igual o más abierto?';};
+    p.explicar=function(){return [{texto:'La línea de puntos marca un ángulo recto (90°), como la esquina de un cuaderno.',vis:{tipo:'html',html:anguloSVG({deg:g,ref90:true})}},{texto:'Este ángulo '+DEF_ANG[cl]+'. Por eso es '+cl+'.',vis:{tipo:'html',html:anguloSVG({deg:g,ref90:g!==90&&g!==180})}}];};
+  } else if(tipo==='medir'){
+    g=n<=2?rnd(1,17)*10:rnd(2,34)*5;if(g===90&&Math.random()<.5)g=rnd(10,17)*10;
+    var cands=[g,180-g,g+10,g-10,g+5].filter(function(x,i,a){return x>0&&x<180&&a.indexOf(x)===i;}),ds=[];
+    if(180-g!==g)ds.push(180-g);barajar(cands.slice(1)).forEach(function(x){if(ds.length<3&&ds.indexOf(x)<0&&x!==g)ds.push(x);});
+    m=mezclarOps([g].concat(ds).map(function(x){return {t:x+'°',voz:String(x),val:x};}),0);
+    p.consigna='¿Cuánto mide el ángulo?';p.titulo='¿Cuánto mide el ángulo? Usa el graduador';
+    p.estimulo=cartulina(anguloSVG({deg:g,transp:true}));p.voz='Usa el graduador. ¿Cuánto mide el ángulo?';
+    p.final='Mide '+g+'°. Es un ángulo '+tipoAngulo(g)+'.';p.finalVoz='Correcto. Mide '+g+' grados.';
+    p.pista=function(i){var v=p.ops[i]&&p.ops[i].val;return v===180-g?'Cuidado: estás leyendo la fila de números de adentro. Empieza en el 0 del lado del ángulo.':'Empieza en el 0 y sigue los números grandes hasta el otro lado.';};
+    p.explicar=function(){var v=S.ultimaEleccion!=null&&p.ops[S.ultimaEleccion]?p.ops[S.ultimaEleccion].val:null;return explicarMedida(g,v);};
+  } else if(tipo==='sumar-ang'){
+    var a=rnd(2,10)*(n>=5?5:10),b=rnd(2,8)*10;if(a+b>=180)b=170-a;g=a+b;
+    m=mezclarOps([g,g+10,g-10,Math.abs(a-b)].filter(function(x,i,ar){return x>0&&ar.indexOf(x)===i;}).map(function(x){return {t:x+'°',voz:String(x)};}),0);
+    p.consigna='El ciclista gira primero '+a+'° y después '+b+'° más. ¿Cuánto giró en total?';p.titulo=p.consigna;
+    p.estimulo=cartulina(anguloSVG({deg:g,medio:a,partes:[[0,a,a+'°'],[a,g,b+'°']]}));p.voz=p.consigna;
+    p.final=a+'° + '+b+'° = '+g+'°.';p.finalVoz='Correcto. '+g+' grados.';
+    p.pista=function(){return 'Los dos ángulos están juntos: suma sus medidas.';};
+    p.explicar=function(){return [{texto:'Cuando dos ángulos están uno junto al otro, el ángulo total es la suma: '+a+'° + '+b+'° = '+g+'°.',vis:{tipo:'html',html:anguloSVG({deg:g,medio:a,partes:[[0,a,a+'°'],[a,g,b+'°']]})}}];};
+  } else {
+    var tot=pick([90,180]),a2=rnd(2,tot===90?8:16)*(tot===90?5:10);if(a2>=tot)a2=tot-20;var b2=tot-a2;
+    m=mezclarOps([b2,b2+10,b2-10,a2].filter(function(x,i,ar){return x>0&&ar.indexOf(x)===i&&!(x===a2&&a2===b2);}).map(function(x){return {t:x+'°',voz:String(x)};}),0);
+    p.consigna='Un ángulo '+(tot===90?'recto (90°)':'llano (180°)')+' está dividido en dos. Una parte mide '+a2+'°. ¿Cuánto mide la otra?';p.titulo=p.consigna;
+    p.estimulo=cartulina(anguloSVG({deg:tot,medio:a2,partes:[[0,a2,a2+'°'],[a2,tot,'?']]}));p.voz=p.consigna;
+    p.final=tot+'° − '+a2+'° = '+b2+'°.';p.finalVoz='Correcto. '+b2+' grados.';
+    p.pista=function(){return 'Las dos partes juntas suman '+tot+'°. ¿Cuánto le falta a '+a2+' para llegar a '+tot+'?';};
+    p.explicar=function(){return [{texto:'Las dos partes juntas forman '+tot+'°. Restamos: '+tot+'° − '+a2+'° = '+b2+'°.',vis:{tipo:'html',html:anguloSVG({deg:tot,medio:a2,partes:[[0,a2,a2+'°'],[a2,tot,b2+'°']]})}}];};
+  }
+  p.ops=m.ops;p.ok=m.ok;return p;
+};
+
+/* ======================= MEDIDAS DE TIEMPO (quinto) — tema: carreras y etapas ======================= */
+function hm(h,m){return h+':'+(m<10?'0':'')+m;}
+function dur(min){var h=Math.floor(min/60),m=min%60;return (h?h+' h':'')+(h&&m?' ':'')+(m||!h?m+' min':'');}
+function relojSVG(h,m,o){
+  o=o||{};var c=110,r=96,s='<svg class="reloj" viewBox="0 0 220 220" role="img" aria-label="Reloj"><circle class="esfera" cx="'+c+'" cy="'+c+'" r="'+r+'"/>';
+  for(var i=0;i<60;i++){var a=i*6*Math.PI/180,l=i%5===0?12:5;s+='<line class="'+(i%5===0?'t5':'t1')+'" x1="'+(c+r*Math.sin(a)).toFixed(1)+'" y1="'+(c-r*Math.cos(a)).toFixed(1)+'" x2="'+(c+(r-l)*Math.sin(a)).toFixed(1)+'" y2="'+(c-(r-l)*Math.cos(a)).toFixed(1)+'"/>';}
+  for(i=1;i<=12;i++){var b=i*30*Math.PI/180;s+='<text class="hnum'+(o.cuenta&&i*5<=m?' cnt':'')+'" data-k="'+i+'" x="'+(c+(r-26)*Math.sin(b)).toFixed(1)+'" y="'+(c-(r-26)*Math.cos(b)+6).toFixed(1)+'">'+i+'</text>';}
+  var ah=((h%12)+m/60)*30*Math.PI/180,am=m*6*Math.PI/180;
+  s+='<line class="aguja-h" x1="'+c+'" y1="'+c+'" x2="'+(c+50*Math.sin(ah)).toFixed(1)+'" y2="'+(c-50*Math.cos(ah)).toFixed(1)+'"/>';
+  s+='<line class="aguja-m" x1="'+c+'" y1="'+c+'" x2="'+(c+80*Math.sin(am)).toFixed(1)+'" y2="'+(c-80*Math.cos(am)).toFixed(1)+'"/><circle class="eje-r" cx="'+c+'" cy="'+c+'" r="6"/>';
+  return s+'</svg>';
+}
+var EQUIV=[['1 hora','minutos',60],['1 minuto','segundos',60],['1 día','horas',24],['1 semana','días',7],['1 año','meses',12],['1 año','días',365],['1 lustro','años',5],['1 década','años',10],['1 siglo','años',100]];
+var CONV=[['horas','minutos',60],['minutos','segundos',60],['días','horas',24],['semanas','días',7],['años','meses',12],['décadas','años',10],['siglos','años',100]];
+LEC_GEN['grande:tiempo']=function(n){
+  var tipos=[null,['reloj','equiv'],['reloj','convertir','equiv'],['convertir2','reloj','convertir'],['duracion','llegada','convertir2'],['sumar-t','duracion','llegada']][n];
+  var tipo=tipos[S.n%tipos.length],p={tipo:'opciones',gemelo:true,tiempo:tipo},m;
+  if(tipo==='reloj'){
+    var h=rnd(1,12),mi=n===1?pick([0,30]):n===2?rnd(0,11)*5:rnd(0,11)*5;
+    var ds=[hm(h,mi===30?0:30),hm(mi/5||12,h*5===60?0:(h*5)%60),hm(h===12?1:h+1,mi),hm(h,(mi+15)%60)];
+    var u=[];ds.forEach(function(x){if(x!==hm(h,mi)&&u.indexOf(x)<0)u.push(x);});
+    m=mezclarOps([hm(h,mi)].concat(u.slice(0,3)).map(function(x){return {t:x,voz:x};}),0);
+    p.consigna='¿Qué hora marca el reloj de la carrera?';p.titulo='¿Qué hora marca el reloj?';
+    p.estimulo=cartulina(relojSVG(h,mi)+'<p class="leyenda-reloj"><span class="ch">Corta: horas</span> <span class="cm">Larga: minutos</span></p>');p.voz=p.consigna;
+    p.final='Son las '+hm(h,mi)+'.';p.finalVoz='Correcto. Son las '+h+(mi?' y '+mi:' en punto')+'.';
+    p.pista=function(){return 'La aguja corta marca la hora. La aguja larga marca los minutos: cada número vale 5 minutos.';};
+    p.explicar=function(){var vs=[];for(var k=5;k<=mi;k+=5)vs.push(String(k));return [
+      {texto:'La aguja corta (rosada) marca la hora: está en el '+h+(mi>=30?' o pasando hacia el '+(h%12+1):'')+'. Son las '+h+'.',vis:{tipo:'html',html:relojSVG(h,mi)}},
+      {texto:mi?'La aguja larga (azul) marca los minutos. Contamos de 5 en 5 desde el 12: '+vs.join(', ')+'.':'La aguja larga está en el 12: son las '+h+' en punto.',voz:mi?'Contamos de cinco en cinco.':'La aguja larga está en el doce. En punto.',vis:{tipo:'html',html:relojSVG(h,mi)},anim:mi?{tipo:'resaltar',sel:'.hnum',voces:vs,acumular:true,limite:mi/5}:null},
+      {texto:'Son las '+hm(h,mi)+'.',vis:{tipo:'html',html:relojSVG(h,mi,{cuenta:true})}}];};
+  } else if(tipo==='equiv'){
+    var e=pick(EQUIV),ds2=[60,24,7,12,365,10,100,5,30].filter(function(x){return x!==e[2];});
+    m=mezclarOps([e[2]].concat(barajar(ds2).slice(0,3)).map(function(x){return {t:String(x),voz:String(x)};}),0);
+    p.consigna=e[0]+' tiene ¿cuántos '+e[1]+'?';p.titulo=p.consigna;p.estimulo=cartulina('<p class="num-letras">'+e[0]+' = ? '+e[1]+'</p>');p.voz='¿Cuántos '+e[1]+' tiene '+e[0]+'?';
+    p.final=e[0]+' = '+e[2]+' '+e[1]+'.';p.finalVoz='Correcto. '+e[2]+' '+e[1]+'.';
+    p.pista=function(){return 'Piensa en el reloj y en el calendario.';};
+    p.explicar=function(){return [{texto:e[0]+' tiene '+e[2]+' '+e[1]+'. Es una equivalencia que conviene memorizar.',vis:{tipo:'html',html:cartulina('<p class="num-grande">'+e[0]+' = '+e[2]+' '+e[1]+'</p><p class="texto-adiv">1 h = 60 min · 1 min = 60 s · 1 día = 24 h · 1 semana = 7 días · 1 año = 12 meses · 1 década = 10 años · 1 siglo = 100 años</p>')}}];};
+  } else if(tipo==='convertir'){
+    var c=pick(CONV),k=rnd(2,n>=3?9:5),r=k*c[2];
+    m=mezclarOps([r,k+c[2],r+c[2],(k-1)*c[2]].filter(function(x,i,a){return a.indexOf(x)===i;}).map(function(x){return {t:String(x),voz:String(x)};}),0);
+    p.consigna=k+' '+c[0]+' = ¿cuántos '+c[1]+'?';p.titulo=p.consigna;p.estimulo=cartulina('<p class="num-letras">'+k+' '+c[0]+' = ? '+c[1]+'</p>');p.voz=p.consigna;
+    p.final=k+' × '+c[2]+' = '+r+' '+c[1]+'.';p.finalVoz='Correcto. '+r+'.';
+    p.pista=function(){return 'Cada una de las '+c[0]+' tiene '+c[2]+' '+c[1]+'. Multiplica.';};
+    p.explicar=function(){return [{texto:'1 '+c[0].replace(/s$/,'')+' = '+c[2]+' '+c[1]+'. Si son '+k+', multiplicamos: '+k+' × '+c[2]+' = '+r+' '+c[1]+'.',vis:{tipo:'html',html:chipsHTML(range(0,k).map(function(){return String(c[2]);}),'')},anim:{tipo:'resaltar',sel:'.sil',voces:range(1,k+1).map(function(i){return String(i*c[2]);}),acumular:true}}];};
+  } else if(tipo==='convertir2'){
+    if(Math.random()<.5){var hh=rnd(1,4),mm=rnd(1,11)*5,tot=hh*60+mm;
+      m=mezclarOps([tot,hh*100+mm,hh*60,tot+60].filter(function(x,i,a){return a.indexOf(x)===i;}).map(function(x){return {t:x+' min',voz:String(x)};}),0);
+      p.consigna=hh+' h '+mm+' min = ¿cuántos minutos?';p.final=hh+' × 60 + '+mm+' = '+tot+' min.';
+      p.explicar=function(){return [{texto:'Cada hora tiene 60 minutos: '+hh+' × 60 = '+(hh*60)+'. Sumamos los '+mm+' minutos: '+(hh*60)+' + '+mm+' = '+tot+' min.',vis:{tipo:'html',html:cartulina('<p class="num-letras">'+hh+' h '+mm+' min = '+(hh*60)+' + '+mm+' = '+tot+' min</p>')}}];};
+    } else {var tot2=rnd(65,250);tot2-=tot2%5;var h2=Math.floor(tot2/60),m2=tot2%60;if(!m2){tot2+=15;m2=15;}
+      var ok2=dur(tot2),alts=[dur(tot2+10),dur(tot2-60>0?tot2-60:tot2+120),Math.floor(tot2/100)+' h '+(tot2%100)+' min'].filter(function(x){return x!==ok2;});
+      m=mezclarOps([ok2].concat(alts).filter(function(x,i,a){return a.indexOf(x)===i;}).map(function(x){return {t:x,voz:x};}),0);
+      p.consigna=tot2+' minutos = ¿cuántas horas y minutos?';p.final=tot2+' min = '+ok2+'.';
+      p.explicar=function(){return [{texto:'Sacamos grupos de 60 minutos (1 hora cada uno): en '+tot2+' caben '+h2+' grupos de 60 ('+(h2*60)+' min) y sobran '+m2+'. Son '+ok2+'. Ojo: no se divide entre 100, porque una hora tiene 60 minutos.',vis:{tipo:'html',html:chipsHTML(range(0,h2).map(function(){return '60';}).concat([String(m2)]),'')}}];};}
+    p.titulo=p.consigna;p.estimulo=cartulina('<p class="num-letras">'+p.consigna+'</p>');p.voz=p.consigna;p.finalVoz='Correcto.';
+    p.pista=function(){return 'Recuerda: 1 hora = 60 minutos, no 100.';};
+  } else if(tipo==='duracion'||tipo==='llegada'){
+    var ini=rnd(6,14)*60+rnd(0,11)*5,d=rnd(1,3)*60+rnd(1,11)*5,fin=ini+d;
+    var fH=function(t){return hm(Math.floor(t/60),t%60);};
+    if(tipo==='duracion'){
+      m=mezclarOps([dur(d),dur(d+10),dur(d-10),dur(d+60)].filter(function(x,i,a){return a.indexOf(x)===i;}).map(function(x){return {t:x,voz:x};}),0);
+      p.consigna='La etapa empezó a las '+fH(ini)+' y el ciclista llegó a la meta a las '+fH(fin)+'. ¿Cuánto duró?';p.final='Duró '+dur(d)+'.';
+    } else {
+      var ingenuo=(ini%60)+(d%60)>=60?hm(Math.floor(ini/60)+Math.floor(d/60),(ini%60)+(d%60)):fH(fin+40);
+      m=mezclarOps([fH(fin),fH(fin+60),fH(fin-10),ingenuo].filter(function(x,i,a){return a.indexOf(x)===i;}).map(function(x){return {t:x,voz:x};}),0);
+      p.consigna='La carrera empezó a las '+fH(ini)+' y duró '+dur(d)+'. ¿A qué hora llegó el ciclista a la meta?';p.final='Llegó a las '+fH(fin)+'.';
+    }
+    var sigH=Math.ceil(ini/60)*60,pre=sigH-ini,horas=Math.floor((fin-sigH)/60),post=fin-sigH-horas*60;
+    p.titulo=p.consigna;p.estimulo=cartulina(dib('🚴','dib-chica')+'<p class="texto-adiv">'+esc(p.consigna)+'</p>');p.voz=p.consigna;p.finalVoz='Correcto.';
+    p.pista=function(){return 'Avanza primero hasta la siguiente hora en punto, después cuenta las horas completas y al final los minutos que sobran.';};
+    p.explicar=function(){var pasos=[];if(pre)pasos.push(fH(ini)+' → '+fH(sigH)+': '+pre+' min');if(horas)pasos.push(fH(sigH)+' → '+fH(sigH+horas*60)+': '+horas+' h');if(post)pasos.push(fH(sigH+horas*60)+' → '+fH(fin)+': '+post+' min');
+      return [{texto:'Vamos por tramos, como en una carrera: '+pasos.join('; ')+'.',voz:'Vamos por tramos.',vis:{tipo:'html',html:'<div class="tramos">'+pasos.map(function(x){return '<span class="sil">'+esc(x)+'</span>';}).join('')+'</div>'},anim:{tipo:'resaltar',sel:'.sil',voces:pasos.map(function(x){return x.split(': ')[1];}),acumular:true}},
+        {texto:'Juntamos los tramos: '+(pre+post?(pre+post)+' min':'')+(horas&&(pre+post)?' + ':'')+(horas?horas+' h':'')+' = '+dur(d)+'. '+(tipo==='llegada'?'Llegó a las '+fH(fin)+'.':''),vis:{tipo:'html',html:cartulina('<p class="num-letras">'+fH(ini)+' → '+fH(fin)+' = '+dur(d)+'</p>')}}];};
+  } else {
+    var e1=rnd(1,3)*60+rnd(4,11)*5,e2=rnd(1,3)*60+rnd(4,11)*5,s2=e1+e2;
+    var crudoH=Math.floor(e1/60)+Math.floor(e2/60),crudoM=e1%60+e2%60;
+    m=mezclarOps([dur(s2),crudoH+' h '+crudoM+' min',dur(s2+60),dur(s2-5)].filter(function(x,i,a){return a.indexOf(x)===i;}).map(function(x){return {t:x,voz:x};}),0);
+    p.consigna='Etapa 1: '+dur(e1)+'. Etapa 2: '+dur(e2)+'. ¿Cuál es el tiempo total?';p.titulo=p.consigna;
+    p.estimulo=cartulina(dib('🚴','dib-chica')+'<p class="texto-adiv">Vuelta ciclística</p><p class="num-letras">Etapa 1: '+dur(e1)+'<br>Etapa 2: '+dur(e2)+'</p>');p.voz=p.consigna;
+    p.final='Total: '+dur(s2)+'.';p.finalVoz='Correcto.';
+    p.pista=function(){return 'Suma horas con horas y minutos con minutos. Si pasas de 60 minutos, forma una hora más.';};
+    p.explicar=function(){return [{texto:'Horas con horas: '+crudoH+' h. Minutos con minutos: '+crudoM+' min.',vis:{tipo:'html',html:cartulina('<p class="num-letras">'+dur(e1)+' + '+dur(e2)+' = '+crudoH+' h '+crudoM+' min</p>')}},
+      {texto:crudoM>=60?crudoM+' min es más de 60: 60 min forman 1 hora y sobran '+(crudoM-60)+' min. Total: '+dur(s2)+'.':'Los minutos no llegan a 60, así que queda '+dur(s2)+'.',vis:{tipo:'html',html:cartulina('<p class="num-letras">'+crudoH+' h '+crudoM+' min = '+dur(s2)+'</p>')}}];};
+  }
+  p.ops=m.ops;p.ok=m.ok;return p;
+};
 
 /* ---------- Celular como control y micrófono ----------
    La tele abre una "sala" con un código. El celular se conecta directo (WebRTC) usando PeerJS.

@@ -26,7 +26,11 @@ Cada juego tiene 5 niveles. El nivel sube con 3 aciertos seguidos y baja si fall
 **Números para quinto:** además de las cuatro operaciones:
 
 - **Números grandes:** tabla posicional (CMi DMi UMi | CM DM UM | C D U) que se llena empezando por las unidades, lectura y escritura en letras, valor de cada cifra, descomposición y separación en períodos. Si empieza a llenar la tabla por la izquierda, el juego lo detecta y lo explica.
+- **Ángulos:** tipos (agudo, recto, obtuso, llano), medir con el graduador de 10 en 10 y de 5 en 5, sumar ángulos y el ángulo que falta para 90° o 180°. Detecta cuando lee la fila de números de adentro del graduador.
+- **Medidas de tiempo:** leer el reloj, equivalencias (hora, día, semana, año, década, siglo), conversiones, duración de una etapa y suma de tiempos con «llevadas» de 60 minutos.
 - **Plano cartesiano:** ejes y origen, leer coordenadas, ubicar puntos moviéndose desde el origen (primero a la derecha por X, después hacia arriba por Y), vértices de figuras, movimientos y patrones. Si pone los números al revés, lo detecta y lo cuenta en Progreso.
+
+**Tema de ciclismo:** en quinto, los problemas usan ciclistas, rutas, curvas y etapas, y hay una lectura sobre Richard Carapaz.
 
 **Apoyos (en Progreso):** modo tranquilo sin movimientos, el plan de la sesión antes de empezar, avanzar solo con el botón y una pausa disponible en cada ejercicio. En quinto vienen activados.
 
